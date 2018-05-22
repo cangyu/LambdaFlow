@@ -40,7 +40,7 @@
 \normalfont \normalsize 
 \textsc{Shanghai Jiao Tong University, UM-SJTU JOINT INSTITUTE} \\ [25pt] % Your university, school and/or department name(s)
 \horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
-\huge Assignment Title \\ % The assignment title
+\huge Introduction to Numerical Analysis \\ HW1 \\ % The assignment title
 \horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
 }
 
@@ -56,75 +56,111 @@
 %	PROBLEM 1
 %----------------------------------------------------------------------------------------
 
-\section{Problem title}
+\section{Metric Space}
 
-\lipsum[2] % Dummy text
-
-\begin{align} 
-\begin{split}
-(x+y)^3 	&= (x+y)^2(x+y)\\
-&=(x^2+2xy+y^2)(x+y)\\
-&=(x^3+2x^2y+xy^2) + (x^2y+2xy^2+y^3)\\
-&=x^3+3x^2y+3xy^2+y^3
-\end{split}					
-\end{align}
-
-Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies
-
-%------------------------------------------------
-
-\subsection{Heading on level 2 (subsection)}
-
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
-\begin{align}
-A = 
-\begin{bmatrix}
-A_{11} & A_{21} \\
-A_{21} & A_{22}
-\end{bmatrix}
-\end{align}
-Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
-
-%------------------------------------------------
-
-\subsubsection{Heading on level 3 (subsubsection)}
-
-\lipsum[3] % Dummy text
-
-\paragraph{Heading on level 4 (paragraph)}
-
-\lipsum[6] % Dummy text
 
 %----------------------------------------------------------------------------------------
 %	PROBLEM 2
 %----------------------------------------------------------------------------------------
 
-\section{Lists}
+\section{Continuity}
 
-%------------------------------------------------
-
-\subsection{Example of list (3*itemize)}
-\begin{itemize}
-	\item First item in a list 
-		\begin{itemize}
-		\item First item in a list 
-			\begin{itemize}
-			\item First item in a list 
-			\item Second item in a list 
-			\end{itemize}
-		\item Second item in a list 
-		\end{itemize}
-	\item Second item in a list 
-\end{itemize}
-
-%------------------------------------------------
-
-\subsection{Example of list (enumerate)}
 \begin{enumerate}
-\item First item in a list 
-\item Second item in a list 
-\item Third item in a list
+\item $y=\frac{1}{x}$ is continuous over $(0, +\infty)$, but not uniform continuous.
+      \begin{proof}
+      	Let $x_1 = \frac{1}{n+1}$,  $x_2 = \frac{1}{n}$. 
+      	Then $\lim\limits_{n \rightarrow +\infty} x_2-x_1 = \frac{1}{n(n+1)} = 0 $.
+      	But $\lim\limits_{n \rightarrow +\infty} y_2- y_1 = -1 \neq 0 $.
+      	Thus it is not uniform continuous.
+      \end{proof}
+\item $y=\sqrt{x}$ is uniform continuous over $(0, +\infty)$ but not Lipschitz continuous.
+	  \begin{proof}
+	  	As $y\prime = \frac{1}{2\sqrt{x}}$, 
+	  	the slope tends towards infty when $x$ approaches 0, 
+	  	thus it is not Lipschitz continuous.  
+	  \end{proof}
 \end{enumerate}
+
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+
+\section{Cardinalty}
+\begin{enumerate}
+	\item 
+		\begin{proof}
+			The following function is a one-to-one mapping from N to Z, thus N and Z have the same number of elements.
+		
+			\begin{equation}
+			f(n) = 
+				\begin{cases}
+					-\frac{n}{2} & \text{n is even}\\
+					\frac{n+1}{2} & \text{n is odd}
+				\end{cases}
+			\end{equation}
+			
+			Arange the elements in N and Q in the pascal triangle style as below, and it is clear enough to see the one-to-one mapping from N to Q with rationals are grouped according to the sum of dividend and divisor. Thus N and Q have the same number of elements.
+			
+			\begin{tabular}{c|c}
+				\begin{tabular}{rccccccccc}
+					&&&&&1\\\noalign{\smallskip\smallskip}
+					&&&&2&&3\\\noalign{\smallskip\smallskip}
+					&&&4&&&&5\\\noalign{\smallskip\smallskip}
+					&&6&&7&&8&&9\\\noalign{\smallskip\smallskip}
+					&10&&&&&&&&11\\\noalign{\smallskip\smallskip}
+					&&&&&...\\\noalign{\smallskip\smallskip}
+				\end{tabular} &
+				\begin{tabular}{rccccccccc}
+					&&&&&$\frac{1}{1}$ \\\noalign{\smallskip\smallskip}
+					&&&&$\frac{1}{2}$&&$\frac{2}{1}$\\\noalign{\smallskip\smallskip}
+					&&&$\frac{1}{3}$&&&&$\frac{3}{1}$\\\noalign{\smallskip\smallskip}
+					&&$\frac{1}{4}$&&$\frac{2}{3}$&&$\frac{3}{2}$&&$\frac{4}{1}$\\\noalign{\smallskip\smallskip}
+					&$\frac{1}{5}$&&&&&&&&$\frac{5}{1}$\\\noalign{\smallskip\smallskip}
+					&&&&&...\\\noalign{\smallskip\smallskip}
+				\end{tabular}
+			\end{tabular}
+			
+		\end{proof}	
+	\item 
+		\begin{proof}
+			The following function is a one-to-one mapping from [0, 1] to R, thus they have the same number of elements.	
+			
+			\begin{equation}
+				f(x) = 
+				\begin{cases}
+				-\infty& \text{x=0}\\
+				tan[\pi(x-0.5)] & \text{0 < x < 1}\\
+				+\infty& \text{x=1}
+				\end{cases}
+			\end{equation}
+			
+		\end{proof}
+	\item
+		\begin{proof}
+			Suppose all the real numbers can be listed, and each one is marked as $r_i$, where $i=1,2,3...$. Given a real number $r\prime$ such that its \textbf{i-th} digit is different from that in $r_i$, it's obvious that $r\prime$ is not included in the real numbers listed above, which is contradictory to the hypothesis. Thus real numbers can not be listed and it contains more elements than N.
+		\end{proof}
+\end{enumerate}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 4
+%----------------------------------------------------------------------------------------
+
+\section{Slides}
+
+\begin{enumerate}
+	\item
+		\begin{proof}
+	
+		\end{proof}
+
+	\item
+		\begin{proof}
+
+		\end{proof}
+\end{enumerate}
+
+
 
 %----------------------------------------------------------------------------------------
 
