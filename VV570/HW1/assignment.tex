@@ -7,7 +7,7 @@
 \usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
 \usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
 \usepackage[english]{babel} % English language/hyphenation
-\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{amsmath,amsfonts,amsthm,amssymb} % Math packages
 
 \usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
 
@@ -151,11 +151,56 @@
 \begin{enumerate}
 	\item
 		\begin{proof}
-	
+			Let $E$ be an inner product space over $\mathbb{C}$, and $u, v\in E$.
+			Given $Y$ defined as below, where $\lambda \in \mathbb{R}$.
+						
+			\begin{equation}
+				Y = {\vert u-\lambda v \vert}^2
+			\end{equation}
+			
+			It's obvious that $Y\geq0$. Expand the squares according to the definition of inner products, the inequality can be written as below.
+			
+			\begin{equation}
+				<v, v>\lambda^2 -(<u, v>+<v, u>)\lambda + <u, u> \ \ \geq \ 0
+			\end{equation}
+			
+			The LHS of the inequality can be viewed as a quadratic function where $\lambda$ is the variable. Thus, the discriminant is semi-negative definite, which can be written as below.
+			
+			\begin{equation}
+				\Delta = (<u, v>+<v, u>)^2 - 4<u,u><v,v> \ \ \leq \ 0
+			\end{equation}
+			
+			As $<v, u> = \overline{<u, v>}$, the inequality above can be simplified as below.
+			
+			\begin{equation}
+				<u, v>^2 + {\overline{<u, v>}}^2 + 2{\vert <u,v> \vert}^2 \ \ \leq \ 4 \lVert u \rVert^2 \lVert v \rVert^2 \label{cs}			
+			\end{equation}
+			
+			For $x \in \mathbb{C}$, the following equality is justified.
+			\begin{equation}
+				x^2 + \bar{x}^2 = \frac{1}{2}[(x+\bar{x})^2+(x-\bar{x})^2] = \frac{1}{2}[(2Re(x))^2+(2Im(x))^2] = 2 {\vert x \vert}^2 \label{der}
+			\end{equation}
+			
+			Since $<u, v>$ is an complex number, apply (\ref{der}) into (\ref{cs}) and eliminate the constant 4, the Cauchy-Schwarz inequality is obtained at last.
+			
+			\begin{equation}
+				{\vert <u,v> \vert}^2 \leq \lVert u \rVert^2 \lVert v \rVert^2
+			\end{equation}
+  
 		\end{proof}
 
 	\item
 		\begin{proof}
+			$d(x, y)$ is non-negative follows from the definition of metric space.
+			\begin{equation}
+				\begin{aligned}
+					d(x, y) & = \frac{1}{2}(d(x, y) + d(x, y)) \\
+							& = \frac{1}{2}(d(x, y) + d(y, x))  &\text{By symmetry}\\
+							& \geq  \frac{1}{2} d(x, x)  &\text{By triangle inequality} \\
+							&  = 0  &\text{By identity of indiscernible}
+				\end{aligned}
+			\end{equation}
+			
 
 		\end{proof}
 \end{enumerate}
