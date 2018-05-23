@@ -69,8 +69,8 @@
 \item $y=\frac{1}{x}$ is continuous over $(0, +\infty)$, but not uniform continuous.
       \begin{proof}
       	Let $x_1 = \frac{1}{n+1}$,  $x_2 = \frac{1}{n}$. 
-      	Then $\lim\limits_{n \rightarrow +\infty} x_2-x_1 = \frac{1}{n(n+1)} = 0 $.
-      	But $\lim\limits_{n \rightarrow +\infty} y_2- y_1 = -1 \neq 0 $.
+      	Then $\lim\limits_{n \rightarrow +\infty} \vert x_2-x_1 \vert = \frac{1}{n(n+1)} = 0 $.
+      	But $\lim\limits_{n \rightarrow +\infty} \vert y_2- y_1 \vert = 1 \neq 0 $.
       	Thus it is not uniform continuous.
       \end{proof}
 \item $y=\sqrt{x}$ is uniform continuous over $(0, +\infty)$ but not Lipschitz continuous.
@@ -195,9 +195,9 @@
 			\begin{equation}
 				\begin{aligned}
 					d(x, y) & = \frac{1}{2}(d(x, y) + d(x, y)) \\
-							& = \frac{1}{2}(d(x, y) + d(y, x))  &\text{By symmetry}\\
-							& \geq  \frac{1}{2} d(x, x)  &\text{By triangle inequality} \\
-							&  = 0  &\text{By identity of indiscernible}
+							& = \frac{1}{2}(d(x, y) + d(y, x)) &\text{By symmetry}\\
+							& \geq \frac{1}{2} d(x, x)         &\text{By triangle inequality} \\
+							& = 0                              &\text{By identity of indiscernible}
 				\end{aligned}
 			\end{equation}
 			
@@ -205,6 +205,63 @@
 		\end{proof}
 \end{enumerate}
 
+%----------------------------------------------------------------------------------------
+%	PROBLEM 5
+%----------------------------------------------------------------------------------------
+
+\section{Linear Algebra}
+
+\begin{enumerate}
+	\item
+		\begin{proof}
+			Suppose $\{u_1, u_2, ... , u_m \}$ forms the basis of Ker($f$), and it can be extended to form the basis of $V_1$, which is denoted as $\{u_1, u_2, ... , u_m, v_1, v_2, ... , v_n \}$. It's clear that the dimension of Ker($f$) is $m$ and the dimension of $V_1$ is $m+n$. So, it is left to prove that the dimension of $V_2$ is $n$.
+			
+			The dimension of $V_2$ is $n$ means $\{f(v_1), f(v_2), ... , f(v_n)\}$ forms a basis of $V_2$. To see that, let $w$ be an arbitary vector in $V_1$, thus, there exist unique scalars $a_i$, $b_j$ such that 
+			\begin{equation}
+				w = a_1 u_1 + a_2 u_2 + ... + a_m u_m + b_1 v_1 + b_2 v_2 + ... + b_n v_n
+			\end{equation}
+			
+			The image of $w$ under mapping $f$ is given as below.
+			\begin{equation}
+				\begin{aligned}
+					f(w) & = \sum_{i=1}^{m}a_i f(u_i) + \sum_{j=1}^{m}b_j f(v_j) \\
+						 & = \sum_{j=1}^{m}b_j f(v_j)  \ \ \ \  \text{As $f(u_i) = 0$}
+				\end{aligned}
+			\end{equation}
+			
+			Thus $\{f(v_1), f(v_2), ... , f(v_n)\}$ spans $V_2$. It is left to show that they are linearly independent, which means there's no redundancy in the list.
+			
+			Given coefficents $c_i$ such that
+			\begin{equation}
+				c_1 f(v_1) + c_2 f(v_2) + ... + c_n f(v_n) = 0 \label{cdis}
+			\end{equation}
+			
+			Since $f$ is a linear mapping, (\ref{cdis}) can be grouped as below.
+			\begin{equation}
+				f(c_1 v_1 + c_2 v_2 + ... + c_n v_n) = 0
+			\end{equation}
+			
+			Thus $c_1 v_1 + c_2 v_2 + ... + c_n v_n \in Ker(f)$. As $\{u_1, u_2, ... , u_m \}$ forms the basis of Ker($f$), there exists coefficients $d_i$ such that
+			\begin{equation}
+				c_1 v_1 + c_2 v_2 + ... + c_n v_n = d_1 u_1 + d_2 u_2 + ... + d_m u_m \label{diff}
+			\end{equation}
+			
+			Since $\{u_1, u_2, ... , u_m, v_1, v_2, ... , v_n \}$ forms the basis of $V_1$, all the coefficients in (\ref{diff}) should be 0. Thus, (\ref{cdis}) is valid if and only if all the coefficents $c_i$ is 0, which implies that $\{f(v_1), f(v_2), ... , f(v_n)\}$ are linearly independent.
+			
+			Thus, $\{f(v_1), f(v_2), ... , f(v_n)\}$ forms the basis of $V_2$, and the dimension of $V_2$ is therefore $n$. The rank-nullity theorem written as below is proved.
+			\begin{equation}
+				dim(V_1) = dim(ker(f)) + dim(V_2)
+			\end{equation}
+		\end{proof}
+	\item
+		\begin{proof}
+			
+		\end{proof}
+	\item
+		\begin{proof}
+			
+		\end{proof}
+\end{enumerate}
 
 
 %----------------------------------------------------------------------------------------
