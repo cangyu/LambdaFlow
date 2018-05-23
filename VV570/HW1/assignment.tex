@@ -9,6 +9,13 @@
 \usepackage[english]{babel} % English language/hyphenation
 \usepackage{amsmath,amsfonts,amsthm,amssymb} % Math packages
 
+\usepackage{algorithm, algorithmic}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}} %Use Input in the format of Algorithm  
+\renewcommand{\algorithmicensure}{\textbf{Output:}} %UseOutput in the format of Algorithm  
+
+\usepackage{listings}
+\lstset{language=Matlab}
+
 \usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
 
 \usepackage{sectsty} % Allows customizing section commands
@@ -57,6 +64,32 @@
 %----------------------------------------------------------------------------------------
 
 \section{Metric Space}
+\begin{enumerate}
+	\item
+		\begin{proof}
+			Since there's no elements in $\emptyset$, so $\emptyset$ is open, as $X^\complement = \emptyset$, so $X$ is closed.\\
+			$X$ is open as it contains all the elemnets, since $\emptyset^\complement = X$, thus $\emptyset$ is closed. 
+		\end{proof}
+	\item
+		\begin{proof}
+			Since
+			\begin{equation}
+				T \triangleq (U_1 \cap U_2 \cap ... \cap U_m)^\complement = U_1^\complement \cup U_2^\complement \cup ... \cup U_m^\complement
+			\end{equation}
+			And ${U_i}^\complement$ is open, as $U_i$ is closed.\\
+			Thus, $T$ is open, and therefore the intersection is closed. 
+		\end{proof}
+	\item 
+		\begin{proof}
+			Since
+			\begin{equation}
+				T \triangleq (U_1 \cup U_2 \cup ... \cup U_m)^\complement = U_1^\complement \cap U_2^\complement \cap ... \cap U_m^\complement
+			\end{equation}
+			And ${U_i}^\complement$ is open, as $U_i$ is closed.\\
+			Thus, $T$ is open, and therefore the intersection is closed. 
+		\end{proof}
+
+\end{enumerate}
 
 
 %----------------------------------------------------------------------------------------
@@ -253,14 +286,173 @@
 				dim(V_1) = dim(ker(f)) + dim(V_2)
 			\end{equation}
 		\end{proof}
+	
 	\item
 		\begin{proof}
+			Let $U, V, W$ be vector spaces over the same field $K$, function $f$ be a linear map from $U$ to $V$ and function $g$ be a linear map from $V$ to $W$. It's left to show that the composition of $f$ and $g$, denoted as $h$, which maps a vector in $U$ to $W$, is still a linear map.
 			
+			Given $u_1, u_2 \in U$ and any scalar $c \in \mathbb{K}$, then
+			\begin{equation}
+				\begin{aligned}
+					h(u_1 + u_2) & = g(f(u_1 + u_2)) \\
+								 & = g(f(u_1) + f(u_2)) \\
+								 & = g(f(u_1)) + g(f(u_2)) \\
+								 & = h(u_1) + h(u_2)
+				\end{aligned}
+			\end{equation}
+			
+			\begin{equation}
+				\begin{aligned}
+					h(c u_1) & = g(f(c u_1)) \\
+							 & = g(c f(u_1)) \\
+						     & = c g(f(u_1)) \\
+							 & = c h(u_1)
+				\end{aligned}
+			\end{equation}
+			
+			Thus, the composition of two linear maps is still a linear map.
 		\end{proof}
+	
 	\item
 		\begin{proof}
+			Let $U, V$ be vector spaces over the same field $K$, function $f$ be linear maps from $U$ to $V$. It's left to show that the inverse of $f$, denoted as $f^{-1}$, which maps a vector in $V$ to $U$ is still a linear map.
 			
+			By inverse, it means that
+			\begin{equation}
+				f(f^{-1}(x)) = f^{-1}(f(x)) = x
+			\end{equation}
+			
+			Given $u_1, u_2 \in U$ and any scalar $c \in \mathbb{K}$, denote the counterpart of $u_1, u_2$ in $V$ as $v_1, v_2$ under the linear mapping function $f$. Then
+			
+			\begin{equation}
+				\begin{aligned}
+					f^{-1}(v_1 + v_2) & = f^{-1}(f(u_1) + f(u_2)) \\
+									  & = f^{-1}(f(u_1 + u_2)) \\
+									  & = u_1 + u_2 \\
+									  & = f^{-1}(v_1) + f^{-1}(v_2)
+				\end{aligned}
+			\end{equation}
+			
+			\begin{equation}
+				\begin{aligned}
+					f^{-1}(c v_1) & = f^{-1}(c f(u_1)) \\
+							      & = f^{-1}(f(c u_1)) \\
+								  & = c u_1 \\
+								  & = c f^{-1}(v_1)
+				\end{aligned}
+			\end{equation}
+			
+			Thus, the inverse of a linear map is still a linear map.
 		\end{proof}
+\end{enumerate}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 6
+%----------------------------------------------------------------------------------------
+
+\section{Discontinuous linear maps}
+\begin{enumerate}
+	\item 
+		\begin{proof}
+			The $k$ times derivative of $f_n(x)$ can be written as below.
+			\begin{equation}
+				f_n^{(k)}(x) = n^{k-1} sin(nx+ \frac{k\pi}{2}) \ \ \ \ k = 0, 1, 2, 3, ...
+			\end{equation}
+			It's clear that $f_n^{(k)}(x)$ is continous for any $k$, thus $f_n(x) \in C^\infty(\mathbb{R})$.
+		\end{proof}
+	\item 
+		\begin{equation}
+			d f_n(x) = cos(nx) dx
+		\end{equation}
+	\item
+		\begin{proof}
+			Let $x_0 = 0, x_1 = \frac{\pi}{2n}$, then
+			\begin{equation}
+				\lim\limits_{n->+\infty} \vert x_1-x_0 \vert = 0
+			\end{equation}
+			\begin{equation}
+				\lim\limits_{n->+\infty} \vert df_n(x_1) - df_n(x_0) \vert = \vert 0-dx \vert = |dx| \neq 0
+			\end{equation}
+			Thus, the differential is not continous when n tends to infty.
+		\end{proof}
+	\item 
+		Sorry, haven't figured out yet...
+		
+	
+\end{enumerate}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 7
+%----------------------------------------------------------------------------------------
+
+\section{pi}
+\begin{enumerate}
+	\item 
+		The main program(see Algorithm\ref{machin}) adopts Machin's formula to calculate $\pi$.
+		\begin{equation}
+			\pi = 4[4atan(\frac{1}{5}) - atan(\frac{1}{239})]
+		\end{equation}
+		
+		Subroutine(see Algorithm\ref{atan_inv}) calculating $atan(\frac{1}{x})$ is used by the main program. Since
+		\begin{equation}
+			atan(x) = \frac{1}{1}x - \frac{1}{3}x^3 + \frac{1}{5}x^5 - \frac{1}{7} x^7 + ...
+		\end{equation}
+		
+		Therefore
+		\begin{equation}
+			atan(\frac{1}{x}) = \frac{1}{x} - \frac{1}{3x^3} + \frac{1}{5x^5} - \frac{1}{7x^7} + ...
+		\end{equation}		
+		
+		\begin{algorithm}
+			\caption{Calculation of $\pi$ using Machin's formula}  
+			\label{machin}
+			\begin{algorithmic}[1]
+				\REQUIRE
+				None.
+				\ENSURE
+				The value of $\pi$ with approximation.
+				\RETURN $4[4 atan(1/5) - atan(1/239)]$
+			\end{algorithmic}  
+		\end{algorithm}
+		
+		\begin{algorithm}
+			\caption{Calculation of $atan(\frac{1}{x})$}
+			\label{atan_inv}
+			\begin{algorithmic}[1]
+				\REQUIRE x
+				\ENSURE $atan(\frac{1}{x})$
+				\STATE $ret \gets 0$
+				\STATE $e \gets 1/x$
+				\STATE $s \gets - x^2$
+				\STATE $c \gets 1$
+				\WHILE {$e \neq 0$}
+				\STATE $ret \gets ret + e/c$
+				\STATE $e \gets e/s$
+				\STATE $c \gets c + 2$
+				\ENDWHILE
+				\RETURN ret
+			\end{algorithmic}  
+		\end{algorithm}
+	
+	\newpage
+	
+	\item
+		The matlab code is given as below.
+		\begin{verbatim}
+			function [pi] = pi_machin()
+			pi = 4*(4*atan_inv(5) - atan_inv(239));
+			
+			function [r] = atan_inv(x)
+			r = 0;
+			e = 1/x;
+			s = - x*x;
+			c = 1;
+			while (e ~= 0)
+			r = r + e/c;
+			e = e/s;
+			c = c+2;
+			end
+		\end{verbatim}	
 \end{enumerate}
 
 
