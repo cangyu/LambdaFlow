@@ -16,5 +16,6 @@ end
 
 hold on
 plot(xdata, ydata,'-^');
-plot(xdata, y_interp, '--r')
+plot(xdata, y_interp, '--r');
+legend('Original','Rational Approx')
 hold off
