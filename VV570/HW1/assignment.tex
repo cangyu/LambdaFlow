@@ -53,7 +53,7 @@
 
 \author{Yu Cang \\ 018370210001} % Your name
 
-\date{\normalsize\today} % Today's date or a custom date
+\date{\normalsize May 23, 2018} % Today's date or a custom date
 
 \begin{document}
 
@@ -183,8 +183,10 @@
 
 \begin{enumerate}
 	\item
+		Here I give 2 proofs, the first one comes directly from the class, the other from previous reading.(thanks to Ran Yi for pointing out that)
+		
 		\begin{proof}
-			Let $E$ be an inner product space over $\mathbb{C}$, and $u, v\in E$.
+			Let $E$ be an inner product space over $\mathbb{C}$, and $u, v\in E$.\\
 			Given $Y$ defined as below, where $\lambda \in \mathbb{R}$.
 						
 			\begin{equation}
@@ -219,8 +221,43 @@
 			\begin{equation}
 				{\vert <u,v> \vert}^2 \leq \lVert u \rVert^2 \lVert v \rVert^2
 			\end{equation}
-  
 		\end{proof}
+	
+		\begin{proof}
+			Let $E$ be an inner product space over $\mathbb{C}$, and $u, v\in E$.\\
+			
+			Given $Y$ defined as below, where $\lambda \in \mathbb{R}$.
+			
+			\begin{equation}
+				\begin{aligned}
+					Y & = {\vert u-\lambda v \vert}^2 \\
+					  & = <v, v>\lambda^2 -(<u, v>+<v, u>)\lambda + <u, u> \label{lbd}
+				\end{aligned}
+			\end{equation}
+			
+			It's obvious that $Y\geq0$ for any $\lambda$. \\
+			Given $\lambda$ as
+			\begin{equation}
+				\lambda = \frac{<u,v>}{<v, v>}
+			\end{equation}
+			Substitude it into (\ref{lbd}), the inequality reads as
+			\begin{equation}
+				<u, u><v,v> - <u, v>(<u, v> + <v, u>) + <u, v>^2 \ \ \geq 0
+			\end{equation}
+			It can be further simplified as
+			\begin{equation}
+				\begin{aligned}
+					<u, u> \cdot <v, v> \ \  & = ||u||^2 \cdot ||v||^2 \\
+								        \ \  & \geq \ \ <u, v> \cdot <v, u>\\
+								        \ \  & = \ \  <u, v> \cdot \overline{<u, v>}\\
+								        \ \  & = \ \ |<u, v>|^2
+				\end{aligned}
+			\end{equation}
+			
+			Thus, the Cauchy-Schwarz inequality got proved.
+		\end{proof}
+		
+		
 
 	\item
 		\begin{proof}
