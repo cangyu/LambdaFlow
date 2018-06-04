@@ -152,7 +152,7 @@
 			\item
 				As induction hypothesis, assume the statement is true for $n = k$.
 			\item 
-				For $n = k+1$, where $f(x)$ has $k+2$ distinct roots denoted as $c_0 < c_1 < ... <c_k < c_{k+1}$, applying the results for $n = 1$ on each gap $[c_i, c_{i+1}]\ (i = 0, 1, ... , k)$, then $g(x) \triangleq f'(x)$ has $k+1$ roots in $[c_0, c_{k+1}]$. By induction hypothesis, there exists $c \in [c_0, c_{k+1}]$ s.t. $g^{(k)}(c) = f^{(k+1)} = f^{(n)} 0$. Thus the statement holds true for $n = k+1$.
+				For $n = k+1$, where $f(x)$ has $k+2$ distinct roots denoted as $c_0 < c_1 < ... <c_k < c_{k+1}$, applying the results for $n = 1$ on each gap $[c_i, c_{i+1}]\ (i = 0, 1, ... , k)$, then $g(x) \triangleq f'(x)$ has $k+1$ roots in $[c_0, c_{k+1}]$. By induction hypothesis, there exists $c \in [c_0, c_{k+1}]$ s.t. $g^{(k)}(c) = f^{(k+1)}(c) = f^{(n)}(c)= 0$. Thus the statement holds true for $n = k+1$.
 		\end{enumerate}
 	\end{proof}
 
@@ -166,7 +166,7 @@
 \begin{enumerate}
 	\item
 		\begin{proof}
-
+			
 		\end{proof}
 
 	\item
@@ -185,22 +185,24 @@
 %----------------------------------------------------------------------------------------
 
 \section{Continuity}
-
-\begin{enumerate}
-	\item
-		\begin{proof}
-
-		\end{proof}
-	
-	\item
-		\begin{proof}
-
-		\end{proof}
-	
-	\item
-		\begin{proof}
-
-		\end{proof}
-\end{enumerate}
+	\begin{enumerate}
+		\item
+			\begin{proof}
+				(i)$\Rightarrow$(ii): For each $ y \in B(f(a), \xi)$, there exists $U_x \subset X, U_x \neq \emptyset$ s.t. $y = f(U_x)$. Thus, $d(f(x), f(a)) < \xi$ is valid for any $x \in U \triangleq \bigcup\limits_{x \in X} U_x$. As indicated by (i), there exists $\eta$ s.t. $B(a, \eta) \subset U$. Thus, $\eta$ is valid, and $d(a, x)$ for $x \in B(a, \eta)$ is less than $\eta$.\\
+				(ii)$\Rightarrow$(i): As $X$ and $Y$ are two metrix spaces, then the set containing all the elements in $d(x, a) < \eta$ is equivalent to the ball $B(a, \eta) \subset X$. It suffices to show that the $\eta$ in (i) exists.
+			\end{proof}
+		\item
+			\begin{proof}
+				Given $\xi$ where $B(f(a), \xi) \subset V$, then it is indicated by (i) that there exists $\eta$ where $f(B(a, \eta)) \in B(f(a), \xi)$. Denote $U = B(a, \eta)$, then $f(U) \subset B(f(a), \xi) \subset V$.
+			\end{proof}
+		\item
+			\begin{proof}
+				As indicated by (iii), $U$ is a neighborhood of $a$ and $f(U) \subset V$. Since $U \subset f^{-1}(V)$, thus, by observation, $f^{-1}(V)$ is a neighborhood of $a$. 
+			\end{proof}
+		\item
+			\begin{proof}
+				For any $\xi \in \mathbb{R}_+$, take the neighborhood $V$ of $f(a)$ \ s.t. $V \subset B(f(a), \xi)$. Then, by (iv), $f^{-1}(V)$ is a neighborhood of $a$. Thus, there exists $\eta \in \mathbb{R}_+$ s.t. $B(a, \eta) \subset f^{-1}(V)$, and it is obvious that $f(B(a, \eta)) \subset B(f(a), \xi)$.
+			\end{proof}
+	\end{enumerate}
 
 \end{document}
