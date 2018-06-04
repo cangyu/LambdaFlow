@@ -8,6 +8,7 @@
 \usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
 \usepackage[english]{babel} % English language/hyphenation
 \usepackage{amsmath,amsfonts,amsthm,amssymb} % Math packages
+\usepackage{mathrsfs}
 
 \usepackage{algorithm, algorithmic}
 \renewcommand{\algorithmicrequire}{\textbf{Input:}} %Use Input in the format of Algorithm  
@@ -102,7 +103,7 @@
 	\item 
 		\begin{proof}
 			If (iii) is false, then $X = U_1 \cup U_2$, where $U_1$ and $U_2$ are two disjoint, non-empty closed subsets.\\
-			...
+			(haven't figured out yet...)
 		\end{proof}
 \end{enumerate}
 
@@ -130,11 +131,32 @@
 				For $A$ containing only 1 element, it is connected as it can no be written as the union of two disjoint non-empty closed subsets.
 			\item
 				If $A$ is not an interval and the corner cases in a) are excluded, then it can be written as union of non-empty, disjoint closed subsets. Thus $A$ is not connected.
-			\item 
-				
+			\item
+				\begin{enumerate}
+					\item 
+						The continuous bijection mapping $f$ can be given as 
+						\begin{equation}
+							f(x) = \frac{x-I_{min}}{I_{max} - I_{min}} (J_{max} - J{min})
+						\end{equation} 
+						where $I_{min}, I_{max}, J_{max}, J{min}$ are the limits of corresponding interval.\\
+						The inverse continuous bijection can be constructed in the same way, which can be given as
+						\begin{equation}
+							f^{-1}(y) = \frac{y-J_{min}}{J_{max} - J_{min}} (I_{max} - I_{min})
+						\end{equation}
+					\item 
+						Consider open interval $X = (0, 1)$, it is clear that $X$ is connected. As there exists a continous bijection mapping which maps $X$ to $\mathbb{R}$, thus $f(A) = \mathbb{R}$ is connected as well.
+					\item 
+						If $U$ is both open and closed, then $U^\complement$ is also both open and closed. As there must exist a minimum for a closed and non-empty set, $R = U \cup U^\complement$ is then bounded, which is false. Thus, the only subsets that are both open and closed in $\mathbb{R}$ are $\mathbb{R}$ and $\emptyset$, which is equivalent to say $\mathbb{R}$ is connected. 
+				\end{enumerate}
 		\end{enumerate}
 	  \end{proof}
-  
+	\item 
+		\begin{proof}
+			For any connected set $A$, as is indicated above, $f(A)$ is also connected, where $f$ is a continuous function.\\
+			And the connected subsets of $\mathbb{R}$ are all intervals.\\
+			Then $f(X)$ is an interval of $\mathbb{R}$, which contains both $f(a)$ and $f(b)$.\\
+			Thus, $f(X)$ contains both $f(a)$ and $f(b)$.
+		\end{proof}
 \end{enumerate}
 
 
@@ -171,7 +193,12 @@
 
 	\item
 		\begin{proof}
-		
+			\begin{enumerate}
+				\item
+					Given an open covering $\mathscr{U}$ of $A$, an open covering of $X$ by throwing in the open subset $U_0 = X /\ A$. Since $X$ is compact, there exists finitely many sets $U_1, U_2, U_3, ... , U_n \in \mathscr{U}$ \ s.t. $X = U_0 \cup U_1 \cup ... \cup U_n$. Then $A \subseteq  U_1 \cup ... \cup U_n$, proving that $A$ is compact.
+				\item
+					(haven't figured out yet...)
+			\end{enumerate}
 		\end{proof}
 	
 	\item
