@@ -132,10 +132,27 @@
 			\end{proof}
 		\item
 			\begin{proof}
-				Let $g_n(x) = \vert f_n(x) - f(x) \vert$, then $g_n(x)$ is positive on $C_n$ and 0 on other places. Further, $g_n(x)$ is symmetric around $x = 1/2$, thus, only $[0, 1/2]$ is considered for simplicity.\\
-				Given any $\xi > 0$, it is left to find $N$ s.t. $g_n(x) < \xi$ when $n > N$.
+				Let $g_n(x) = \vert f_n(x) - f(x) \vert$, then $g_n(x)$ is positive on $C_n$ and 0 on other places. Further, $g_n(x)$ holds the same value on each closed subset of $C_n$.\\
+				Given any $\xi > 0$, it is left to find $N$ s.t. $g_n(x) < \xi$ when $n > N$. \\
+				As $g_n(x)$ reaches its extream $\frac{1}{6} \frac{1}{3^n}$ at the $\frac{1}{3}$ and $\frac{2}{3}$ of each compact subset of $C_n$, thus, given any $\xi$
+				
+				\begin{equation}
+					\frac{1}{6} \frac{1}{3^n} < \xi
+				\end{equation}
+				
+				which is equivalent to 
+				
+				\begin{equation}
+					n > \frac{ln(\frac{1}{6\xi})}{ln(3)} \triangleq N
+				\end{equation}
+				
+				and the target $N$ is given as above.
 			\end{proof}
 		\item 
+			\begin{proof}
+				As $f_c(x)$ is continous over $[0, 1]$, it is left to prove that a continous function on a compact is uniformly continous, which can be proved by contradiction.
+				
+			\end{proof}
 		
 		\item 
 		
@@ -160,11 +177,47 @@
 \section{Convergence of rationals to irrationals}
 	\begin{enumerate}
 		\item
+			\begin{proof}
+				As $e$ can be written as 
+				\begin{equation}
+					e = \sum_{i=0}^{\infty} \frac{1}{i!}
+				\end{equation}
+				
+				Suppose it is rational, then it can be written as below, where $p, q$ are prime to each other.
+				
+				\begin{equation}
+					e = \frac{p}{q} 
+				\end{equation}
+				Thus
+				\begin{equation}
+					p(q-1)! = q! \sum_{i=0}^{q} \frac{1}{i!} +  q! \sum_{i=q+1}^{\infty} \frac{1}{i!} 
+				\end{equation}
+				Since both LHS  and  the first part of RHS are integers, the second part of RHS(denoted as $RHS_2$) should be an integer as well.//
+				$RHS_2$ can be further expanded as below
+				\begin{equation}
+					\begin{aligned}
+						RHS_2 & = \frac{1}{q+1} + \frac{1}{(q+1)(q+2)} + \frac{1}{(q+1)(q+2)(q+3)} + ...\\
+						           & <  \frac{1}{q+1} + \frac{1}{(q+1)^2} + \frac{1}{(q+1)^3} + ...\\
+						           & = \frac{1}{q}\\
+						           & < 1
+					\end{aligned}
+				\end{equation}
+				Therefore $RHS_2$ is not an integer as $RHS_2 > 0$. Thus the assumption fails, and $e$  is irrational.
+			\end{proof}
 	
 		\item
+			\begin{proof}
+				It's clear that $u_n$ is increasing, and the limit is $e$, so the maximum distance between 2 element can be denoted as 
+				\begin{equation}
+					d_{max} < e - (1+\frac{1}{n})^n
+				\end{equation} 
+				
+				For any $\xi > 0$, let $d_{max} < \xi$, it is satisfied when $n > N $, where $N$ is the index of the first element s.t. $u_N > e-\xi$.\\
+				Thus $u_n$ is a cauchy sequence converging to $e$.
+			\end{proof}
 		
 		\item
-		
+			No, as the limit of a rational sequence may not converging to a rational.
 	\end{enumerate}
 
 \end{document}
