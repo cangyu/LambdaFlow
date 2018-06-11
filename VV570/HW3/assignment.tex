@@ -124,9 +124,17 @@
 \section{Cantor's Function}
 	\begin{enumerate}
 		\item
-	
+			\begin{proof}
+				It's easy to verify that $f_0, f_1$ are monotonically increasing continuous functions.\\
+				Suppose $f_n$ are still monotonically increasing continuous functions for $ n = k$.\\
+				For $n = k+1$, as $f_{k+1}$ is only different from $f_k$ on each closed subset of $C_k$, whose length is $\frac{1}{3^n}$ and is denoted as $I_{k, p} (1\leq p \leq 2^k$) here, it is left to prove that $f_{k+1}$ remains  monotonically increasing continuous on each $I_{k, p}$ after the construction process.\\
+				Since $f_k$ is linear on each $I_{k, p}$, and the recursive construction process doesn't change the values on each ending points, on which the values of $f_k$ is denoted as $a, b$ recursively, the subset of $I_{k, p}$ is valid and the value of $f_{k+1}$ on the central part, whose length is $\frac{1}{3^{k+1}}$, is $\frac{a+b}{2}$. As the measure of the remaining parts of $I_{k, p}$ is not 0, the linear function connecting each ending points is obviously valid. Thus, the new function $f_{k+1}$ is still  monotonically increasing continuous.
+			\end{proof}
 		\item
-	
+			\begin{proof}
+				Let $g_n(x) = \vert f_n(x) - f(x) \vert$, then $g_n(x)$ is positive on $C_n$ and 0 on other places. Further, $g_n(x)$ is symmetric around $x = 1/2$, thus, only $[0, 1/2]$ is considered for simplicity.\\
+				Given any $\xi > 0$, it is left to find $N$ s.t. $g_n(x) < \xi$ when $n > N$.
+			\end{proof}
 		\item 
 		
 		\item 
