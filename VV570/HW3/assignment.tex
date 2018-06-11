@@ -110,8 +110,7 @@
 				\begin{aligned}
 					\lambda(C^c) & = \frac{1}{3} + 2 * \frac{1}{9} + ... \\
 					             & = \frac{1}{3}\sum_{i=0}^{\infty} (\frac{2}{3})^n\\
-					             & = \frac{1}{3} \lim\limits_{n\rightarrow\infty}\frac{1-(2/3)^n}{1-(2/3)}\\
-					             & = 1
+					             & = \frac{1}{3} \lim\limits_{n\rightarrow\infty}\frac{1-(2/3)^n}{1-(2/3)} = 1
           		\end{aligned}
 			\end{equation} 
 		
@@ -149,12 +148,45 @@
 				and the target $N$ is given as above.
 			\end{proof}
 		\item 
+			\begin{enumerate}
+				\item 
+					\begin{proof}
+						As $f_c(x)$ is continous over $[0, 1]$, it is left to prove that a continous function on a compact is uniformly continous, which can be proved by contradiction.\\
+						(the proof haven't figured out yet...)
+					\end{proof}
+				
+				\item 
+					\begin{proof}
+						For any $x \in (0, 1] \cap C$, $f_c(x)$ can be expressed as below
+						
+						\begin{equation}
+							f_c(x) = sup\{ f_c(y) | y < x, y \in [0, 1] \backslash C  \}
+						\end{equation}
+						
+						Thus $f_c(x)$ is monotonically increasing.
+					\end{proof}
+				
+				\item
+					\begin{proof}
+						As $f_c(x)$ is constant on each segment dropped by $C$, thus $f_c'(x)$ is almost 0 everywhere.
+					\end{proof} 
+				
+			\end{enumerate}
+			
+		\item 
 			\begin{proof}
-				As $f_c(x)$ is continous over $[0, 1]$, it is left to prove that a continous function on a compact is uniformly continous, which can be proved by contradiction.
+				Assume $f_c(x)$  is absolutely continous, then its Riemann integral exists, which can be expressed as 
+				\begin{equation}
+					\int_{0}^{1} f_c'(x) dx = f_c(1) - f_c(0) \label{cantor_rie}
+				\end{equation} 
+				
+				However, the $LHS$ of (\ref{cantor_rie}) is 0 as $f_c'(x)$ is 0 almost everywhere, while the $RHS$ of (\ref{cantor_rie}) is 1. Thus its riemann integral doesn't exist, and therefore the assumption fails.
 				
 			\end{proof}
 		
-		\item 
+			
+			
+			
 		
 	\end{enumerate}
 
@@ -165,8 +197,74 @@
 \section{Taylor's theorem}
 	\begin{enumerate}
 		\item 
+			\begin{proof}
+				For $n=0$, apply the fundamental theorem of calculus to $f(x)$ and its derivatives, $f(x)$ can be written as below. It's clear that the theorem is valid in such case.
+				\begin{equation}
+					f(x) = f(a) + \int_{a}^{x} f'(t) dt
+				\end{equation}
+				
+				Suppose the theorem is still valid for $n = k$, then $f(x)$ can be written as 
+				\begin{equation}
+					f(x) = \sum_{i=0}^{k}\frac{f^{i}(a)}{i!}(x-a)^i + \frac{1}{k!}\int_{a}^{x} (x-t)^k f^{(k+1)}(t) dt \label{rhs}
+				\end{equation}
+				
+				For $n = k+1$, as $f^{(k+1)}$ is absolutely continous, apply the fundamental theorem of calculus to $f^{(k+1)}$, the second part of RHS of $f(x)$ can be written as below
+				\begin{equation}
+					\begin{aligned}
+						RHS_2 & = \frac{1}{k!}\int_{a}^{x} (x-t)^k [f^{(k+1)}(a) + \int_{a}^{t}f^{(k+2)}(u) du] dt\\
+						           & = \frac{f^{(k+1)}(a)}{k!}\int_{a}^{x}(x-t)^k dt + \frac{1}{k!}\int_{a}^{x}(x-t)^k \int_{a}^{t} f^{(k+2)}(u) du dt\\
+						           & =  \frac{f^{k+1}(a)}{(k+1)!}(x-a)^{k+1} + \frac{1}{k!}\int_{a}^{x}(x-t)^k \int_{a}^{t} f^{(k+2)}(u) du dt
+					\end{aligned}
+				\end{equation}
+				Let
+				\begin{equation}
+					g(t) = \int_{a}^{t} f^{(k+2)}(u) du
+				\end{equation}
+				$RHS_2$ can be further expressed as
+				\begin{equation}
+					\begin{aligned}
+						RHS_2 & =  \frac{f^{k+1}(a)}{(k+1)!}(x-a)^{k+1} + \frac{1}{k!}\int_{a}^{x}(x-t)^k g(t) dt\\
+								   & =  \frac{f^{k+1}(a)}{(k+1)!}(x-a)^{k+1} - \frac{1}{(k+1)!}\int_{a}^{x} g(t) d(x-t)^{k+1}\\
+								   & =  \frac{f^{k+1}(a)}{(k+1)!}(x-a)^{k+1} - \frac{1}{(k+1)!}[\left. (x-t)^{k+1} g(t) \right|_{a}^{x} - \int_{a}^{x}(x-t)^{k+1} g'(t) dt]
+					\end{aligned}
+				\end{equation}
+				As $g(a) = 0$ and $g'(t) = f^{(k+2)}(t)$, $RHS_2$ can be simplified as 
+				\begin{equation}
+					RHS_2 = \frac{f^{k+1}(a)}{(k+1)!}(x-a)^{k+1} + \frac{1}{(k+1)!}\int_{a}^{x}(x-t)^{k+1}  f^{(k+2)}(t)dt \label{rhs2}
+				\end{equation}
+				
+				Substitude (\ref{rhs2}) into (\ref{rhs}), $f(x)$ can be expressed as below when $n = k+1$
+				\begin{equation}
+					\begin{aligned}
+						f(x) & = \sum_{i=0}^{k+1}\frac{f^{i}(a)}{i!}(x-a)^i + \frac{1}{(k+1)!}\int_{a}^{x} (x-t)^{k+1} f^{(k+2)}(t) dt\\
+						      & = \sum_{i=0}^{n}\frac{f^{i}(a)}{i!}(x-a)^i + \frac{1}{n!}\int_{a}^{x} (x-t)^{n} f^{(n+1)}(t) dt\\
+					\end{aligned}
+				\end{equation}
+				Thus the theorem is still valid when $n$ is extended to $k+1$.
+			\end{proof}
 
 		\item 
+			\begin{proof}
+				It is left to prove that there exists $c\in [a, x]$ s.t. 
+				\begin{equation}
+					\frac{1}{n!}\int_{a}^{x} (x-t)^{n} f^{(n+1)}(t) dt = \frac{f^{(n+1)}(c)}{(n+1)!}(x-a)^{n+1}
+				\end{equation}
+				which is equal to 
+				\begin{equation}
+					(n+1)\int_{a}^{x} (x-t)^{n} f^{(n+1)}(t) dt = f^{(n+1)}(c)(x-a)^{n+1} \label{target}
+				\end{equation}
+				
+				As the LHS of (\ref{target}) can be expanded as below
+				\begin{equation}
+					\begin{aligned}
+						LHS & = - \int_{a}^{x}f^{(n+1)}(t) d(x-t)^{n+1}\\
+							   & = - [\left. (x-t)^{n+1}f^{(n+1)}(t)\right|_{a}^{x} - \int_{a}^{x}(x-t)^{n+1}df^{(n+1)}(t)]
+					\end{aligned}
+				\end{equation}
+				
+				Apply the medium value theorem ...(haven't figured out yet...)
+				
+			\end{proof}
 		
 	\end{enumerate}
 
@@ -198,8 +296,7 @@
 					\begin{aligned}
 						RHS_2 & = \frac{1}{q+1} + \frac{1}{(q+1)(q+2)} + \frac{1}{(q+1)(q+2)(q+3)} + ...\\
 						           & <  \frac{1}{q+1} + \frac{1}{(q+1)^2} + \frac{1}{(q+1)^3} + ...\\
-						           & = \frac{1}{q}\\
-						           & < 1
+						           & = \frac{1}{q} < 1 \\
 					\end{aligned}
 				\end{equation}
 				Therefore $RHS_2$ is not an integer as $RHS_2 > 0$. Thus the assumption fails, and $e$  is irrational.
