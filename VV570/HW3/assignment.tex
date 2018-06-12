@@ -254,16 +254,11 @@
 					(n+1)\int_{a}^{x} (x-t)^{n} f^{(n+1)}(t) dt = f^{(n+1)}(c)(x-a)^{n+1} \label{target}
 				\end{equation}
 				
-				As the LHS of (\ref{target}) can be expanded as below
+				Denote $m = min(f^{(n+1)}(x))$ and $ M = max(f^{(n+1)}(x))$, apply the first medium value theorem, there exists $c \in (m, M)$ s.t. 
 				\begin{equation}
-					\begin{aligned}
-						LHS & = - \int_{a}^{x}f^{(n+1)}(t) d(x-t)^{n+1}\\
-							   & = - [\left. (x-t)^{n+1}f^{(n+1)}(t)\right|_{a}^{x} - \int_{a}^{x}(x-t)^{n+1}df^{(n+1)}(t)]
-					\end{aligned}
+					\int_{a}^{x} (x-t)^{n} f^{(n+1)}(t) dt = f^{(n+1)}(c) \int_{a}^{x} (x-t)^{n} dt
 				\end{equation}
-				
-				Apply the medium value theorem ...(haven't figured out yet...)
-				
+				Thus, (\ref{target}) is verified.
 			\end{proof}
 		
 	\end{enumerate}
