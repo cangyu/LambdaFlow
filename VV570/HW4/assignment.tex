@@ -103,7 +103,7 @@
 						\end{equation}
 											
 					\item
-						If $g(x) = Q_n(x)$, the the $n-th$ derivative of $g(x)$ is
+						If $g(x) = Q_n(x)$, then the $n-th$ derivative of $g(x)$ is
 						\begin{equation}
 							g^{(n)}(x) = Q^{(n)}(x) = \frac{(2n)!}{2^n n!}
 						\end{equation} 
@@ -122,12 +122,24 @@
 				\end{enumerate}
 				
 				Thus, $(Q_n)_{n\in\mathbb{N}}$ are a sequence of orthogonal polynomials.
-				
 			\end{proof}
-		\item
 		
 		\item
+			\begin{proof}
+				Denote
+				\begin{equation}
+				\varphi(x) = (x^2-1)^n
+				\end{equation}
+				then
+				\begin{equation}
+				Q_n(x) = \frac{1}{2^n n!}\varphi^{(n)}(x)
+				\end{equation}
+				As the power of each item in $\varphi(x)$ is even when $\varphi(x)$ is extended, thus $\varphi^{(n)}(x)$ is even function if the order of derivative is even, and $\varphi^{(n)}(x)$ is odd function if the order of derivative is odd. \\
+				Therefore $Q_n(x)$ is even function if $n$ is even, and $Q_n(x)$ is odd function if $n$ is odd. So, it can be summarized as $Q_n(-x) = (-1)^n Q_n(x)$. 
+			\end{proof}
 		
+		\item
+			
 		\item
 	
 	\end{enumerate}
