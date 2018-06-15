@@ -66,7 +66,64 @@
 \section{Legendre Polynomials}
 	\begin{enumerate}
 		\item
-		
+			\begin{proof}
+				Let
+				\begin{equation}
+					\varphi(x) = (x^2-1)^n
+				\end{equation}
+				then
+				\begin{equation}
+					Q_n(x) = \frac{1}{2^n n!}\varphi^{(n)}(x)
+				\end{equation}
+				and
+				\begin{equation}
+					\varphi^{(k)}(1) = \varphi^{(k)}(-1) = 0 \ \  (\text{$k=0,1, ... , n-1$})
+				\end{equation}
+				Suppose $h(x) \in C^n(-1,1)$, then performing integration by parts
+				\begin{equation}
+					\begin{aligned}
+						\int_{-1}^{1} P_n(x)h(x)dx 
+						& = \frac{1}{2^n n!}\int_{-1}^{1}\varphi^{(n)}(x)h(x)dx \\
+						& = -\frac{1}{2^n n!} \int_{-1}^{1}\varphi^{(n-1)}(x)h'(x)dx \\
+						& = ...\\
+						& = \frac{(-1)^n}{2^n n!}\int_{-1}^{1}\varphi(x)h^{(n)}(x)dx
+					\end{aligned}
+				\end{equation}
+				Thus, the proof can be discussed on 2 cases
+				
+				\begin{enumerate}
+					\item 
+						If the order of $g(x)$ is less than $n$, then 
+						\begin{equation}
+							g^{(n)}(x) = 0
+						\end{equation}
+						Thus
+						\begin{equation}
+							\int_{-1}^{1}Q_n(x)Q_m(x)dx = 0 \ \ (\text{$n\neq m$})
+						\end{equation}
+											
+					\item
+						If $g(x) = Q_n(x)$, the the $n-th$ derivative of $g(x)$ is
+						\begin{equation}
+							g^{(n)}(x) = Q^{(n)}(x) = \frac{(2n)!}{2^n n!}
+						\end{equation} 
+						Thus
+						\begin{equation}
+							\begin{aligned}
+								\int_{-1}^{1}Q_n(x)Q_m(x)dx	
+								& = \int_{-1}^{1}Q_n^2(x)dx \\
+								& = \frac{(-1)^n (2n)!}{2^{2n}(n!)^2}\int_{-1}^{1}(x^2-1)^n dx\\
+								& = \frac{(2n)!}{2^{2n}(n!)^2}\int_{-1}^{1}(1-x^2)^n dx\\
+								& = \frac{(2n)!}{2^{2n}(n!)^2} \int_{0}^{\pi/2} cos^{2n+1}t dt\\
+								& = \frac{(2n)!}{2^{2n}(n!)^2} \frac{2 \times 4 \times ... \times (2n)}{1\times3\times ... \times (2n+1)}\\
+								& = \frac{2}{2n+1} \ \ (\text{$n = m$})
+							\end{aligned}
+						\end{equation}
+				\end{enumerate}
+				
+				Thus, $(Q_n)_{n\in\mathbb{N}}$ are a sequence of orthogonal polynomials.
+				
+			\end{proof}
 		\item
 		
 		\item
