@@ -188,6 +188,43 @@
 			
 		\item
 			\begin{proof}
+				As 
+				\begin{equation}
+					\begin{aligned}
+						Q_n(x) & = \frac{1}{2^n n!}[(x+1)^n(x-1)^n]^{(n)} \\
+							   & = \frac{2^n}{n!}[(\frac{x+1}{2})^n(\frac{x-1}{2})^n]^{(n)}
+					\end{aligned}
+				\end{equation}
+				Denote
+				\begin{equation}
+					f(x) = (\frac{x+1}{2})^n
+				\end{equation}
+				and
+				\begin{equation}
+					g(x) = (\frac{x-1}{2})^n
+				\end{equation}
+				Then
+				\begin{equation}
+					f^{(k)}(x) = \frac{n!}{2^k (n-k)!} (\frac{x+1}{2})^{n-k}
+				\end{equation}
+				and
+				\begin{equation}
+					g^{(k)}(x) = \frac{n!}{2^k (n-k)!} (\frac{x-1}{2})^{n-k}
+				\end{equation}
+				Since
+				\begin{equation}
+					(fg)^{(n)} = \sum_{k=0}^{n} C_n^k f^{(k)}g^{(n-k)}
+				\end{equation}
+				Thus
+				\begin{equation}
+					\begin{aligned}
+						Q_n(x) & = \frac{2^n}{n!} \sum_{k=0}^{n} C_n^k f^{(k)}(x) g^{(n-k)}(x)\\
+							   & = \frac{2^n}{n!} \sum_{k=0}^{n} C_n^k \frac{n!}{2^k (n-k)!} (\frac{x+1}{2})^{n-k} \frac{n!}{2^{n-k} k!} (\frac{x-1}{2})^k \\
+							   & = \sum_{k=0}^{n} C_n^k \frac{n!}{(n-k)!k!} (\frac{x+1}{2})^{n-k} (\frac{x-1}{2})^k\\
+							   & = \sum_{k=0}^{n} (C_n^k)^2 (\frac{x+1}{2})^{n-k} (\frac{x-1}{2})^k\\
+							   &= \sum_{k=0}^{n} (-1)^k \binom{n}{k}^2 (\frac{1+x}{2})^{n-k} (\frac{1-x}{2})^k
+					\end{aligned}
+				\end{equation}
 				
 			\end{proof}
 	
@@ -226,7 +263,7 @@
 \section{Newton's form of interpolation polynomial}
 	\begin{enumerate}
 		\item 
-
+			
 		\item
 		
 		\item 
