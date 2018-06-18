@@ -93,9 +93,9 @@
 				
 				\begin{enumerate}
 					\item 
-						If the order of $g(x)$ is less than $n$, then 
+						If the order of $h(x)$ is less than $n$, then 
 						\begin{equation}
-							g^{(n)}(x) = 0
+							h^{(n)}(x) = 0
 						\end{equation}
 						Thus
 						\begin{equation}
@@ -103,20 +103,20 @@
 						\end{equation}
 											
 					\item
-						If $g(x) = Q_n(x)$, then the $n-th$ derivative of $g(x)$ is
+						If $h(x) = Q_n(x)$, then the $n-th$ derivative of $g(x)$ is
 						\begin{equation}
-							g^{(n)}(x) = Q^{(n)}(x) = \frac{(2n)!}{2^n n!}
+							h^{(n)}(x) = Q^{(n)}(x) = \frac{(2n)!}{2^n n!}
 						\end{equation} 
 						Thus
 						\begin{equation}
 							\begin{aligned}
 								\int_{-1}^{1}Q_n(x)Q_m(x)dx	
-								& = \int_{-1}^{1}Q_n^2(x)dx \\
+								& = \int_{-1}^{1}Q_n^2(x)dx  \ \ (\text{$n = m$}) \\
 								& = \frac{(-1)^n (2n)!}{2^{2n}(n!)^2}\int_{-1}^{1}(x^2-1)^n dx\\
 								& = \frac{(2n)!}{2^{2n}(n!)^2}\int_{-1}^{1}(1-x^2)^n dx\\
 								& = \frac{(2n)!}{2^{2n}(n!)^2} \int_{0}^{\pi/2} cos^{2n+1}t dt\\
 								& = \frac{(2n)!}{2^{2n}(n!)^2} \frac{2 \times 4 \times ... \times (2n)}{1\times3\times ... \times (2n+1)}\\
-								& = \frac{2}{2n+1} \ \ (\text{$n = m$})
+								& = \frac{2}{2n+1}
 							\end{aligned}
 						\end{equation}
 				\end{enumerate}
@@ -139,8 +139,57 @@
 			\end{proof}
 		
 		\item
+			\begin{proof}
+				As $xQ_n(x)$ can be written as
+				\begin{equation}
+					xQ_n(x) = \sum_{i=0}^{n+1} a_i Q_i(x)
+				\end{equation}
+				According to the orthogonality of Legendre polynomials, $a_i = 0$ for $i = 0, 1, ... , n-2, n$, as
+				\begin{equation}
+					0 = \int_{-1}^{1}xQ_n(x) Q_i(x) dx = a_i \int_{-1}^{1}Q_i^2(x)dx \ \ (i = 0, 1, ... , n-2, n)
+				\end{equation}
+				Thus,  $xQ_n(x)$ can be written as
+				\begin{equation}
+					xQ_n(x) = a_{n-1} Q_{n-1}(x) + a_{n+1} Q_{n+1}(x)
+				\end{equation}
+				Since the highest order item in $xQ_n(x)$ is $x^{n+1}$ and its coefficient is $\frac{(2n)!}{2^n (n!)^2}$, thus
+				\begin{equation}
+					\frac{(2n)!}{2^n (n!)^2} = a_{n+1} \frac{(2n+2)!}{2^{n+1} (n+1)!^2}
+				\end{equation}
+				which implies that
+				\begin{equation}
+					a_{n+1} = \frac{n+1}{2n+1} 
+				\end{equation}
+				Denote
+				\begin{equation}
+					I_n = \int_{-1}^{1} xQ_{n-1}(x)Q_{n}(x)dx
+ 				\end{equation}
+ 				Then
+ 				\begin{equation}
+ 					I_n = a_{n-1}\int_{-1}^{1} Q_{n-1}^2(x)dx = a_{n-1} \frac{2}{2n-1}
+ 				\end{equation}
+ 				As
+ 				\begin{equation}
+ 					I_{n+1} = a_{n+1}\int_{-1}^{1}Q_{n+1}^2(x)dx = a_{n+1} \frac{2}{2n+3} = \frac{2(n+1)}{(2n+1)(2n+3)}
+ 				\end{equation}
+ 				Thus
+ 				\begin{equation}
+ 					I_n = \frac{2n}{(2n-1)(2n+1)}
+ 				\end{equation}
+ 				which implies that
+ 				\begin{equation}
+ 					a_{n-1} = \frac{n}{2n+1}
+ 				\end{equation}
+ 				Hence
+ 				\begin{equation}
+ 					(2n+1)xQ_n(x) = nQ_{n-1}(x) + (n+1)Q_{n+1}(x)
+ 				\end{equation}
+			\end{proof}
 			
 		\item
+			\begin{proof}
+				
+			\end{proof}
 	
 	\end{enumerate}
 
