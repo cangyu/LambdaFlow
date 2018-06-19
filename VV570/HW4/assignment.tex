@@ -225,7 +225,6 @@
 							   &= \sum_{k=0}^{n} (-1)^k \binom{n}{k}^2 (\frac{1+x}{2})^{n-k} (\frac{1-x}{2})^k
 					\end{aligned}
 				\end{equation}
-				
 			\end{proof}
 	
 	\end{enumerate}
@@ -263,18 +262,179 @@
 \section{Newton's form of interpolation polynomial}
 	\begin{enumerate}
 		\item 
-			
+			\begin{enumerate}
+				\item
+					\begin{proof}
+						Denote $P^1(x) = a_0 + a_1 x$, where $a_0$ and $a_1$ are coefficients to be determined.Then
+						\begin{equation}
+							\left\{
+							\begin{aligned}
+								f(x_0) & = a_0 + a_1 x_0 \\
+								f(x_1) & = a_0 + a_1 x_1
+							\end{aligned}
+							\right.
+						\end{equation}
+						$a_0$ and $a_1$ are solved as below
+						\begin{equation}
+							\left\{
+							\begin{aligned}
+								a_0 & = \frac{x_1 f(x_0) - x_0 f(x_1)}{x_1 - x_0}\\
+								a_1 & = \frac{f(x_1)-f(x_0)}{x_1 - x_0}
+							\end{aligned}
+							\right.
+						\end{equation}
+						Thus
+						\begin{equation}
+							\begin{aligned}
+								P^1(x) & = \frac{x_1 f(x_0) - x_0 f(x_1)}{x_1 - x_0} + \frac{f(x_1) - f(x_0)}{x_1 - x_0} x \\
+									   & = \frac{(x_1 - x_0)f(x_0) - x_0 (f(x_1) - f(x_0))}{x_1 - x_0} + \frac{f(x_1) - f(x_0)}{x_1 - x_0}x \\
+									   & = f(x_0) + \frac{f(x_1) - f(x_0)}{x_1 - x_0} (x-x_0)\\
+									   & = P^0(x) + \frac{f(x_1) - f(x_0)}{x_1 - x_0} (x-x_0)
+							\end{aligned}
+						\end{equation}
+					\end{proof}
+					 
+				\item 
+					If $P^2(x) = P^1(x) + R(x)$, then $R(x_0) = 0$ and $R(x_1) = 0$, thus $R(x) = c(x-x_1)(x-x_0)$, where $c$ is the coefficient to be determined. 
+					Since
+					\begin{equation}
+						R(x_2) = P^2(x_2) - P^1(x_2) 
+					\end{equation}
+					Thus
+					\begin{equation}
+						c(x_2 - x_1)(x_2 - x_0) = f(x_2) - [f(x_0) + \frac{f(x_1) - f(x_0)}{x_1 - x_0}(x_2 - x_0)]
+					\end{equation}
+					$c$ is solved as 
+					\begin{equation}
+						c = \frac{1}{x_2 - x_0} [\frac{f(x_2) - f(x_1)}{x_2 -x_1} - \frac{f(x_1) - f(x_0)}{x_1 - x_0}]
+					\end{equation}
+					Hence
+					\begin{equation}
+						R(x) = \frac{1}{x_2 - x_0} [\frac{f(x_2) - f(x_1)}{x_2 -x_1} - \frac{f(x_1) - f(x_0)}{x_1 - x_0}] (x-x_1)(x-x_0)
+					\end{equation}
+				
+				\item
+					\begin{proof}
+						As have been shown above, the statement is valid for $j = 1, 2$. Suppose it's still valid for $j = n$, then
+						\begin{equation}
+							P^n(x) = P^{n-1}(x) + a_n \prod_{k=0}^{n-1}(x - x_k)
+						\end{equation}
+						where $a_n$ depends only on $a_0, a_1, ... , a_n$.\\
+						Let $P^{n+1}(x) = P^n(x) + R(x)$, then $R(x_k) = 0$ for $k = 0, 1, 2, ... , n$, thus
+						\begin{equation}
+							R(x) = a_{n+1} \prod_{k=0}^{n}(x-x_k)
+						\end{equation}
+						Then $a_{n+1}$ is solved as
+						\begin{equation}
+							a_{n+1} = \frac{f(x_{n+1}) - P^n(x_{n+1})}{\prod_{k=0}^{n}(x-x_k)}
+						\end{equation}
+						As $a_n$ only depends on $a_0, a_1, ... , a_n$, $P^n(x_{n+1})$ only depends on $x_0, x_1, ... , x_n, x_{n+1}$, thus $a_{n+1}$ only depends on $a_0, a_1, ... , a_n, a_{n+1}$.
+					\end{proof}
+				
+			\end{enumerate}
+		
 		\item
+			\begin{proof}
+				As
+				\begin{equation}
+					P^j(x) = P^{j-1}(x) + a_j \prod_{k=0}^{j-1}(x - x_k)
+				\end{equation}
+				Thus, by recursion, $P^j(x)$ can be written as
+				\begin{equation}
+					P^n(x) = P^0(x) + \sum_{j=1}^{n} a_j \prod_{k=0}^{j-1}(x-x_k)
+				\end{equation}
+			\end{proof}
 		
 		\item 
+			\begin{proof}
+				(haven't figured out yet...)
+			\end{proof}
 		
 		\item 
+			Algorithm that calculate the approximation of $f(x)$ is given as below
+			
+			\begin{algorithm}
+			\caption{Calculation of the approximated value of $f(x)$}
+			\begin{algorithmic}[1]
+				\REQUIRE $x$, $n$, $x[i]$, $f[i]$ ($i = 0, 1, ... , n$)
+				\ENSURE $P^n(x) \approx f(x)$
+				\STATE $ret \gets 0$
+				\STATE $prod \gets 1$
+				
+				\FOR{$i=0 \to n$}
+					\STATE $coef[i] \gets f[i]$
+				\ENDFOR
+
+				\FOR{$i=0 \to n$}
+					\STATE $ret \gets coef[i] * prod$
+					\STATE $prod \gets prod * (x-x_i)$
+
+					\FOR{$j= n \to i+1$}
+						\STATE $coef[j] \gets \frac{coef[j] - coef[j-1]}{x[j] - x[j-(i+1)]}$
+					\ENDFOR
+
+				\ENDFOR
+
+				\RETURN ret
+			\end{algorithmic}  
+			\end{algorithm}
+		\item 
+			\begin{proof}
+				As
+				\begin{equation}
+					f[x_k, x_{k+1}] = \frac{f_{k+1}-f_k}{x_{k+1} - x_k} = \frac{\triangledown f_k}{h}
+				\end{equation}
+				The statement is valid for $m = 1$.\\
+				Assume it is still valid for $m = n$, then
+				\begin{equation}
+					f[x_i, x_{i+1}, ... , x_{i+n}] = \frac{\triangledown^n f_i}{n! h^n}
+				\end{equation}
+				Consider $m = n+1$, by the definition of $f[x_i, x_{i+1}, ... , x_{i+n+1}]$
+				\begin{equation}
+					f[x_i, x_{i+1}, ... , x_{i+n+1}] = \frac{f[x_{i+1}, ... , x_{i+n+1}]-f[x_i, x_{i+1}, ... , x_n]}{x_{i+n+1} - x_i}
+				\end{equation}
+				By the induction hypothesis, it can be simplified as
+				\begin{equation}
+					f[x_i, x_{i+1}, ... , x_{i+n+1}] = \frac{1}{(n+1)h} \frac{1}{n! h^n} [\triangledown^n f_{i+1} - \triangledown^n f_i]
+				\end{equation}
+				By the definition of operator $\triangledown$, it can be further simplified as
+				\begin{equation}
+					f[x_i, x_{i+1}, ... , x_{i+n+1}] = \frac{\triangledown^{n+1} f_i}{(n+1)! h^{n+1}}
+				\end{equation}
+				Thus, the statement is valid for all $m \geq 1$.
+				
+			\end{proof}
+		\item 
+			(haven't figured out yet...)
 		
 		\item 
+		Algorithm that calculate the approximation of $f(x)$ with equidistant nodes is given as below
 		
-		\item 
-		
-		\item 
+		\begin{algorithm}
+			\caption{Calculation of the approximated value of $f(x)$ with equidistant nodes}
+			\begin{algorithmic}[1]
+				\REQUIRE $h$, $n$, $x$, $f[i]$ ($i = 0, 1, ... , n$)
+				\ENSURE $P^n(x) \approx f(x)$
+				\STATE $ret \gets 0$
+				\STATE $prod \gets 1$
+				\STATE $t \gets \frac{x-x_0}{h}$
+				
+				\FOR{$i=0 \to n$}
+					\STATE $coef[i] \gets f[i]$
+				\ENDFOR
+				
+				\FOR{$i=0 \to n$}
+					\STATE $ret \gets coef[i] \times prod$
+					\STATE $prod \gets prod \times \frac{t- i}{i+1}$
+					
+					\FOR{$j= n \to i+1$}
+						\STATE $coef[j] \gets coef[j] - coef[j-1]$
+					\ENDFOR
+				\ENDFOR
+
+				\RETURN ret
+			\end{algorithmic}  
+		\end{algorithm}
 		
 	\end{enumerate}
 
