@@ -64,6 +64,149 @@
 %	PROBLEM 1
 %----------------------------------------------------------------------------------------
 \section{Lebesgue constant for Chebyshev nodes}
+\begin{enumerate}
+	\item 
+		\begin{enumerate}
+			\item 
+				\begin{proof}
+					Denote
+					\begin{equation}
+						\begin{aligned}
+							LHS &\triangleq (x-x_i)l_i(x) \\
+							RHS &\triangleq \frac{T_{n+1}(x)}{T_{n+1}'(x_i)}
+						\end{aligned}
+					\end{equation}
+					It is left to prove $LHS = RHS$.\\
+					The left part can be written as
+					\begin{equation}
+						LHS = c_l \omega(x)
+					\end{equation}
+					where 
+					\begin{equation}
+						\omega(x) = \prod_{i=0}^{n}(x-x_i)
+					\end{equation}
+					and
+					\begin{equation}
+						c_l = \frac{1}{\prod_{k=0, k\neq i}^{n}(x_i - x_k)} 
+					\end{equation}
+
+					Since both $LHS$ and $RHS$ are polynomials of order $n+1$, they are equivalent iff. they have same roots and leading coefficients.\\
+					On the one hand,as for all $x_i$, where $i = 0, 1, ... , n$
+					\begin{equation}
+						T_{n+1}(x_i) = cos((n+1)\theta_i) = cos(\frac{2i+1}{2}\pi) = 0
+					\end{equation}
+					Thus, $LHS$ and $RHS$ have same roots. $RHS$ can therefore be written as
+					\begin{equation}
+						RHS(x) = c_r \omega(x)
+					\end{equation}
+					On the other hand, since
+					\begin{equation}
+						LHS'(x)|_{x=x_i} = (l_i(x) + (x-x_i)l_i'(x))|_{x=x_i} = 1
+					\end{equation}
+					and
+					\begin{equation}
+						RHS'(x)|_{x=x_i} = \frac{T'_{n+1}(x)}{T_{n+1}'(x_i)}\Big|_{x=x_i} = 1
+					\end{equation}
+					Thus, the leading coefficients of $LHS$ and $RHS$ are equal, namely $c_l = c_r$.\\
+					Hence, $LHS=RHS$.
+				\end{proof}
+			\item 
+				\begin{proof}
+					\begin{equation}
+						\begin{aligned}
+							T'_{n+1}(x) & = (cos((n+1)arccos(x)))'\\
+							            & = sin((n+1)arccos(x)) (n+1) \frac{1}{\sqrt{1-x^2}}\\
+							            & = \frac{n+1}{\sqrt{1-cos^2(\theta)}} sin((n+1)\theta) 
+						\end{aligned}
+					\end{equation}
+					As $\theta_k = \frac{2k+1}{2(n+1)}\pi$, thus, $sin(\theta_k) > 0$, and
+					\begin{equation}
+						T'_{n+1}(x_k) = \frac{n+1}{sin(\theta_k)} sin(\frac{2k+1}{2}\pi) = {(-1)}^k \frac{n+1}{sin(\theta_k)}
+					\end{equation}
+				\end{proof}
+			\item
+				\begin{proof}
+					As
+					\begin{equation}
+						T_{n+1}(1) = cos((n+1)arccos(1)) = 1	
+					\end{equation}
+					Thus
+					\begin{equation}
+						\begin{aligned}
+							\sum_{i=0}^{n}|l_i(1)| & = \sum_{i=0}^{n}\Bigg|\frac{T_{n+1}(1)}{(1-x_i)T'_{n+1}(x_i)}\Bigg| \\
+												   & = \sum_{i=0}^{n} \frac{1}{\Big|(1-x_i)T'_{n+1}(x_i)\Big|}\\
+												   & = \frac{1}{n+1} \sum_{i=0}^{n} \bigg|\frac{sin\theta_i}{(1-cos\theta_i)} \bigg|\\
+												   & = \frac{1}{n+1} \sum_{i=0}^{n} \bigg|\frac{sin\theta_i}{2sin^2(\frac{\theta_i}{2})} \bigg|\\
+												   & \geq  \frac{1}{n+1} \sum_{i=0}^{n} cot(\frac{\theta_i}{2})\\
+						\end{aligned}
+					\end{equation}
+				\end{proof} 			
+		\end{enumerate}
+	\item 
+		\begin{enumerate}
+			\item 
+				\begin{proof}
+					According to the mean value theorem, there exists $\theta \in [\frac{\theta_k}{2}, \frac{\theta_{k+1}}{2}]$, s.t.
+					\begin{equation}
+						\int_{\frac{\theta_k}{2}}^{\frac{\theta_{k+1}}{2}} cot(t) dt = \frac{\theta_{k+1} - \theta_k}{2} cot(\theta)
+					\end{equation}
+					As $cot'(t) = -\frac{1}{sin^2(t)} < 0$, and $\theta_k \leq \theta \leq \theta_{k+1}$, thus
+					\begin{equation}
+						cot(\theta) \leq cot(\theta_k)
+					\end{equation}
+					Therefore
+					\begin{equation}
+						\int_{\frac{\theta_k}{2}}^{\frac{\theta_{k+1}}{2}} cot(t) dt \leq \frac{\theta_{k+1} - \theta_k}{2} cot(\theta_k)
+					\end{equation}
+				\end{proof}
+			
+			\item 
+				\begin{proof}
+					As $\theta_{k+1} - \theta_k = \frac{\pi}{n+1}$ and according to the result that have been proved above
+					\begin{equation}
+						\begin{aligned}
+							\sum_{k=0}^{n} \int_{\frac{\theta_k}{2}}^{\frac{\theta_{k+1}}{2}} cot(t) dt 
+							& \leq \sum_{k=0}^{n} \frac{\theta_{k+1} - \theta_k}{2}cot(\frac{\theta_k}{2})\\
+							& = \frac{\pi}{2(n+1)} \sum_{k=0}^{n} cot(\frac{\theta_k}{2})
+						\end{aligned}
+					\end{equation}
+				\end{proof}
+			
+			\item 
+				\begin{proof}
+					As $\theta_n = \frac{2n+1}{2n+2}\pi < \pi$, $\theta_{n+1} = \frac{2n+3}{2n+2} > \pi$, and $cot(x)$ is positive over $(0, \frac{\pi}{2})$, while negative otherwise.
+					Thus
+					\begin{equation}
+							\int_{\frac{\theta_0}{2}}^{\frac{\pi}{2}} cot(t) dt 
+							\leq \int_{\frac{\theta_0}{2}}^{\frac{\theta_n}{2}} cot(t) dt
+							= \sum_{k=0}^{n-1} \int_{\frac{\theta_k}{2}}^{\frac{\theta_{k+1}}{2}} cot(t) dt
+					\end{equation}
+					Hence
+					\begin{equation}
+						\int_{\frac{\theta_0}{2}}^{\frac{\pi}{2}} cot(t) dt \leq \frac{\pi}{2(n+1)} \sum_{i=0}^{n}cot(\frac{\theta_i}{2})
+					\end{equation}
+					(... not fine)
+				\end{proof}
+			
+		\end{enumerate}
+
+	\item 
+		\begin{proof}
+			\begin{equation}
+				\begin{aligned}
+					\Lambda_n & = \max_{x \in [a, b]} \sum_{i=0}^{n} |l_i(x)|\\
+							  & \geq \sum_{i=0}^{n} |l_i(1)|\\
+							  & \geq \frac{1}{n+1} \sum_{i=0}^{n} cot(\frac{\theta_i}{2})\\
+							  & \geq \frac{2}{\pi} \int_{\theta_0 / 2}^{\pi/2} cot(t)dt\\
+							  & = \frac{2}{\pi} ln(|sin(t)|) \Bigg| _{\theta_0/2}^{\pi/2}\\
+							  & = - \frac{2}{\pi} ln(sin(\frac{\theta_0}{2}))\\
+							  & \geq \frac{2}{\pi} ln(\frac{2}{\theta_0}) = \frac{2}{\pi} ln(\frac{4(n+1)}{\pi})\\
+							  & \ge \frac{2}{\pi} ln(n)
+				\end{aligned}
+			\end{equation}
+		\end{proof}
+	
+\end{enumerate}
 
 
 %----------------------------------------------------------------------------------------
