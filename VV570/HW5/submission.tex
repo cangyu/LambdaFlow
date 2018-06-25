@@ -213,12 +213,179 @@
 %	PROBLEM 2
 %----------------------------------------------------------------------------------------
 \section{Interpolation}
+\begin{enumerate}
+	\item 
+		\begin{proof}
+			Since $\Phi(f)=0$, $f(x_k) + f(y_k) = 0$ is valid for any $k$.\\
+			Thus $f(x_k) = f(y_k) = 0$ or $f(x_k)$ and $f(y_k)$ have different signs.\\
+			In the first case, take $\xi_k = x_k$ or $\xi_k = y_k$;\\
+			In the second case, as $f$ is continous over $[a, b]$, according to the  intermediate value theorem, there exists $\xi_k \in [x_k, y_k]$ s.t. $f(\xi_k) = 0$.
+		\end{proof}
+	
+	\item 
+		\begin{proof}
+			Let $h_1(x) \in \mathbb{R}_n [x]$, $h_2(x) \in \mathbb{R}_n [x]$ and  $h_1(x) \neq h_2(x)$. They can be written as
+			\begin{equation}
+				h_1(x) = \sum_{i=0}^{n} a_i x^i
+			\end{equation}
+			\begin{equation}
+				h_2(x) = \sum_{i=0}^{n} b_i x^i
+			\end{equation}
+			Assume $\Phi(h_1) = \Phi(h_2)$, then
+			\begin{equation}
+				h_1(x_k) + h_1(y_k) = h_2(x_k) + h_2(y_k) \ \ (k=0, 1, ... , n)
+			\end{equation}
+			Thus
+			\begin{equation}
+				 \begin{bmatrix}
+					(1+1) & (x_0 + y_0) &  (x_0^2 + y_0^2) & ... & (x_0^n + y_0^n)\\
+					(1+1) & (x_1 + y_1)  &  (x_1^2 + y_1^2) & ... & (x_1^n  + y_1^n)\\
+					\vdots  & \vdots    & \vdots & \ddots & \vdots \\
+					(1+1) & (x_n + y_n) & (x_n^2 + y_n^2) & ... & (x_n^n + y_n^n)\\
+				\end{bmatrix}
+				\begin{bmatrix}
+					a_0 - b_0\\
+					a_1 - b_1\\
+					\vdots \\
+					a_n - b_n\\
+				\end{bmatrix}
+				=
+				\begin{bmatrix}
+					0\\
+					0\\
+					\vdots \\
+					0\\
+				\end{bmatrix}
+			\end{equation}
+			The determinant of the coefficient matrix above is positive as it is the sum of $2^{n+1}$ determinents, each of these be positive as $x_0 < y_0 < x_1 < y_1 < ... < x_n < y_n$. Thus, solution to this linear system is $x = [0, 0, ... , 0]^T$, which means
+			\begin{equation}
+				a_i = b_i \ \ (i=0, 1, ... , n)
+			\end{equation}
+			So, the hypothsis fails as $h_1(x) = h_2(x)$. Hence, $\Phi(f) \neq \Phi(g)$, which means $\Phi$ is injective.\\
+			Assume $\Phi(P1) = \Phi(f)$, $\Phi(P2) = \Phi(f)$, according to the converse-negative proposition of the injective property, there should be $P1 = P2$, thus the unicity is proved.
+		\end{proof}
+	
+	\item 
+		\begin{proof}
+			Let $P_n(x) = a_n x^n + a_{n-1} x^{n-1} + ... + a_1 x + a_0$, denote $h(x) = P_n(x) - f(x)$. As $\Phi(P_n) = \Phi(f)$, then
+			\begin{equation}
+			h(x_k) + h(y_k) = 0
+			\end{equation}
+			Thus, there exists $\xi_k \in [x_k, y_k]$ s.t. $h(\xi_k) = 0$. So
+			\begin{equation}
+			\sum_{i=0}^{n}a_i \xi_k ^ i = f(\xi_k) \ \ (k=0, 1, ... , n)
+			\end{equation}
+			which can be written as matrix form
+			\begin{equation}
+			\begin{bmatrix}
+				1 & \xi_0 & \xi_0^2 & ... & \xi_0^n \\
+				1 & \xi_1 & \xi_1^2 & ... & \xi_1^n \\
+				\vdots  & \vdots & \vdots & \ddots & \vdots \\
+				1 & \xi_n & \xi_n^2 & ... & \xi_n^n \\
+			\end{bmatrix}
+			\begin{bmatrix}
+				a_0\\
+				a_1\\
+				\vdots \\
+				a_n\\
+			\end{bmatrix}
+			=
+			\begin{bmatrix}
+				f(\xi_0)\\
+				f(\xi_1)\\
+				\vdots \\
+				f(\xi_n)\\
+			\end{bmatrix}
+			\end{equation}
+			The determinant of the coefficient matrix is the so called Vandermonde determinant, and $\xi_j > \xi_i$ when $j>i$. Thus, determinant of the coefficient matrix is positive, which means there exist $n+1$ points in $[a, b]$, denoted as $\xi_i$, s.t. $P(\xi_i) = f(\xi_i)$. Thus $P_n$ is the interpolation polynomial of $f$.\\
+			
+			Applying the Taylor theorem, it's clear that 
+			\begin{equation}
+				f(x)-P_n(x) = \frac{(x-a)^{n+1}}{(n+1)!}f^{(n+1)}(\xi)
+			\end{equation}
+			Thus
+			\begin{equation}
+				\lVert f- p_n \rVert_\infty = \max_{x \in [a, b]} |f-P_n| \leq \frac{(b-a)^{n+1}}{(n+1)!}\sup_{x \in [a, b]}|f^{(n+1)}(x)|
+			\end{equation}
+			
+		\end{proof}
+	
+\end{enumerate}
 
 	
 %----------------------------------------------------------------------------------------
 %	PROBLEM 3
 %----------------------------------------------------------------------------------------
 \section{Trigonometric polynomials}
+\begin{enumerate}
+	\item 
+		\begin{proof}
+			It's clear that the statement holds when $k=0, 1$ as $1$ and $cos \theta$ are in $T_0$ and $T_1$ respectively.\\
+			Suppose the statement is still valid when $k = n-1$, thus, there exists $Q_{n-1}$ s.t.
+			\begin{equation}
+				(cos\theta)^{n-1} = Q_{n-1}
+			\end{equation}
+			When it comes to $k = n$, with the induction hypothesis,
+			\begin{equation}
+				\begin{aligned}
+						(cos\theta)^n & =  Q_{n-1} \times cos\theta\\
+						                     & = (\frac{a_0}{\sqrt{2}} + \sum_{k=1}^{n-1}a_k cosk\theta) cos\theta\\
+						                     & = \frac{a_0}{\sqrt{2}}cos\theta + \sum_{k=1}^{n-1}a_k (\frac{cos(k+1)\theta + cos(k-1)\theta}{2})\\
+						                     & = \frac{b_0}{\sqrt{2}} + \sum_{k=0}^{n} b_k cosk\theta \triangleq Q_n
+				\end{aligned}
+			\end{equation}
+			Thus, $(cos\theta)^n$ is in $T_n$. Hence, for any $0 \leq k \leq n$, $(cos\theta)^k$ is in $T_n$ as $T_k \subseteq T_n$.\\
+			
+			(the bijection part haven't figured out yet ...)
+			
+		\end{proof}
+	\item 
+		\begin{proof}
+			As $Q_n(\theta_i) = F(\theta_i)$, the existence of $Q_n \in T_n$ is equivalent to the existence of solution of the linear system given as below
+			\begin{equation}
+				\begin{bmatrix}
+					\frac{1}{\sqrt{2}} & cos(\theta_0) & cos(2\theta_0) & ... & cos(n\theta_0) \\
+					\frac{1}{\sqrt{2}} & cos(\theta_1) & cos(2\theta_1) & ... & cos(n\theta_1) \\
+					\vdots                 & \vdots           & \vdots             & \ddots  & \vdots     \\
+					\frac{1}{\sqrt{2}} & cos(\theta_n) & cos(2\theta_n) & ... & cos(n\theta_n) \\
+				\end{bmatrix}
+				\begin{bmatrix}
+					a_0 \\ a_1 \\ a_2 \\ \vdots \\ a_n\\
+				\end{bmatrix}
+				=
+				\begin{bmatrix}
+					F(\theta_0) \\ F(\theta_1) \\ F(\theta_2) \\ \vdots \\ F(\theta_n)\\
+				\end{bmatrix}
+			\end{equation}
+			Thus, it's left to prove the determinant of the coefficient matrix is non-zero, which can be denoted as $\det(A)$.\\
+			As $cos(k\theta)$ can be written as
+			\begin{equation}
+				cos(k\theta) = \sum_{n=0}^{k} b_n(cos\theta)^n
+			\end{equation}
+			Thus, $\det(A)$ can be simplified as below, where $C$ is an non-zero factor.
+			\begin{equation}
+				\det(A) = C \det
+				\begin{bmatrix}
+					1 & cos(\theta_0) & cos^2(\theta_0) & ... & cos^n(\theta_0) \\
+					1 & cos(\theta_1) & cos^2(\theta_1) & ... & cos^n(\theta_1) \\
+					\vdots                 & \vdots           & \vdots             & \ddots  & \vdots     \\
+					1 & cos(\theta_n) & cos^2(\theta_n) & ... & cos^n(\theta_n) \\
+				\end{bmatrix}
+			\end{equation}
+			With $\theta_i = \frac{2i+1}{2(n+1)}\pi$, it's clear that $\det(A)\neq0$ as its Vandermon derterminant part is non-zero. Thus the existence of $Q_n$ is valid.
+		\end{proof}
+	
+	\item 
+		\begin{proof}
+			It has been exactly proved above.
+		\end{proof}
+	
+	\item 
+		\begin{proof}
+			
+		\end{proof}
+	
+\end{enumerate}
 
 
 \end{document}
