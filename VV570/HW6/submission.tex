@@ -63,6 +63,83 @@
 %	PROBLEM 1
 %----------------------------------------------------------------------------------------
 \section{Richardson Extrapolation}
+\begin{enumerate}
+	\item 
+		\begin{proof}
+			When $k = 0$, it's clear that $A_0(t) = a_0 + O(t)$.\\
+			Assume that the statement is still valid when $k=n-1$, which means $A_{n-1} = a_0 + O(t^n)$\\
+			Thus, when $k = n$, apply the induction hypothesis
+			\begin{equation}
+				\begin{aligned}
+					A_n(t) & = \frac{r^n A_{n-1}(t) - A_{n-1}(rt)}{r^n-1}\\
+					          & = \frac{r^n (a_0 + O(t^n)) - (a_0 + r^n O(t^n))}{r^n-1}\\
+					          & = a_0 + \frac{r^n}{r^n-1} (O(t^n) - O(t^n))\\
+					          & = a_0 + O(t^{n+1})
+				\end{aligned}
+			\end{equation}
+			Hence, the statement is valid.
+		\end{proof}
+	\item
+		\begin{enumerate}
+			\item 
+				\begin{proof}
+					When $t_m = \frac{t_0}{r_0^m}$, and $r_0 > 1$
+					\begin{equation}
+						\lim\limits_{m\rightarrow\infty} A_n(t_m) = a_0 + O((\frac{t_0}{r_0^m})^{n+1}) = a_0 + \frac{O(t_0 ^ {n+1})}{r_0^{m(n+1)}} = 0
+					\end{equation}
+					The equation above is valid as $O(t_0 ^{n+1})$ is finite.
+			\end{proof}
+			
+			\item 
+				\begin{proof}
+					As $O(t_0 ^{n+1})$ is finite, it's clear that
+					\begin{equation}
+						 A_n(t_m) = a_0 + O((\frac{t_0}{r_0^m})^{n+1}) = a_0 + O(r_0^{-m(n+1)})
+					\end{equation}
+				\end{proof}
+			
+		\end{enumerate}
+	\item
+		Algorithm used to do extrapolation is given as below.
+		
+		\begin{algorithm}
+		\caption{Calculation of the extrapolation matrix and the improved quadrature}
+			\begin{algorithmic}[1]
+				\REQUIRE $A(t)$, $n$, $m$, $a$, $b$, $r_0$
+				\ENSURE $M$, $a_0$
+				\STATE $h \gets b-a$
+				\STATE $i \gets 0$
+				\WHILE {$i \neq m$}
+					\STATE $M[i][0] \gets A(\frac{h}{2^i})$
+					\STATE $i \gets i + 1$
+				\ENDWHILE
+				\STATE $j \gets 1$
+				\WHILE {$j \neq n$}
+					\STATE $i \gets j$
+					\WHILE {$i \neq m$}
+						\STATE $M[i][j] \gets \frac{r_0^i}{r_0^i - 1} M[i][j-1] - \frac{1}{r_0^i -1} M[i-1][j-1]$
+						\STATE $i \gets i+1$
+					\ENDWHILE
+					\STATE $j \gets j+1$
+				\ENDWHILE
+				\STATE $a_0 \gets M[m-1][n-1]$
+				\RETURN $M$, $a_0$
+			\end{algorithmic}
+		\end{algorithm}
+	
+	\item
+		\begin{enumerate}
+			\item 
+				With proper combination, lower-order terms inside original quadratures can be eliminated when generating the new quadrature.
+			\item 
+				Consider the Runge's Function
+				\begin{equation}
+					f(x) = \frac{1}{1+25x^2}
+				\end{equation}
+				(to be added...)
+		\end{enumerate}
+	
+\end{enumerate}
 
 
 %----------------------------------------------------------------------------------------
@@ -70,11 +147,82 @@
 %----------------------------------------------------------------------------------------
 \section{Integration}
 
+
 	
 %----------------------------------------------------------------------------------------
 %	PROBLEM 3
 %----------------------------------------------------------------------------------------
 \section{Gauss's method}
-
+\begin{enumerate}
+	\item 
+		\begin{enumerate}
+			\item 
+				\begin{proof}
+					It's clear that $w(x)$ is positive.\\
+					And
+					\begin{equation}
+						\int_{-1}^{1} w(x) dx = \int_{-1}^{1} \sqrt{1-x^2}dx = \int_{-\pi/2}^{\pi/2} cos^2\theta d\theta = \frac{\pi}{2}
+					\end{equation}
+					Thus, $w(x)$ is a weight function.
+				\end{proof}
+			\item 
+				\begin{proof}
+					Since
+					\begin{equation}
+						\begin{aligned}
+							\int_{-1}^{1}w(x)q_m(x)q_n(x)dx 
+							& = \int_{\pi}^{0} \sqrt{1-cos^2\theta} \frac{sin(m+1)\theta}{sin\theta} \frac{sin(n+1)\theta}{sin\theta}(-sin\theta)d\theta\\
+							& = \int_{0}^{\pi} sin(m+1)\theta sin(n+1)\theta d\theta
+						\end{aligned}
+					\end{equation}
+					It's clear that when $n=m$, the value of the equation above is $\frac{\pi}{2}$, and is $0$ when $n \neq m$.
+					Thus, $q_k\  (k\in \mathbb{N})$ defines a sequence of orthogonal polynomials for weight function $w(x)$.
+				\end{proof}
+			\item
+				\begin{equation}
+					p_k(x) = \sqrt{\frac{2}{\pi}} q_k(x)
+				\end{equation} 
+		\end{enumerate}
+	\item 
+		\begin{enumerate}
+			\item 
+				$x_k$ are roots of orthogonal polynomial over $[a, b]$, whose order is $n+1$ and weight is $w(x)$.
+			\item 
+				With the Lagrange interpolation function $f(x) = \sum_{i=0}^{n} l_i(x)f(x_i)$, $A_k$ can be determined as
+				\begin{equation}
+					A_k = \int_{-1}^{1} l_k(x)w(x)dx
+				\end{equation}
+				As $x_k = cos(\frac{k\pi}{n+2})$, it can be further resolved that $A_k = \frac{\pi}{n+2}sin^2\frac{(k+1)\pi}{n+2}$.
+			\item 
+				\begin{proof}
+					Apply Hermitan interpolation polynomials $H_{2n+1}(x)$ onto $f(x_k)$ s.t. for $k = 0, 1, ... , n$
+					\begin{equation}
+						H_{2n+1}(x_k) = f(x_k) 
+					\end{equation}
+					and
+					\begin{equation}
+						H'_{2n+1}(x_k) = f'(x_k)
+					\end{equation}
+					Thus
+					\begin{equation}
+						f(x) = H_{2n+1}(x) + \frac{f^{(2n+2)}(\xi)}{(2n+2)!}\omega^2(x)
+					\end{equation}
+					Then integrate over $[-1, 1]$ with weight $w(x)$
+					\begin{equation}
+						I = \int_{-1}^{1} f(x) w(x) dx = \int_{-1}^{1} H_{2n+1}(x) w(x)dx + R_n[f]
+					\end{equation}
+					Thus
+					\begin{equation}
+						R_n[f] = I- \sum_{k=0}^{n}A_k f(x_k) = \int_{-1}^{1}\frac{f^{(2n+2)}(\xi)}{(2n+2)!}\omega^2(x)w(x)dx
+					\end{equation}
+					Since $\omega^2(x)w(x) \geq 0$, it can be concluded from the first intermediate value theorem that
+					\begin{equation}
+						R_n[f] = \frac{f^{(2n+2)}(\eta)}{(2n+2)!}\int_{-1}^{1}\omega^2(x)w(x)dx \triangleq c  \frac{f^{(2n+2)}(\eta)}{(2n+2)!}
+					\end{equation}
+					
+				\end{proof}
+			
+		\end{enumerate}
+\end{enumerate}
 
 \end{document}
