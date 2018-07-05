@@ -1,9 +1,16 @@
-function [quad] = CompoundSimpsonQuad(f, a, b, n)
-    quad = 0;
-    xpts = linspace(a, b, n+1);
-    h = (b-a)/n;
+function [quad] = gauss_chebyshev(f, n)
+    xpts = linspace(1, 2*n-1, n);
     for i = 1:n
-        quad = quad + f(xpts(i)) + f(xpts(i+1)) + 4*f((xpts(i)+xpts(i+1))/2);
+        xpts(i) = cos(xpts(i)/(2*n)*pi);
     end
-    quad = quad * h/6;
+    
+    quad = 0;
+    for i = 1:n
+        quad = quad + cf(f, xpts(i));
+    end
+    quad = pi/n * quad;
+end
+
+function [ret] = cf(f, x)
+    ret = f(x) * sqrt(1-x.^2);
 end

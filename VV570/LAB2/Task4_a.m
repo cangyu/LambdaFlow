@@ -7,5 +7,5 @@ eval(exactf)
 format short
 
 n = 20;
-quad = CompoundSimpsonQuad(fano, -1, 1, n)
-err = eval(quad - exactf)
+quad = gauss_chebyshev(fano,n)
+err = abs(eval(quad - exactf))
