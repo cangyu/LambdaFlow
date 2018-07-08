@@ -44,7 +44,7 @@
 %% \usepackage{epsfig}
 
 %% The amssymb package provides various useful mathematical symbols
-\usepackage{amssymb}
+\usepackage{amssymb, amsmath}
 %% The amsthm package provides extended theorem environments
 %% \usepackage{amsthm}
 
@@ -131,9 +131,9 @@ Speech \sep Prediction \sep Cholesky \sep Topelitz
 \linenumbers
 
 %% main text
-\section{Background and Principles}
+\section{Background and Basic Equations}
 \label{S:1}
-In a simplified situation, the speech can be linearly predicted from the previous $p$ samples as
+In a simplified situation, a speech can be linearly predicted from the previous $p$ samples as
 \begin{equation}
 	\hat{x}(n) =  \sum_{i=1}^{p} a_i x(n-i)
 \end{equation}
@@ -148,23 +148,134 @@ The square error of the prediction is defined as
 \end{equation}
 To minimize $E$, each coefficient $a_i\ (i = 1, 2, ..., p)$ is determined as
 \begin{equation}
-	\frac{\partial E}{\partial a_i} = 2(\sum_{n}x(n)x(n-j) - \sum_{min}^{max})=0
+	\frac{\partial E}{\partial a_i} = 0
 \end{equation}
-Thus
+Which is equivalent to
+\begin{equation}\label{coef_eqn}
+	\sum_{j=1}^{p}a_j \sum_{n}x(n-j)x(n-i) = \sum_{n}x(n)x(n-i)
+\end{equation}
+where $i= 1, 2, ..., p$. \\
+Denote $\phi(i,j)$ as
+\begin{equation}\label{phi_def}
+	\phi(i, j) = \sum_{n}x(n-i)x(n-j) 
+\end{equation}
+it's clear that $\phi(i,j) = \phi(j, i)$, and (\ref{coef_eqn}) can be written as
 \begin{equation}
-	content...
+	\sum_{j=1}^{p} \phi(j, i)a_j = \phi(0, i)
 \end{equation}
+where $i= 1, 2, ..., p$.\\
+Hence, it is left to determine $\phi(j, i)$ and then $a_j$ can be resolved. However, there're different ways to determine the bounds of $n$ when calculating $\phi(j, i)$, which led to different strategies of linear prediction.
 
-\section{The Second Section}
-\label{S:2}
+\section{The Autocorrelation Method}\label{S:2}
+The autocorrelation method aims to minimize the error over the whole timespan, and it's assumed that $x(n)$ is 0 when $n \notin [0,N-1]$. Thus, $x(n)$ is windowed with finite length, and the autocorrelation function of $x(n)$ is defined as
+\begin{equation}
+	r(j) = \sum_{n=-\infty}^{+\infty} x(n)x(n-j) \ \ (j \in [1, p])
+\end{equation}
+It can be concluded that, from (\ref{phi_def}), $r(|j-i|) = \phi(j, i)$. Thus, (\ref{coef_eqn}) can be expressed as
+\begin{equation}
+	\begin{bmatrix}
+		r(0) & r(1) & r(2) & ... & r(p-1) \\ 
+		r(1) & r(0) & r(1) & ... & r(p-2) \\
+		r(2) & r(1) & r(0) & ... & r(p-3) \\
+		\vdots & \vdots & \vdots & \ddots & \vdots \\
+		r(p-1) & r(p-2) & r(p-3) & ... & r(0)
+	\end{bmatrix}
+	\begin{bmatrix}
+	a_1 \\ a_2 \\ a_3 \\ \vdots \\ a_p
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		r(1) \\ r(2) \\ r(3) \\ \vdots \\ r(p)
+	\end{bmatrix}
+\end{equation}
+It can be observed that the coefficient matrix is the so called Toeplitz matrix, where elements are symmetry and  each descending diagonal from left to right is constant.\\
+Suppose $a_i^{(k)} \ (i=1, 2, ... ,k)$ is the solution for $k-th$ iteration for $p=k$, which implies
+\begin{equation}
+	\begin{bmatrix}
+		r(0) & r(1) & r(2) & ... & r(k-1) \\ 
+		r(1) & r(0) & r(1) & ... & r(k-2) \\
+		r(2) & r(1) & r(0) & ... & r(k-3) \\
+		\vdots & \vdots & \vdots & \ddots & \vdots \\
+		r(k-1) & r(k-2) & r(k-3) & ... & r(0)
+	\end{bmatrix}
+	\begin{bmatrix}
+		a_1^{(k)} \\ a_2^{(k)} \\ a_3^{(k)} \\ \vdots \\ a_k^{(k)}
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		r(1) \\ r(2) \\ r(3) \\ \vdots \\ r(k)
+	\end{bmatrix}
+\end{equation}
+Thus, when $p=k+1$, two equation sets can be constructed as
+\begin{equation}
+	\begin{bmatrix}
+		r(0) & r(1) & ... & r(k)\\ 
+		r(1) & r(0) & ... & r(k-1)\\
+		r(2) & r(1) & ... & r(k-2)\\
+		\vdots & \vdots & \ddots & \vdots \\
+		r(k-1) & r(k-2) & ... & r(1)\\
+		r(k) & r(k-1) & ... & r(0)\\
+	\end{bmatrix}
+	\begin{bmatrix}
+		a_1^{(k)} \\ a_2^{(k)} \\ a_3^{(k)} \\ \vdots \\ a_k^{(k)} \\ -\lambda
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		r(1) - \lambda r(k) \\
+		r(2) - \lambda r(k-1) \\
+		r(3) - \lambda r(k-2) \\
+		\vdots \\
+		r(k) - \lambda r(1) \\
+		\sum_{i=1}^{k}a_i^{(k)} r(k+1-i)-\lambda r(0)
+	\end{bmatrix}
+\end{equation}
+and
+\begin{equation}
+	\begin{bmatrix}
+		r(0) & r(1) & ... & r(k)\\ 
+		r(1) & r(0) & ... & r(k-1)\\
+		r(2) & r(1) & ... & r(k-2)\\
+		\vdots & \vdots & \ddots & \vdots \\
+		r(k-1) & r(k-2) & ... & r(1)\\
+		r(k) & r(k-1) & ... & r(0)\\
+	\end{bmatrix}
+	\begin{bmatrix}
+		\lambda a_k^{(k)} \\
+		\lambda a_{k-1}^{(k)} \\
+		\lambda a_{k-2}^{(k)} \\
+		\vdots \\
+		\lambda a_1^{(k)} \\
+		0
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		\lambda r(k) \\
+		\lambda r(k-1) \\
+		\lambda r(k-2) \\
+		\vdots \\
+		\lambda r(1) \\
+		\lambda\sum_{i=1}^{k}a_i^{(k)} r(i)
+	\end{bmatrix}
+\end{equation}
+Let $\lambda$ satisfy
+\begin{equation}
+	\sum_{i=1}^{k}a_i^{(k)} r(k+1-i)-\lambda r(0) + \lambda\sum_{i=1}^{k}a_i^{(k)} r(i) = r(k+1)
+\end{equation}
+namely
+\begin{equation}
+	\lambda = \frac{r(k+1) - \sum_{i=1}^{k}a_i^{(k)} r(k+1-i)}{\sum_{i=0}^{k}a_i^{(k)}r(i)}
+\end{equation}
+where $a_0^{(k)} = -1$. Then $a_i^{(k+1)}$ can be given as
+\begin{equation}
+	\{a_i^{(k+1)}\} = 
+	\begin{bmatrix}
+		a_1^{(k)} + \lambda a_k^{(k)} & a_2^{(k)} + \lambda a_{k-1}^{(k)} & ... & a_k^{(k)} + \lambda a_1^{(k)} & -\lambda  
+	\end{bmatrix}^T
+\end{equation}
+And it can be easily verified that the recursion formula is also valid when $k=1,2$, thus this solution is justified by induction. \\
+Further, this is the so-called Levinson-Durbin algorithm, with time complexity $O(n^2)$, and it is much faster than solving it directly where time complexity is $O(n^3)$.
 
-Reference to Section \ref{S:1}. Etiam congue sollicitudin diam non porttitor. Etiam turpis nulla, auctor a pretium non, luctus quis ipsum. Fusce pretium gravida libero non accumsan. Donec eget augue ut nulla placerat hendrerit ac ut mi. Phasellus euismod ornare mollis. Proin tempus fringilla ultricies. Donec pretium feugiat libero quis convallis. Nam interdum ante sed magna congue eu semper tellus sagittis. Curabitur eu augue elit.
-
-Aenean eleifend purus et massa consequat facilisis. Etiam volutpat placerat dignissim. Ut nec nibh nulla. Aliquam erat volutpat. Nam at massa velit, eu malesuada augue. Maecenas sit amet nunc mauris. Maecenas eu ligula quis turpis molestie elementum nec at est. Sed adipiscing neque ac sapien viverra sit amet vestibulum arcu rhoncus.
-
-Vivamus pharetra nibh in orci euismod congue. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque lacus diam, congue vel laoreet id, iaculis eu sapien. In id risus ac leo pellentesque pellentesque et in dui. Etiam tincidunt quam ut ante vestibulum ultricies. Nam at rutrum lectus. Aenean non justo tortor, nec mattis justo. Aliquam erat volutpat. Nullam ac viverra augue. In tempus venenatis nibh quis semper. Maecenas ac nisl eu ligula dictum lobortis. Sed lacus ante, tempor eu dictum eu, accumsan in velit. Integer accumsan convallis porttitor. Maecenas pretium tincidunt metus sit amet gravida. Maecenas pretium blandit felis, ac interdum ante semper sed.
-
-In auctor ultrices elit, vel feugiat ligula aliquam sed. Curabitur aliquam elit sed dui rhoncus consectetur. Cras elit ipsum, lobortis a tempor at, viverra vitae mi. Cras sed urna sed eros bibendum faucibus. Morbi vel leo orci, vel faucibus orci. Vivamus urna nisl, sodales vitae posuere in, tempus vel tellus. Donec magna est, luctus non commodo sit amet, placerat et enim.
+\section{The Covariance Method}
 
 %% The Appendices part is started with the command \appendix;
 %% appendix sections are then done as normal sections
