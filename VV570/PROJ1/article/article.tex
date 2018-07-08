@@ -276,6 +276,39 @@ And it can be easily verified that the recursion formula is also valid when $k=1
 Further, this is the so-called Levinson-Durbin algorithm, with time complexity $O(n^2)$, and it is much faster than solving it directly where time complexity is $O(n^3)$.
 
 \section{The Covariance Method}
+In constrast to the previous method, the covariance method doesn't windowed the signal. Instead, the amount of points used to calculate the error is fixed. And it aims to minimize the error\\
+Suppose the amount of points to calculate $r(j)$ is $N$, then by definition
+\begin{equation}
+	r(j) = \sum_{n=0}^{N-1}x(n)x(n-j) \ \ (j = 0, 1, ... , p)
+\end{equation}
+Thus, $N+p$ samples are needed for calculating all $r(j)$. And $r(j-i)$ can be expressed as 
+\begin{equation}
+	r(j-i) = \sum_{n=0}^{N-1} x(n-j)x(n-i) \triangleq c(j, i) \ \ (j = 0, 1, ... , p) 
+\end{equation}
+Thus, the prediction equation (\ref{coef_eqn}) can be written as
+\begin{equation}
+	\begin{bmatrix}
+		c(1, 1) & c(1, 2) & ... & c(1, p)\\
+		c(2, 1) & c(2, 2) & ... & c(2, p)\\
+		\vdots  & \vdots  & \ddots & \vdots\\
+		c(p, 1) & c(p, 2) & ... & c(p, p)\\
+	\end{bmatrix}
+	\begin{bmatrix}
+		a_1 \\ a_2 \\ \vdots \\ a_p
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		c(1, 0) \\ c(2, 0) \\ \vdots \\ c(p, 0)
+	\end{bmatrix}
+\end{equation}
+Since $c(i, j) \neq c(i+k, j+k)$, the coefficient matrix above is no longer the Toeplitz matrix, and different scheme should be employed to solve this linear system.\\
+It's clear that $c(i, j) = c(j, i)$, so it can be solved using the Cholesky decomposition. And the coefficient matrix can be decomposed as
+\begin{equation}
+	C = L L^T
+\end{equation}
+where $L$ is a lower triangle matrix.
+
+\section{Numerical Experiment}
 
 %% The Appendices part is started with the command \appendix;
 %% appendix sections are then done as normal sections
