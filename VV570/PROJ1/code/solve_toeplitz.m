@@ -20,14 +20,15 @@ function [a] = solve_toeplitz(t)
         a(k) = -lambda;
         left =1;
         right = k-1;
-        while(left<=right)
+        while(left<right)
             tmp = a(left);
             a(left) = a(left) + lambda * a(right);
-            if(left~=right)
-                a(right) = a(right) + lambda * tmp;
-            end
+            a(right) = a(right) + lambda * tmp;
             left = left+1;
             right = right-1;
+        end
+        if(left==right)
+            a(right) = (1+lambda)*a(right);
         end
     end
 end
