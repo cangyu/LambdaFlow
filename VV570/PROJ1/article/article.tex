@@ -128,10 +128,10 @@ Speech \sep Prediction \sep Cholesky \sep Topelitz
 %%
 %% Start line numbering here if you want
 %%
-\linenumbers
+%\linenumbers
 
 %% main text
-\section{Background and Basic Equations}
+\section{Basic Equations}
 \label{S:1}
 In a simplified situation, a speech can be linearly predicted from the previous $p$ samples as
 \begin{equation}
@@ -276,7 +276,7 @@ And it can be easily verified that the recursion formula is also valid when $k=1
 Further, this is the so-called Levinson-Durbin algorithm, with time complexity $O(n^2)$, and it is much faster than solving it directly where time complexity is $O(n^3)$.
 
 \section{The Covariance Method}
-In constrast to the previous method, the covariance method doesn't windowed the signal. Instead, the amount of points used to calculate the error is fixed. And it aims to minimize the error\\
+In constrast to the previous method, the covariance method doesn't windowed the signal. Instead, the amount of points used to calculate the error is fixed. And it aims to minimize the error.\\
 Suppose the amount of points to calculate $r(j)$ is $N$, then by definition
 \begin{equation}
 	r(j) = \sum_{n=0}^{N-1}x(n)x(n-j) \ \ (j = 0, 1, ... , p)
