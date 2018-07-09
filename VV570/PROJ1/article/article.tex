@@ -35,13 +35,16 @@
 %% \documentclass[final,5p,times]{elsarticle}
 %% \documentclass[final,5p,times,twocolumn]{elsarticle}
 
+\usepackage{cite}
+
 %% if you use PostScript figures in your article
 %% use the graphics package for simple commands
 %% \usepackage{graphics}
 %% or use the graphicx package for more complicated commands
-%% \usepackage{graphicx}
+\usepackage{graphicx}
 %% or use the epsfig package if you prefer to use the old commands
 %% \usepackage{epsfig}
+\usepackage{epstopdf}
 
 %% The amssymb package provides various useful mathematical symbols
 \usepackage{amssymb, amsmath}
@@ -52,10 +55,6 @@
 %% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
 %% for the whole article with \linenumbers after \end{frontmatter}.
 \usepackage{lineno}
-
-%use graph format
-\usepackage{graphicx} 
-\usepackage{epstopdf}
 
 %% natbib.sty is loaded by default. However, natbib options can be
 %% provided with \biboptions{...} command. Following options are
@@ -115,11 +114,11 @@
 
 \begin{abstract}
 %% Text of abstract
-A model was established for predicting a speech linearly. Two strategies are developed to determine the coefficients. One is windowing the error and the Cholesky decomposition is applied. The other is windowing the signal and the Topelitz equations are solved iteratively. The two strategies are compared using a sample speech finally.
+A model was established for predicting a speech linearly. Two strategies are developed to determine the coefficients. One is windowing the signal and the Topelitz equations are solved iteratively. The other is windowing the error and the Cholesky decomposition is applied. Both the two strategies are compared with a sample speech finally.
 \end{abstract}
 
 \begin{keyword}
-Speech \sep Prediction \sep Cholesky \sep Topelitz
+Speech Prediction \sep Correlation \sep Covariance \sep Cholesky \sep Topelitz
 %% keywords here, in the form: keyword \sep keyword
 
 %% MSC codes here, in the form: \MSC code \sep code
@@ -361,6 +360,20 @@ The covariance method is investigated in Fig(\ref{fig:performance_cov}). It can 
 The difference can be explained as the bounds of $n$ are different. There're $p$ more points used in the covariance method when calculating the linear prediction coefficients, and hence, it's more likely that the covariance method out-performs the autocorrelation method.
 
 \subsection{Relation between the error and $p$}
+Here, the covariance method is choosen for further investigating the relation between the error and the prediction order $p$. 
+
+Again, the total number of samples is fixed($len = 120$). The error vector $e$ is measured with $\lVert e \rVert_2$. $p$ is equidistantly choosen ranging from $2$ to $50$. Plot indicating the relation between the order of error and $p$ is given as below.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[height=5.5cm,width=9cm]{../pic/err_vs_p.eps}
+\end{figure}
+
+It can be seen from the plot that the error is reduced immediately when $p$ is increased from $5$ to $15$, but the error decreases slowly when $p$ continues to grow.
+
+\section{Conclusion}
+Two different methods were introduced to calculate the linear prediction coefficients. Numerical experiments were carried out to compare the performence of these two methods, and the results show that the covariance method
+does better than the correlation method. Possible reasons were suggested and a further study on the relation between the error and $p$ indicates that the error decreases intensively at the begining but tends to be converged later on.
 
 %% The Appendices part is started with the command \appendix;
 %% appendix sections are then done as normal sections
@@ -369,37 +382,7 @@ The difference can be explained as the bounds of $n$ are different. There're $p$
 %% \section{}
 %% \label{}
 
-%% References
-%%
-%% Following citation commands can be used in the body text:
-%% Usage of \cite is as follows:
-%%   \cite{key}          ==>>  [#]
-%%   \cite[chap. 2]{key} ==>>  [#, chap. 2]
-%%   \citet{key}         ==>>  Author [#]
-
-%% References with bibTeX database:
-
-\bibliographystyle{model1-num-names}
-\bibliography{sample.bib}
-
-%% Authors are advised to submit their bibtex database files. They are
-%% requested to list a bibtex style file in the manuscript if they do
-%% not want to use model1-num-names.bst.
-
-%% References without bibTeX database:
-
-% \begin{thebibliography}{00}
-
-%% \bibitem must have the following form:
-%%   \bibitem{key}...
-%%
-
-% \bibitem{}
-
-% \end{thebibliography}
-
+\bibliographystyle{plain}
+\bibliography{article.bib}
 
 \end{document}
-
-%%
-%% End of file `elsarticle-template-1-num.tex'.

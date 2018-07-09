@@ -1,4 +1,20 @@
 function main2
+    x = 2:2:50;
+    y = zeros(1, length(x));
+    
+    for idx = 1:length(x)
+        error = lpc_covariance(x(idx));
+        y(idx) = norm(error,2);
+    end
+    
+    y = log(y);
+    plot(x, y);
+    xlabel('p');
+    ylabel('log(||e||)');
+    
+end
+
+function[err] = lpc_covariance(p)
     %提取音频数据
     file_path = '../resource/clip.mp3';
     [y,~] = audioread(file_path);
@@ -7,7 +23,6 @@ function main2
     end_idx = beg_idx+len-1;
     ysp = y(beg_idx:end_idx); 
     t = 0:len-1;
-    p = 6;
     
     %构造系数矩阵
     c = zeros(p, p);
@@ -57,4 +72,6 @@ function main2
     ylim([0 0.2])
     xlabel('Time')
     ylabel('Absolute Error')
+    fn = sprintf('../pic/covariance_err_%d_%d', len, p);
+%     saveas(gcf,fn,'eps');
 end
