@@ -53,6 +53,10 @@
 %% for the whole article with \linenumbers after \end{frontmatter}.
 \usepackage{lineno}
 
+%use graph format
+\usepackage{graphicx} 
+\usepackage{epstopdf}
+
 %% natbib.sty is loaded by default. However, natbib options can be
 %% provided with \biboptions{...} command. Following options are
 %% valid:
@@ -141,7 +145,8 @@ where $a_i$ are the linear prediction coefficients. Then the error between the s
 \begin{equation}
 	e(n) = x(n) - \hat{x}(n) = -\sum_{i=0}^{p}a_i x(n-i)
 \end{equation}
-where $a_0 = -1$. The minimum mean square error(MMSE) is adopted as the principle to determine these coefficients $a_i$.\\
+where $a_0 = -1$. The minimum mean square error(MMSE) is adopted as the principle to determine these coefficients $a_i$.
+
 The square error of the prediction is defined as
 \begin{equation}
 	E = \sum_{n}e^2(n) = \sum_{n}[x(n) - \sum_{i=1}^{p}a_i x(n-i)]^2
@@ -154,7 +159,8 @@ Which is equivalent to
 \begin{equation}\label{coef_eqn}
 	\sum_{j=1}^{p}a_j \sum_{n}x(n-j)x(n-i) = \sum_{n}x(n)x(n-i)
 \end{equation}
-where $i= 1, 2, ..., p$. \\
+where $i= 1, 2, ..., p$.
+
 Denote $\phi(i,j)$ as
 \begin{equation}\label{phi_def}
 	\phi(i, j) = \sum_{n}x(n-i)x(n-j) 
@@ -163,7 +169,8 @@ it's clear that $\phi(i,j) = \phi(j, i)$, and (\ref{coef_eqn}) can be written as
 \begin{equation}
 	\sum_{j=1}^{p} \phi(j, i)a_j = \phi(0, i)
 \end{equation}
-where $i= 1, 2, ..., p$.\\
+where $i= 1, 2, ..., p$.
+
 Hence, it is left to determine $\phi(j, i)$ and then $a_j$ can be resolved. However, there're different ways to determine the bounds of $n$ when calculating $\phi(j, i)$, which led to different strategies of linear prediction.
 
 \section{The Autocorrelation Method}\label{S:2}
@@ -188,7 +195,8 @@ It can be concluded that, from (\ref{phi_def}), $r(|j-i|) = \phi(j, i)$. Thus, (
 		r(1) \\ r(2) \\ r(3) \\ \vdots \\ r(p)
 	\end{bmatrix}
 \end{equation}
-It can be observed that the coefficient matrix is the so called Toeplitz matrix, where elements are symmetry and  each descending diagonal from left to right is constant.\\
+It can be observed that the coefficient matrix is the so called Toeplitz matrix, where elements are symmetry and  each descending diagonal from left to right is constant.
+
 Suppose $a_i^{(k)} \ (i=1, 2, ... ,k)$ is the solution for $k-th$ iteration for $p=k$, which implies
 \begin{equation}
 	\begin{bmatrix}
@@ -272,11 +280,13 @@ where $a_0^{(k)} = -1$. Then $a_i^{(k+1)}$ can be given as
 		a_1^{(k)} + \lambda a_k^{(k)} & a_2^{(k)} + \lambda a_{k-1}^{(k)} & ... & a_k^{(k)} + \lambda a_1^{(k)} & -\lambda  
 	\end{bmatrix}^T
 \end{equation}
-And it can be easily verified that the recursion formula is also valid when $k=1,2$, thus this solution is justified by induction. \\
+And it can be easily verified that the recursion formula is also valid when $k=1,2$, thus this solution is justified by induction. 
+
 Further, this is the so-called Levinson-Durbin algorithm, with time complexity $O(n^2)$, and it is much faster than solving it directly where time complexity is $O(n^3)$.
 
 \section{The Covariance Method}
-In constrast to the previous method, the covariance method doesn't windowed the signal. Instead, the amount of points used to calculate the error is fixed. And it aims to minimize the error.\\
+In constrast to the previous method, the covariance method doesn't windowed the signal. Instead, the amount of points used to calculate the error is fixed. And it aims to minimize the error.
+
 Suppose the amount of points to calculate $r(j)$ is $N$, then by definition
 \begin{equation}
 	r(j) = \sum_{n=0}^{N-1}x(n)x(n-j) \ \ (j = 0, 1, ... , p)
@@ -301,15 +311,56 @@ Thus, the prediction equation (\ref{coef_eqn}) can be written as
 		c(1, 0) \\ c(2, 0) \\ \vdots \\ c(p, 0)
 	\end{bmatrix}
 \end{equation}
-Since $c(i, j) \neq c(i+k, j+k)$, the coefficient matrix above is no longer the Toeplitz matrix, and different scheme should be employed to solve this linear system.\\
+Since $c(i, j) \neq c(i+k, j+k)$, the coefficient matrix above is no longer the Toeplitz matrix, and different scheme should be employed to solve this linear system.
+
 It's clear that $c(i, j) = c(j, i)$, so it can be solved using the Cholesky decomposition. And the coefficient matrix can be decomposed as
 \begin{equation}
 	C = L L^T
 \end{equation}
-where $L$ is a lower triangle matrix.
+where $L$ is a lower triangle matrix. Onece $L$ is obtained, targeting $a_i$ can be easily calculated by
+\begin{equation}
+	\begin{aligned}
+		y & = linsolve(L, b)\\
+		{a_i} & = linsolve(L^T, y)
+	\end{aligned}
+\end{equation}
 
 \section{Numerical Experiment}
+A segment of audio is taken as the original signal, where $len = 120$ samples are included. 
+\subsection{Comparison between the autocorrelation and covariance}
+Numerical experiments indicates that the covariance method performs better than the autocorrelation method when $p$ is fixed($p=6$).
 
+The autocorrelation method is examined in Fig(\ref{fig:performance_auto}). It can be seen from the left figure that the predicted signals fit the original signals well, only with slightly difference. The error between is much more apparent at peak area. Details of performance is given in the right figure.
+
+\begin{figure}[!htbp]\centering	
+	\begin{minipage}{6.5cm}
+		\centering
+		\includegraphics[height=6cm,width=7cm]{../pic/autocorrelation_120_6.eps}
+	\end{minipage}
+	\begin{minipage}{6.5cm}
+		\centering
+		\includegraphics[height=6cm,width=7cm]{../pic/autocorrelation_err_120_6.eps}
+	\end{minipage}
+	\caption{Performance of the Autocorrelation Method}\label{fig:performance_auto}
+\end{figure}
+
+The covariance method is investigated in Fig(\ref{fig:performance_cov}). It can be seen from the left figure that the predicted signals meet the original signals very well and the error between is significantly eliminated compared to the autocorrelation method. It can be seen from the right figure that the error is lower by an order of magnitude.
+
+\begin{figure}[!htbp]\centering	
+	\begin{minipage}{6.5cm}
+		\centering
+		\includegraphics[height=6cm,width=7cm]{../pic/covariance_120_6.eps}
+	\end{minipage}
+	\begin{minipage}{6.5cm}
+		\centering
+		\includegraphics[height=6cm,width=7cm]{../pic/covariance_err_120_6.eps}
+	\end{minipage}
+	\caption{Performance of the Covariance Method}\label{fig:performance_cov}
+\end{figure}
+
+The difference can be explained as the bounds of $n$ are different. There're $p$ more points used in the covariance method when calculating the linear prediction coefficients, and hence, it's more likely that the covariance method out-performs the autocorrelation method.
+
+\subsection{Relation between the error and $p$}
 
 %% The Appendices part is started with the command \appendix;
 %% appendix sections are then done as normal sections

@@ -1,13 +1,15 @@
 function main2
+    %提取音频数据
     file_path = '../resource/clip.mp3';
     [y,~] = audioread(file_path);
-    len = 240;
+    len = 120;
     beg_idx = 18000;
     end_idx = beg_idx+len-1;
     ysp = y(beg_idx:end_idx); 
     t = 0:len-1;
-    p = 12;
+    p = 6;
     
+    %构造系数矩阵
     c = zeros(p, p);
     b = zeros(p, 1);
     for i = 1:p
@@ -19,6 +21,7 @@ function main2
         end
     end
     
+    %通过Cholesky分解求线性预测系数
     L = cholesky_decomp(c);
     opts.LT = true; 
     opts.UT = false;
@@ -27,6 +30,7 @@ function main2
     opts.UT = true;
     a = linsolve(L',tmp, opts);
     
+    %估算
     est = zeros(1, len);
     for n = beg_idx : end_idx
         tmp = 0;
@@ -36,6 +40,10 @@ function main2
         est(n-beg_idx+1) = tmp;
     end
 
+    err = abs(est - ysp);
+    
+    %画图
+    figure(1)
     plot(t, ysp)
     xlabel('Time')
     ylabel('Audio Signal')
@@ -43,4 +51,10 @@ function main2
     plot(t, est)
     legend('Original','Predicted')
     hold off
+    
+    figure(2)
+    plot(t, err)
+    ylim([0 0.2])
+    xlabel('Time')
+    ylabel('Absolute Error')
 end
