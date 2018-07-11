@@ -1,0 +1,141 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm,amssymb} % Math packages
+\usepackage{mathrsfs}
+\usepackage{algorithm, algorithmic}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}} %Use Input in the format of Algorithm  
+\renewcommand{\algorithmicensure}{\textbf{Output:}} %UseOutput in the format of Algorithm  
+\usepackage{listings}
+\lstset{language=Matlab}
+\usepackage{enumerate}
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Shanghai Jiao Tong University, UM-SJTU JOINT INSTITUTE} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Introduction to Numerical Analysis \\ HW7 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Yu Cang \\ 018370210001} % Your name
+
+\date{\normalsize \today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+\section{Question 1}
+	\begin{enumerate}[(a)]
+		\item 
+			For example
+			\begin{equation}
+				y = tan(x), \ \ x\in (-\frac{\pi}{2}, \frac{\pi}{2})
+			\end{equation}
+			It's differentiable over $(-\frac{\pi}{2}, \frac{\pi}{2})$, and the derivative is 
+			\begin{equation}
+				y' = \frac{1}{cos^2(x)}
+			\end{equation}
+			It's obvious that $y' \rightarrow \infty$ when $x \rightarrow \frac{\pi}{2}$.
+		\item 
+			\begin{proof}
+				Denote $g(x)$ over $[x_1, x_2]$ as
+				\begin{equation}
+					g(x) = f(x) - f(x_1) - \frac{f(x_2)-f(x_1)}{x_2-x_1}(x-x_1) 
+				\end{equation}
+				where $a< x_1 < x_2 < b$. Then, $g(x_1) = 0$ and $g(x_2)=0$.
+				
+				Thus, from Rolle's theorem, there exists $\xi \in (x_1, x_2)$ s.t. 
+				\begin{equation}
+					g'(\xi)= 0
+				\end{equation}
+				namely
+				\begin{equation}
+					\frac{f(x_2) - f(x_1)}{x_2-x_1} = f'(\xi)
+				\end{equation}
+				Since $f'$ is bounded, then $|f'(\xi)| \leq M$. Thus
+				\begin{equation}
+					|f(x_2) - f(x_1)| \leq M |x_2 - x_1|
+				\end{equation}
+				which means that $f(x)$ is Lipschitz continous.
+			\end{proof}
+		\item 
+			For example
+			\begin{equation}
+				y = \frac{1}{x}, \ \ x \in (0, 1)
+			\end{equation}
+			$y$ is obviously differentiable and its derivative is
+			\begin{equation}
+				y' = -\frac{1}{x^2}, \ \ x \in (0, 1)
+			\end{equation}
+			Suppose there exist a constant $c>0$ s.t. 
+			\begin{equation}
+				|y_2 - y_1| \leq c|x_2 - x_1|
+			\end{equation}
+			is valid for all $0 < x_1 < x_2 < 1$.
+			Let $y(b) - y(a) = c(b-a)$, where $a < b$then
+			\begin{equation}
+				c = \frac{1}{ab}
+			\end{equation}
+			Take the mid-point of $a, b$, then
+			\begin{equation}
+				\frac{y(a)-y(\frac{b+a}{2})}{\frac{b+a}{2}-a} = \frac{1}{a(\frac{b+a}{2})} > \frac{1}{ab} = c
+			\end{equation}
+			Thus, the assumption fails, which means that $y$ is not Lipschitz continous.
+		\item 
+			For example
+			\begin{equation}
+				y = |x|, \ \ x \in (-1, 1)
+			\end{equation}
+			It's Lipschitz continous as for any $-1 < x_1 < x_2 < 1$
+			\begin{equation}
+				\frac{|y(x_2)-y(x_1)|}{|x_2 - x_1|} \leq 1
+			\end{equation}
+			but it is not differentiable at $x=0$.
+		
+	\end{enumerate}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+\section{Question 2}
+	
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+\section{Question 3}
+
+\end{document}
