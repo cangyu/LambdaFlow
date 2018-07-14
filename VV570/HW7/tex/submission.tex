@@ -132,10 +132,135 @@
 %	PROBLEM 2
 %----------------------------------------------------------------------------------------
 \section{Question 2}
-	
+	\begin{enumerate}
+		\item 
+			\begin{proof}
+				Since $|g'(x)|<1$, there exists $0<L<1$ s.t. $|g'(x)| \leq L$.
+				Then, according to the Lagrange intermediate value theorem
+				\begin{equation}
+					\begin{aligned}
+						|g(x_j) - g(x_i)| &= |g'(\xi)||x_j - x_i|\\
+										  &\leq L|x_j - x_i|
+					\end{aligned}
+				\end{equation}
+				As $g(x^*) = x^*$, applying the fixed point iteration, then
+				\begin{equation}
+					\begin{aligned}
+						|x_{k+1} - x^*| & = |g(x_k) - g(x^*)|\\
+										& \leq L|x_k - x^*|\\
+										& = L |(x_{k+1}-x^*) - (x_{k+1} - x_k)|\\
+										& \leq L|x_{k+1}-x^*| + L|x_{k+1} - x_k|
+					\end{aligned}
+				\end{equation}
+				Thus
+				\begin{equation}
+					\begin{aligned}
+						|x_{k+1} - x^*| & \leq \frac{L}{1-L} |x_{k+1} - x_k|\\
+						                & \leq \frac{L^2}{1-L}|x_k - x_{k-1}|\\
+						                & \leq ...\\
+						                & \leq \frac{L^{k+1}}{1-L} |x_1 - x_0|
+					\end{aligned}
+				\end{equation}
+				Since $0<L<1$, and $|x_1 - x_0|$ is finite, it indicates that
+				\begin{equation}
+					\lim\limits_{k\rightarrow\infty}|x_{k+1} - x^*| = 0
+				\end{equation}
+				Hence, the fixed-point iteration will converge to the unique fixed point $x^*$.
+			\end{proof}
+
+		\item 
+			\begin{proof}
+				Since $|g'(x)|>1$, there exists $L>1$ s.t. $|g'(x)| \geq L$.
+				Then, according to the Lagrange intermediate value theorem
+				\begin{equation}
+					\begin{aligned}
+						|g(x_j) - g(x_i)| &= |g'(\xi)||x_j - x_i|\\
+										  &\geq L|x_j - x_i|
+					\end{aligned}
+				\end{equation}
+				As $g(x^*) = x^*$, applying the fixed point iteration, then
+				\begin{equation}
+					\begin{aligned}
+					|x_{k+1} - x^*| & = |g(x_k) - g(x^*)|\\
+									& \geq L|x_k - x^*|\\
+									& = L |(x_{k+1} - x_k)-(x_{k+1}-x^*)|\\
+									& \geq L(|x_{k+1} - x_k|-|x_{k+1}-x^*|)\\
+					\end{aligned}
+				\end{equation}
+				Thus
+				\begin{equation}
+					\begin{aligned}
+						|x_{k+1} - x^*| & \geq \frac{L}{1+L} |x_{k+1} - x_k|\\
+										& \geq \frac{L^2}{1+L}|x_k - x_{k-1}|\\
+										& \geq ...\\
+										& \geq \frac{L^{k+1}}{1+L} |x_1 - x_0|
+					\end{aligned}
+				\end{equation}
+						Since $L>1$, and $|x_1 - x_0|$ is finite, it indicates that
+				\begin{equation}
+				\lim\limits_{k\rightarrow\infty}|x_{k+1} - x^*| = \infty
+				\end{equation}
+				Hence, the fixed-point iteration will never converge to the unique fixed point $x^*$.
+			\end{proof}
+
+		
+	\end{enumerate}
 %----------------------------------------------------------------------------------------
 %	PROBLEM 3
 %----------------------------------------------------------------------------------------
 \section{Question 3}
+\begin{enumerate}
+	\item 
+		For resolving the smallest positive root, the equation can be reformed as
+		\begin{equation}
+			x = tg^{-1}(4x) \triangleq g(x)
+		\end{equation}
+		It can be easily observed that the root lies in $(1, \frac{\pi}{2})$. 
+		
+		Applying the fundamental inequality, $g'(x)$ can be further determined as
+		\begin{equation}
+			0 < g'(x) = \frac{4}{1+(4x)^2} = \frac{1}{\frac{1}{4}+ 4x^2} \leq \frac{1}{x} < 1
+		\end{equation}
+		Thus, the fixed-point iteration can be employed to resolve the result. The starting value is given as
+		\begin{equation}
+			x_0 = \frac{1+\frac{\pi}{2}}{2}
+		\end{equation}
+		A python script is written to perform the numerical iteration, and the final result is
+		\begin{equation}
+			x^* \approx 1.393
+		\end{equation}
+	\item 
+		For resolving the second smallest positive root, the original coordinate axes $Oxy$ can be transfromed to $O'xy$ to simplify to equation, where $(\pi, 0)$ in origial coordinate is selected as the transformed origin. Thus, it's equivalent to solve
+		\begin{equation}
+			tg(x) = 4(x+\pi)
+		\end{equation}
+		For similar consideration, the equation is reformed as
+		\begin{equation}
+			x = tg^{-1}(4(x+\pi)) \triangleq g(x)
+		\end{equation}
+		Obviously, the root is located in $(1, \frac{\pi}{2})$ in the transformed coordinate.Similarly, the range of $g'(x)$ is examined as
+		\begin{equation}
+			0<g'(x)=\frac{4}{1+16(x+\pi)^2} = \frac{1}{\frac{1}{4} + 4(x+\pi)^2} <\frac{1}{\frac{1}{4}+4x^2} <\frac{1}{x} < 1
+		\end{equation}
+		Thus, the fixed-point iteration can be employed to resolve the result. The starting value is given as
+		\begin{equation}
+			x'_0 = \frac{1+\frac{\pi}{2}}{2}
+		\end{equation}
+		A python script is written to perform the numerical iteration, and the final result is
+		\begin{equation}
+			x^* = x'^* + \pi \approx 1.517 + \pi \approx 4.659 
+		\end{equation}
+\end{enumerate}
+%----------------------------------------------------------------------------------------
+%	PROBLEM 6
+%----------------------------------------------------------------------------------------
+\section{Question 6}
+	\begin{enumerate}
+		\item 
+			For example, $e^x = x+1$ over $[-1, 1]$ can be solved by bisection, but $g'(x) \triangleq (e^x-1)' = e^x > 1$ when $x>0$. Thus the fixed-point iteration will diverge if the initial value is given as $x_0 > 0$.
+		\item 
+			For example, $cos(x) = 0$ over $[0, \frac{\pi}{2}]$. Let $g'(x)\triangleq (cos(x)+x)' = 1-sin(x)$, it's clear that $0 \leq g'(x) \leq 1$, thus, it can be resolved by the fixed-point iteration given an starting value $x_0 \in (0, \frac{\pi}{2})$ . However, the Newton method would fail if $x_0$ is very close to $0$. This is caused as $cos'(x) = sin(x) \rightarrow 0$, which lead to the further displacement of $x_1$ as $\frac{f(x_0)}{f'(x_0)}\rightarrow\infty$.
+		
+	\end{enumerate}
 
 \end{document}
