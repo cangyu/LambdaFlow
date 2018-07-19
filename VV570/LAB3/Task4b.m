@@ -6,8 +6,17 @@ df = @(x) exp(x)*((x-2).^3 + 3*(x-2).^2);
 a = 0;
 b = 3;
 x0 = (a+b)/2;
-eps_x = 1e-10;
-eps_y = 1e-10;
-max_iter = 51;
+max_iter = 50;
 
-[xval, x_err,iter_num yval] = newton(f, df, x0, eps_x, eps_y, max_iter)
+x(1) = x0;
+for i = 1:max_iter
+    x(i+1) = x(i) - f(x(i))/df(x(i));
+end
+
+n = length(x);
+m = zeros(1, n);
+for i = 2:n-1
+    m(i+1) = -(x(i)-x(i-1))/(x(i+1) - 2*x(i) + x(i-1));
+end
+
+table((1:n)', x', m', 'VariableNames', {'n', 'x', 'm'})
