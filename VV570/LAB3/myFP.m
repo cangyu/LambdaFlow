@@ -8,8 +8,8 @@ function [xvec] = myFP( f, x0, tol, nmax, varargin)
 %   varargin: Custom plotting parameters.
 %Output:
 %   xvec: Intermediate iteration records.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%       
-    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
     function outputlocalfunc()
             plot(0:(length(xvec)-1), xvec, varargin{2:end});            
             h = xlabel('$n$' );

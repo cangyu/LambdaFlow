@@ -1,6 +1,7 @@
 function myplot( x, y, varargin )
 %Illusration of varargin using plot
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
     plot(x, y, varargin{2:end});
     
     h = line([min(x) max(x)], [0 0]);
