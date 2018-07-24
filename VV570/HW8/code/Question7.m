@@ -1,6 +1,6 @@
 clear all; close all; clc;
 
-f = @(a, b) 1/sin(a) + 1/sin(a+b);
+f = @(a, b) 1/sin(b) + 1/sin(a+b);
 
 N = 91;
 alpha = linspace(45, 135, N);
