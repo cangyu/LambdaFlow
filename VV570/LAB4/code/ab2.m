@@ -1,7 +1,7 @@
 function [ x, y ] = ab2 ( f, xRange, yInitial, numSteps )
 % [ x, y ] = ab2 ( f, xRange, yInitial, numSteps ) uses
 % Adams-Bashforth second-order method to solve a system
-% of first-order ODEs y?=f(x,y).
+% of first-order ODEs y'=f(x,y).
 % f = name of an m-file with signature
 % yprime = f(x,y)
 % to compute the right side of the ODE as a row vector
