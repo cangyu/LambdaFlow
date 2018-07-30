@@ -152,13 +152,64 @@
 \section{Question 3}
 	\begin{enumerate}[(a)]
 		\item 
-		
+			With $y_0 = 4$, $y_k$ are calculated using Euler's method as follows
+			\begin{equation}
+				y_k = y_{k-1} + h \Phi(t_{k-1}, y_{k-1})
+			\end{equation}
+			The calculation is carried out with matlab, and the results are given as below
+			\begin{figure}[!htbp]
+				\centering
+				\includegraphics[width=8cm]{../pic/Q3_a.eps}
+			\end{figure}
 		\item 
-		
+			The initial value of $y_k^{(0)}$ is calculated using Euler's method.\\
+			Then $y_k^{(i)}$ are calculated in $i-th$ iteration, and the back-ward Euler's method is adopted.
+			\begin{equation}
+				y_k^{(i)} = y_{k-1}^{(i)} + h \Phi(t_{k}, y_k^{(i-1)})
+			\end{equation} 
+			The calculation is carried out with matlab, and the results are given as below
+			\begin{figure}[!htbp]
+				\centering
+				\includegraphics[width=8cm]{../pic/Q3_b.eps}
+			\end{figure}
 		\item 
-		
+			Iteration formula is given as 
+			\begin{equation}
+				y_k = y_{k-1} + h \Phi(t_{k-1}, y_{k-1}) + \frac{h^2}{2}[\Phi_t(t_{k-1}, y_{k-1}) + \Phi_y(t_{k-1}, y_{k-1}) \Phi(t_{k-1}, y_{k-1})]
+			\end{equation}
+			The calculation is carried out with matlab, and the results are given as below
+			\begin{figure}[!htbp]
+				\centering
+				\includegraphics[width=8cm]{../pic/Q3_c.eps}
+			\end{figure}
+		\item 
+			The calculation is carried out with the prediction-correction method. Iteration formulas are given as
+			\begin{equation}
+				y^* = y_{k-1} + h \Phi(t_{k-1}, y_{k-1})
+			\end{equation}
+			\begin{equation}
+				y_k = y_{k-1} + \frac{h}{2} [\Phi(t_{k-1}, y_{k-1}) + \Phi(t_k, y^*)] 
+			\end{equation}
+			The calculation is carried out with matlab, and the results are given as below
+			\begin{figure}[!htbp]
+				\centering
+				\includegraphics[width=8cm]{../pic/Q3_d.eps}
+			\end{figure}
+		\item 
+			Here, an extra initial point($y_1$) is required, and it is calculated using the Euler's method as
+			\begin{equation}
+				y_1 = y_0 + h \Phi(t_0, y_0)
+			\end{equation}
+			Then, the iteration steps are taken as
+			\begin{equation}
+				y_k = y_{k-1} + \frac{h}{2}[3\Phi(t_{k-1}, y_{k-1}) - \Phi(t_{k-2}, y_{k-2})]
+			\end{equation}
+			The calculation is carried out with matlab, and the results are given as below
+			\begin{figure}[!htbp]
+				\centering
+				\includegraphics[width=8cm]{../pic/Q3_e.eps}
+			\end{figure}
+			
 	\end{enumerate}
-
-\section{Question 6}
 
 \end{document}
