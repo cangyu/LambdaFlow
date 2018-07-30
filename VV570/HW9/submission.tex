@@ -59,152 +59,75 @@
 \section{Question 1}
 	\begin{enumerate}[(a)]
 		\item
-			It's convex as $f''(x) = e^x > 0$.
+			\begin{proof}
+				As $\mathcal{A}$ is convex, the mean value theorem can be applied in terms of $y$ s.t.
+				\begin{equation}
+					\Phi(t, y_2) - \Phi(t, y_1) = (y_2 - y_1) \frac{\partial \Phi(t, y)}{\partial y}\Big|_{y=\xi} 
+				\end{equation}
+				where $\xi \in (y_1, y_2)$.\\
+				Since the there exists $c>0$ s.t. for all $(t, y)\in \mathcal{A}$
+				\begin{equation}
+					\Big| \frac{\partial \Phi(t, y)}{\partial y} \Big| \leq c
+				\end{equation}
+				Thus
+				\begin{equation}
+					\begin{aligned}
+						& |\Phi(t, y_2) - \Phi(t, y_1)|\\
+					  = & |y_2 - y_1| \Bigg| \frac{\partial \Phi(t, y)}{\partial y}\Big|_{y=\xi} \Bigg|\\
+				   \leq & c |y_2 - y_1|	
+					\end{aligned}
+				\end{equation}
+				which implies that $\Phi(t, y)$ satisfies Lipschitz condition in $y$ on $\mathcal{A}$.
+			\end{proof}
+				
 		\item 
-			Let
+			\begin{proof}
+				Let $P_1 = (t_1, y_1)$ and $P_2 = (t_2, y_2)$. Then any point $P'$ lies on the line segment joining $P_1$ and $P_2$ can be expressed as
+				\begin{equation}
+					\begin{aligned}
+						P & = (1-\alpha)P_1 + \alpha P_2\\
+						  & = ((1-\alpha)t_1 + \alpha t_2, (1-\alpha)y_1 + \alpha y_2)\\
+						  & \triangleq (t', y')
+					\end{aligned}
+				\end{equation} 
+				where $\alpha \in [0, 1]$.\\
+				It's clear that $t_1$ and $t_2$ lies between $t_0$ and $T$, and $t'$ lies between $t_1$ and $t_2$. Thus, $t'$ also lies between $t_0$ and $T$.\\
+				Further, it's also clear that $-\infty < y' < +\infty$.\\
+				Hence $P \in \mathcal{D}$, which implies that $\mathcal{D}$ is convex.
+			\end{proof}
+		
+		\item
+			\begin{proof}
+				Let
+				\begin{equation}
+					\Phi(t, y) = \frac{4t^3y}{1+t^4}
+				\end{equation}
+				Then
+				\begin{equation}
+					\frac{\partial \Phi(t, y)}{\partial y} = \frac{4t^3}{1+t^4} =\frac{4 t}{t^2 + \frac{1}{t^2}} < \frac{4}{t^2 + \frac{1}{t^2}} < \frac{4}{2 \sqrt{t^2 \frac{1}{t^2}}} = 2
+				\end{equation}
+				as $t\in (0,1)$.\\ 
+				which implies that $\Phi(t, y)$ satisfies a Lipschitz condition in $y$.\\
+				Thus, the given IVP problem has a unique solution.
+			\end{proof} 
+		
+		\item 
+			Definitely not recommended.\\
+			As $\Phi(t, y) = 1 + y^2$, then
 			\begin{equation}
-				RHS \triangleq t f(x) + (1-t)f(y)
+				\frac{\partial \Phi}{\partial y} = 2 y \triangleq \lambda y
 			\end{equation}
-			\begin{equation}
-				LHS \triangleq - f(tx+(1-t)y)
-			\end{equation}
-			It's concave as
-			\begin{equation}
-				\begin{aligned}
-				  & RHS-LHS\\
-						   = &[t x_1 x_2 + (1-t)y_1 y_2] -[t x_1 + (1-t)y_1][t x_2 + (1-t)y_2]\\
-						   = &-t(1-t)(x_1 y_2 + x_2 y_1) < 0
-				\end{aligned}
-			\end{equation}
-		\item 
-			Convex.
-			
-		\item 
-			Convex.
-			
-		\item 
-			Convex.
-			
-		\item 
-			Concave.
-
+			Here $\lambda > 0$, and the Euler's method is not stable as the error will be amplified at each iteration step. Finally the calculation will diverge.
 	\end{enumerate}
 
 \section{Question 2}
 	\begin{enumerate}[(a)]
 		\item 
-			\begin{proof}
-				Suppose $x = (x_1, x_2, ... , x_m)$, then it's left to prove that
-				\begin{equation}
-					\frac{\partial f}{\partial x_i} = 0
-				\end{equation}
-				for $i=1,2, ... , m$ at $x=x^*$.
-			\end{proof}
-			The partial derivative of $f$ at $x=x^*$ is defined as
-			\begin{equation}
-				\frac{\partial f}{\partial x_i}\Big|_{x=x^*} = 
-				\lim\limits_{\Delta x_i \rightarrow 0}\frac{f(x_1, x_2, ... ,x_i^* + \Delta x_i, ... , x_m) - f(x_1, x_2, ... ,x_i^*, ... , x_m)}{\Delta x_i}
-			\end{equation}
-			Since $f(x^*)$ is the local minimum, $f(x_1, x_2, ... ,x_i^* + \Delta x_i, ... , x_m) \geq f(x_1, x_2, ... ,x_i^*, ... , x_m)$ however $\Delta x_i$ changes.\\
-			Thus
-			\begin{equation}
-				\frac{f(x_1, x_2, ... ,x_i^* + \Delta x_i, ... , x_m) - f(x_1, x_2, ... ,x_i^*, ... , x_m)}{\Delta x_i} \leq 0
-			\end{equation} 
-			if $\Delta x_i < 0$.\\
-			And
-			\begin{equation}
-				\frac{f(x_1, x_2, ... ,x_i^* + \Delta x_i, ... , x_m) - f(x_1, x_2, ... ,x_i^*, ... , x_m)}{\Delta x_i} \geq 0
-			\end{equation}  
-			if $\Delta x_i > 0$.\\
-			Hence, $\frac{\partial f}{\partial x_i}\Big|_{x=x^*} = 0$ as $f$ is continuously differentiable.
-			Therefore, $\triangledown f(x^*) =0$.
-		\item 
-			\begin{proof}
-				With taylor expansion of $f(x)$ at $x=x^*$
-				\begin{equation}
-					\begin{aligned}
-						  &f(x) - f(x^*) \geq 0 \quad \quad (\text{$f(x^*)$ is the local minimum})\\
-		  \Leftrightarrow &\triangledown f(x^*) \Delta x + \frac{1}{2} \Delta \xi H(x^*) \Delta \xi ^T \geq 0\\
-		  \Leftrightarrow &\frac{1}{2} \Delta \xi H(x^*) \Delta \xi ^T \geq 0 \quad \quad (\text{gradient be 0})
-					\end{aligned}
-				\end{equation}
-				where $d(\Delta \xi, x^*) \leq d(x, x^*)$, and the gradient is $0$ as been proved above.
-				Thus, $ \Delta \xi H(x^*) \Delta \xi ^T \geq 0$ for any $\Delta \xi$ within the local neighbourhood of $x=x^*$.\\
-				Hence $H(x^*)$ is semi-positive finite.
-				
-			\end{proof}
-		\item 
-			\begin{proof}
-				($\Leftarrow$)The global minimum must be a local minimum, and the gradient is therefore 0 as $f$ is differentiable.
-				
-				($\Rightarrow$)As has been proved above, $\triangledown f(x^*)=0$ indicates that $f(x^*)$ is the local minimum. It's left to prove that local minimum is also global minimum for a convex function.
-				Suppose there exist $x'$ s.t. 
-				\begin{equation}
-					f(x') < f(x^*)
-				\end{equation}
-				Then, by convexity
-				\begin{equation}
-					f(t x' + (1-t)x^*) \leq t f(x') + (1-t) f(x^*) < \leq t f(x^*) + (1-t) f(x^*) = f(x^*)
-				\end{equation}
-				When $t\rightarrow1$, the inequality above contradicts local optimality of $x^*$.\\
-				Thus, the assumption fails, which indicates that $f(x^*)$ is the global minimum for $f$.
-				
-			\end{proof}
-		\item
-			\begin{proof}
-				($\Rightarrow$)By Taylor expansion
-				\begin{equation}
-					f(x+ d) = f(x) + \triangledown f(x) d + \frac{1}{2} d^T H(x) d + O(||d||^2)
-				\end{equation}
-				If the Hessian matrix $H$ is semi-definite positive, then
-				\begin{equation}
-					d^T H(x) d \geq 0
-				\end{equation}
-				Thus
-				\begin{equation}
-					f(x+ d) \geq f(x) + \triangledown f(x) d
-				\end{equation}
-				which is the so called 1-st order condition, and it implies that the function $f$ is convex.
-				
-				($\Leftarrow$)By Taylor expansion
-				\begin{equation}
-					f(x+ t d) = f(x) + t \triangledown f(x) d + \frac{t^2}{2} d^T H(x) d + O(||d||^2)
-				\end{equation}
-				With the 1-st order condition
-				\begin{equation}
-					f(x+ t d) \geq f(x) + t \triangledown f(x) d
-				\end{equation}
-				Thus
-				\begin{equation}
-					\frac{t^2}{2} d^T H(x) d + O(t||d||^2) \geq 0
-				\end{equation}
-				Dividing it by $\frac{t^2}{2}$ and set $t \rightarrow 0$, it gives out that for any $d\in \mathbb{R}^n$, $d^T H(x) d \geq 0$.
-				
-			\end{proof}
 		
 	\end{enumerate}
 
 \section{Question 4}
-	The genetic algorithm is adopted as there exists intensive oscillation when $x$ approaches $0$, and optimization algorithms dependent on the gradient info are easy to fall into local minimum.\\
-	The global minimum found is $x_0=0.217, f(x_0)=-0.0249$.
-	
+
 \section{Question 6}
-	The plot of $g(y)$ is given as follows
-	\begin{figure}[!htbp]
-		\centering
-		\includegraphics[width=15cm]{../pic/Task6.eps}
-	\end{figure}
-
-\section{Question 7}
-	According to the geometric relations, the allowable length of the ladder is given as
-	\begin{equation}
-		L(\alpha) = \min\limits_{\beta} (\frac{1}{sin(\beta)} + \frac{1}{sin(\alpha + \beta)})
-	\end{equation}
-	By solving the minimisation problem, the plot of $L$ versus $\alpha$ is given as follows
-	\begin{figure}[!htbp]
-		\centering
-		\includegraphics[width=15cm]{../pic/Task7.eps}	
-	\end{figure}
-
 
 \end{document}
