@@ -1,10 +1,15 @@
-function [x] = multi_var_fp(g, x0, tol, custom_norm)
+function [x] = multi_var_fp(g, x0, x_tol, y_tol, custom_norm)
+    x = x0;
+    y_err = g(x0);
+    if(y_err <= y_tol)
+        return;
+    end
+    x_err = 0;
     
-    x = g(x0);
-    err = abs(x - x0);
-    while(err > tol)
-        cur = g(x);
-        err = custom_norm(cur-x);
-        x = cur;
+    while(x_err > x_tol || y_err > y_tol)
+        cx = g(x);
+        y_err = custom_norm(cx);
+        x_err = custom_norm(cx-x);
+        x = cx;
     end
 end
