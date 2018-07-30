@@ -17,5 +17,6 @@ function [x] = multi_var_broyden(f, x0, A0, x_tol, y_tol, custom_norm)
         y = cfx-fx;
         y_err = custom_norm(y);
         A_inv = A_inv + (s-A_inv*y)*s'*A_inv/(s'*A_inv*y);
+        fx = cfx;
     end
 end
