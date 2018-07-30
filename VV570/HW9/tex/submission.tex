@@ -123,10 +123,41 @@
 \section{Question 2}
 	\begin{enumerate}[(a)]
 		\item 
-		
+			As $\Phi(t, y) = arctan(y)$, then
+			\begin{equation}
+				\Bigg| \frac{\partial \Phi}{\partial y} \Bigg| = \frac{1}{|1+y^2|} < 1 \triangleq c
+			\end{equation}
+		\item 
+			As $\dot{y} = \Phi(t, y) = arctan(y)$, then
+			\begin{equation}
+				|\ddot{y}| = \Bigg| \frac{\dot{y}}{1+y^2} \Bigg| = \frac{|arctan(y)|}{1+y^2} < \frac{\pi}{2(1+y^2)} \leq \frac{\pi}{2} 
+			\end{equation}
+		\item 
+			As the global error is bounded by
+			\begin{equation}
+				|e_k| \leq \frac{\tau^*}{hc}[e^{c(t_k - t_0)} - 1]
+			\end{equation}
+			where $\tau^* = \max\limits_{k}|\tau_k|$, $c$ is the Lipschitz constant and is taken as $1$ as has been illustrated above.\\
+			Since 
+			\begin{equation}
+				\begin{aligned}
+					\frac{\tau^*}{h} & = \max\limits_{k}\Bigg|\frac{y(t_k) - y(t_{k-1}) - h\Phi(t_{k-1}, y(t_{k-1}))}{h}\Bigg|\\
+									 & \leq \max\limits_{k}\Bigg| \frac{y(t_k) - y(t_{k-1})}{h}\Bigg| + |\Phi(t_{k-1}, y(t_{k-1}))|\\
+									 & = 2 \max\limits_{k} |\Phi(t_{k-1}, y(t_{k-1}))| < \pi
+				\end{aligned}
+			\end{equation}
+			Thus, $|e_k| < \pi[e^{(t_k - t_0)}-1]$.
 	\end{enumerate}
 
-\section{Question 4}
+\section{Question 3}
+	\begin{enumerate}[(a)]
+		\item 
+		
+		\item 
+		
+		\item 
+		
+	\end{enumerate}
 
 \section{Question 6}
 
