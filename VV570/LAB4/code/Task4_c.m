@@ -18,9 +18,10 @@ for k = 1:10
         y(i) = cy(i-1);
     end
     
-    disp(k);
-    disp(y);
-    plot(t, y)
+    plot(t, y, '^-')
+    xlabel('t')
+    ylabel('y')
+    title('Solution of the BVP by FDM')
 end
 
 function [A, b] = build_system(y,coef)
@@ -35,7 +36,7 @@ function [A, b] = build_system(y,coef)
             if(aj==0 || aj ==N-1)
                 b(i) = b(i)-coef(ci)*y(aj+1);
             else
-                A(i,aj) = coef(ci)*y(aj+1);
+                A(i,aj) = coef(ci);
             end
         end
     end
