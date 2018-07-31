@@ -5,7 +5,7 @@ function f = stiff2ode ( x, y )
 % x is independent variable
 % y is dependent variable
 % output, f is the value of f(x,y).
-LAMBDA=2;
+LAMBDA=10000;
 f = LAMBDA * ( -y + sin(x) );
 
 end

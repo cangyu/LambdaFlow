@@ -5,7 +5,7 @@ function y = stiff2solution ( x )
 % and initial condition y=0 at x=0
 % x is the independent variable
 % y is the solution value
-LAMBDA=2;
+LAMBDA=10000;
 y = (LAMBDA^2/(1+LAMBDA^2))*sin(x) + ...
 (LAMBDA /(1+LAMBDA^2))*(exp(-LAMBDA*x)-cos(x));
 end
