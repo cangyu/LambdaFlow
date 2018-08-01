@@ -1,22 +1,20 @@
-function [x] = multi_var_broyden(f, x0, A0, x_tol, y_tol, custom_norm)
-    x = x0;
-    fx = f(x);
-    y_err = custom_norm(fx);
-    if(y_err <= y_tol)
-        return;
-    end
-    
-    A_inv = inv(A0);
-    x_err = 0;
-    while(x_err > x_tol || y_err > y_tol)
-        w = A_inv * fx;
-        x_err = custom_norm(w);
-        x = x-w;
-        s = -w;
-        cfx = f(x);
-        y = cfx-fx;
-        y_err = custom_norm(y);
+function [x] = multi_var_broyden(f, x0, A_inv, tol, custom_norm)
+    % 先用牛顿法算出x1
+    x_pre = x0;
+    fx_pre = f(x_pre);
+    w = A_inv*(-fx_pre);
+    err = custom_norm(w);
+    x = x_pre + w;
+    % 迭代
+    while(err > tol)
+        s = x - x_pre;
+        fx_cur = f(x);
+        y = fx_cur - fx_pre;
         A_inv = A_inv + (s-A_inv*y)*s'*A_inv/(s'*A_inv*y);
-        fx = cfx;
+        w = A_inv*fx_cur;
+        err = custom_norm(w);
+        x_pre = x;
+        x = x-w;
+        fx_pre = fx_cur;
     end
 end
