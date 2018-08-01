@@ -1,0 +1,143 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm,amssymb} % Math packages
+\usepackage{mathrsfs}
+\usepackage{algorithm, algorithmic}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}} %Use Input in the format of Algorithm  
+\renewcommand{\algorithmicensure}{\textbf{Output:}} %UseOutput in the format of Algorithm  
+\usepackage{listings}
+\lstset{language=Matlab}
+\usepackage{enumerate}
+\usepackage{graphicx}
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Shanghai Jiao Tong University, UM-SJTU JOINT INSTITUTE} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Introduction to Numerical Analysis \\ Project2 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Yu Cang \\ 018370210001} % Your name
+
+\date{\normalsize \today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+\section{Task 1}
+	Note the symmetry of $x_1$, for any solution $(a, b)$, $(-a, b)$ is also valid.\\
+	If no special claim, the norm function for a vector is taken as the 2-norm.
+	\begin{enumerate}[(a)]
+		\item
+			For fixed-point iteration, the iteration function $G$ is taken as
+			\begin{equation}
+				G \triangleq
+				\begin{bmatrix}
+					\sqrt{x_2}\\
+					\sqrt{1-x_1^2}
+				\end{bmatrix}
+				=
+				\begin{bmatrix}
+					x_1\\
+					x_2\\
+				\end{bmatrix}
+				=x
+			\end{equation}
+			The iteration converges to $(0.7862, 0.6180)$ with intial guess $x_{init} = [\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}]^T$ and tolerance set to $10^{-10}$. 
+		\item 
+			The newton iteration is implemented as mentioned in the project sheet, each time the linear system
+			\begin{equation}
+				J_F(x_k) w_k = y_k
+			\end{equation}
+			is solved with the built-in function 'linsolve' inside matlab.\\
+			The iteration converges to $(0.7862, 0.6180)$ with intial guess $x_{init} = [\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}]^T$ and tolerance set to $10^{-10}$. 
+		\item
+			The input of the Broyden's method is a little bit different from that in newton or fixed-point. The initial Jacobi matrix should be provided, denoted as $A_0$. In my implementation, it is given as
+			\begin{equation}
+				A_0 = J_F(x_0)
+			\end{equation}
+			An extra calculation on $x_1$ should be done before the iteration loop as the iteration process requires both $x_0$ and $x_1$. It is approximated through newton's method in my implementation as
+			\begin{equation}
+				x_1 \approxeq x_0 - A_0^{-1}F(x_0)
+			\end{equation}
+			After all the preparation work, the iteration loop can be carried out as mentioned in the project sheet, and the key part is the application of Sherman-Morrison's formula to calculated the inverse of $A_k$ iteratively as
+			\begin{equation}
+				A_k^{-1} = A_{k-1}^{-1} + \frac{(s_k^T A_{k-1}^{-1} y_k)s_k^T A_{k-1}^{-1}}{s_k^T A_{k-1}^{-1} y_k}
+			\end{equation}
+			where $s_k = x_k - x_{k-1}$ and $y_k = F(x_k) - F(x_{k-1})$. And the iteration of $x_k$ is given as
+			\begin{equation}
+				x_{k+1} = x_k - A_k^{-1}F(x_k)
+			\end{equation}
+			The iteration converges to $(0.7862, 0.6180)$ with intial guess $x_{init} = [\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}]^T$ and tolerance set to $10^{-10}$. 
+		\item 
+			With numerical tests, newton's method out-performs the other two in terms of time cost.
+		
+	\end{enumerate}
+
+\section{Task 2}
+	With trival inequality analysis, the exact solution is given as $x=[0.5, 0, -\frac{\pi}{6}]$, which can be used for varification.\\
+	In general, the initial value for such a non-linear system is hard to know, even the range for each component is hard to estimate. In this case, the downhill simplex method can be applied to produce a fine inital guess for further calculation like newton or quasi-newton.\\
+	Numerical experiments were done to identify the difference in terms of time cost. 
+	
+	\begin{center}
+		\begin{tabular}{ccc}
+			\hline
+			\quad       & Without initialization & With initialization\\
+			\hline
+			fixed-point & $4.033 ms$             & $3.970 ms$\\
+			neweon      & $4.661 ms$             & $0.679 ms$\\
+			broyden     & $4.447 ms$             & $0.799 ms$\\
+			\hline
+		\end{tabular}
+	\end{center}
+	
+	It can be observed from the table that the downhill simplex initialization process does help a lot to reduce time cost for further newton or broyden calculation as it provide a better initial guess. \\
+	However, the time cost is almost equivalent for the fixed-point iteration, which indicates that it does not benefit from the downhill simplex initialization. 
+
+\section{Task 3}
+	\begin{enumerate}[(a)]
+		\item 
+
+		\item 
+
+		\item 
+
+		\item 
+
+		\item 
+			
+	\end{enumerate}
+
+\end{document}
