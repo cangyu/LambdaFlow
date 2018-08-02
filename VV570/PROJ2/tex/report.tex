@@ -107,29 +107,70 @@
 	\end{enumerate}
 
 \section{Task 2}
-	With trival inequality analysis, the exact solution is given as $x=[0.5, 0, -\frac{\pi}{6}]$, which can be used for varification.
+	With trival inequality analysis, the exact solution is given as $x=[0.5, 0, -\frac{\pi}{6}]$, which can be used for verification.
 	\subsection{Solve directly}
-		Applying the fixed-point iteration, newton's method and the broyden's method to this non-linear system respectively, ...(TODO)
+		Applying the fixed-point iteration, newton's method and the broyden's method to this non-linear system respectively, with initial guess given as $x_0 = [0.1 0.1 0.1]^T$, and tolerance set to $10^{-10}$, the iteration process all converge to the exact solution as
+		\begin{equation}
+			\begin{aligned}
+				x_1 & = 0.5\\
+				x_2 & = 3.5440\times 10^{-11}\\
+				x_3 & = -0.5236\\
+			\end{aligned}
+		\end{equation}
+		The iteration function for fixed-point iteration is given as
+		\begin{equation}
+			G =
+			\begin{bmatrix}
+				\frac{0.5+cos(x_2 x_3)}{3}\\
+				\frac{\sqrt(0.25-x_1^2)}{25}\\
+				\frac{\frac{3-10 \pi}{3}-e^{-x_1 x_2}}{20}
+			\end{bmatrix}
+			= x
+		\end{equation}
+		
 	\subsection{Downhill simplex algorithm}
-	In general, the initial value for such a non-linear system is hard to know, even the range for each component is hard to estimate. In this case, the downhill simplex method can be applied to produce a fine inital guess for further calculation like newton or quasi-newton.
+		In general, the initial value for such a non-linear system is hard to know, even the range of each component is hard to estimate. In this case, the downhill simplex method can be applied to produce a initial guess for further calculation.
+		
+		The downhill simplex algorithm was implemented in my code. The kernel idea of this algorithm is to minimize the performance of the worst vertex gradually. 
+		
+		Inside the iteration loop, serval operations guide the simplex to move towards the minimum:
+		\begin{enumerate}
+			\item reflection
+			\item expansion
+			\item contraction
+			\item shrink
+		\end{enumerate}
+		
+		 These operations are designed for different ranges respectively. The whole range of the function is divided by 3 points: 
+		 \begin{enumerate}
+		 	\item  the best
+		 	\item  the last-but-one
+		 	\item  the worst
+		 \end{enumerate}
+ 		 Details of the implement will not be discussed here and can be referenced clearly from the code.
+		
 	\subsection{Solve with initialization}
-	
-	Numerical experiments were done to identify the difference in terms of time cost. 
-	
-	\begin{center}
-		\begin{tabular}{ccc}
-			\hline
-			\quad       & Without initialization & With initialization\\
-			\hline
-			fixed-point & $4.033 ms$             & $3.970 ms$\\
-			neweon      & $4.661 ms$             & $0.679 ms$\\
-			broyden     & $4.447 ms$             & $0.799 ms$\\
-			\hline
-		\end{tabular}
-	\end{center}
-	
-	It can be observed from the table that the downhill simplex initialization process does help a lot to reduce time cost for further newton or broyden calculation as it provide a better initial guess. \\
-	However, the time cost is almost equivalent for the fixed-point iteration, which indicates that it does not benefit from the downhill simplex initialization. 
+		Before using the downhill simplex to find a fine initial guess, a targeting function $f: \mathbb{R^n} \rightarrow \mathbb{R}$ is taken as
+		\begin{equation}
+			f(X) = ||F(x)||_2
+		\end{equation}
+		inside the matlab code as the evaluating function for the algorithm.\\
+		Numerical experiments were done to identify the difference in terms of time cost. 
+		
+		\begin{center}
+			\begin{tabular}{ccc}
+				\hline
+				\quad       & Without initialization & With initialization\\
+				\hline
+				fixed-point & $4.033 ms$             & $3.970 ms$\\
+				neweon      & $4.661 ms$             & $0.679 ms$\\
+				broyden     & $4.447 ms$             & $0.799 ms$\\
+				\hline
+			\end{tabular}
+		\end{center}
+		
+		It can be observed from the table that the downhill simplex initialization process does help a lot to reduce time cost for further newton or broyden calculation as it provide a better initial guess. \\
+		However, the time cost is almost equivalent for the fixed-point iteration, which indicates that it does not benefit from the downhill simplex initialization. 
 
 \section{Task 3}
 	\begin{enumerate}[(a)]
@@ -261,13 +302,13 @@
 			\end{equation}
 			In this way, the only difference is the input data sequence, as the input in part(b) is clean but here is polluted. \\
 			Numerical experiments were done for 200 times to illustrate the initial guess(Fig\ref{coarse_ag}) and the variance(Fig\ref{err_ag}) of $\hat{\alpha}$ and $\hat{\gamma}$.
-			\begin{figure}[!htbp]\centering
-				\includegraphics[height=10cm]{../pic/coarse_estimation.eps}
+			\begin{figure}\centering
+				\includegraphics[height=8cm]{../pic/coarse_estimation.eps}
 				\caption{Coarse estimation} 
 				\label{coarse_ag}
 			\end{figure}
-			\begin{figure}[!htbp]\centering
-				\includegraphics[height=10cm]{../pic/coarse_estimation_err.eps}
+			\begin{figure}\centering
+				\includegraphics[height=8cm]{../pic/coarse_estimation_err.eps}
 				\caption{Error of estimation}
 				\label{err_ag}
 			\end{figure}
