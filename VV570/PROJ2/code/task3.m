@@ -19,16 +19,6 @@ y = deval(sol, t);
 n = y(1,:);
 x = y(2,:);
 
-figure(1)
-plot(t, n)
-xlabel('t');
-ylabel('n(t)');
-
-figure(2)
-plot(t, x)
-xlabel('t');
-ylabel('x(t)');
-
 %--------------------------------------------------------------------------
 disp('Part (b)');
 % Approximate alpha and gamma at each point using central difference
@@ -51,24 +41,58 @@ fprintf('estimated gamma: %f\n', gamma_est);
 %--------------------------------------------------------------------------
 disp('Part (c)');
 %--------------------------------------------------------------------------
-eta = normrnd(0, sqrt(0.1), 1, N);
-mu = normrnd(0, sqrt(0.001), 1, N);
+sigma1 = sqrt(0.1);
+sigma2 = sqrt(0.001);
+eta = normrnd(0, sigma1, 1, N);
+mu = normrnd(0, sigma2, 1, N);
 ns = n + eta;
 xs = x + mu;
-
-figure(3)
-plot(t, ns)
-xlabel('t');
-ylabel('n^*(t)');
-
-figure(4)
-plot(t, xs)
-xlabel('t');
-ylabel('x^*(t)');
 
 %--------------------------------------------------------------------------
 disp('Part (d)');
 %--------------------------------------------------------------------------
+r1 = 15;
+r2 = 15;
+nf = gauss_filter_1d(ns, sigma1, r1);
+xf = gauss_filter_1d(xs, sigma2, r2);
 
+%--------------------------------------------------------------------------
+disp('Part (e)');
+%--------------------------------------------------------------------------
 
+%--------------------------------------------------------------------------
+disp('Plotting...');
+%--------------------------------------------------------------------------
+figure(1)
+subplot(3,1,1)
+plot(t, n)
+xlabel('t');
+ylabel('n(t)');
+title('original n(t)')
+subplot(3,1,2)
+plot(t, ns)
+xlabel('t');
+ylabel('n^*(t)');
+title('n(t) with noise');
+subplot(3,1,3)
+plot(t, nf)
+xlabel('t');
+ylabel('n^*(t)');
+title('filtered n^*(t)');
 
+figure(2)
+subplot(3,1,1)
+plot(t, x)
+xlabel('t');
+ylabel('x(t)');
+title('original x(t)')
+subplot(3,1,2)
+plot(t, xs)
+xlabel('t');
+ylabel('x^*(t)');
+title('x(t) with noise');
+subplot(3,1,3)
+plot(t, xf)
+xlabel('t');
+ylabel('x^*(t)');
+title('filtered x^*(t)');
