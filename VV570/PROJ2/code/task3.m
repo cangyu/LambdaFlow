@@ -133,12 +133,12 @@ subplot(2,1,1)
 plot(alpha_est3_err);
 xlabel('Numerical Experiment Cnt')
 ylabel('Relative error of \alpha')
-title('Coarse estimation of \alpha')
+title('Error of \alpha')
 subplot(2,1,2)
 plot(gamma_est3_err);
 xlabel('Numerical Experiment Cnt')
 ylabel('Relative error of \gamma')
-title('Coarse estimation of \gamma')
+title('Error of \gamma')
 
 gamma_est4 = ensp+exsp+exo1xs;
 alpha_est4 = (gamma_est4-ensp)/en2xs;
