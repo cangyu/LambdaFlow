@@ -6,8 +6,7 @@ phi = @(t, x) [gamma-alpha*x(1)^2*x(2); alpha*x(1)^2*x(2)-x(2)/(1+x(2))];
 x0 = [1;1];
 
 %--------------------------------------------------------------------------
-disp('Part (a)');
-%Calculate x(t) and n(t) using RK-4
+disp('Part (a) -- x(t) and n(t) are calculated with ode45');
 %--------------------------------------------------------------------------
 N = 501;
 a = 0;
@@ -18,28 +17,20 @@ t = linspace(a,b,N);
 y = deval(sol, t);
 n = y(1,:);
 x = y(2,:);
-
 %--------------------------------------------------------------------------
-disp('Part (b)');
-% Approximate alpha and gamma at each point using central difference
+disp('Part (b) -- alpha and gamma are approximated at each point using central difference');
 %--------------------------------------------------------------------------
-alpha_sol = zeros(1, N);
-gamma_sol = zeros(1, N);
-
+alpha_sol1 = zeros(1, N);
+gamma_sol1 = zeros(1, N);
 for i = 2:N-1
-    np = 0.5*(n(i+1)-n(i-1))/dt;
-    xp = 0.5*(x(i+1)-x(i-1))/dt;
-    alpha_sol(i) = (xp+x(i)/(1+x(i)))/(n(i)^2*x(i));
-    gamma_sol(i) = np+alpha_sol(i)*n(i)^2*x(i);
+    [alpha_sol1(i), gamma_sol1(i)] = central_diff_param_solve(n, x, i ,dt);
 end
-
-alpha_est = mean(alpha_sol(2:N-1));
-gamma_est = mean(gamma_sol(2:N-1));
-fprintf('estimated alpha: %f\n', alpha_est);
-fprintf('estimated gamma: %f\n', gamma_est);
-
+alpha_est1 = mean(alpha_sol1(2:N-1));
+gamma_est1 = mean(gamma_sol1(2:N-1));
+fprintf('  estimated alpha: %f\n', alpha_est1);
+fprintf('  estimated gamma: %f\n', gamma_est1);
 %--------------------------------------------------------------------------
-disp('Part (c)');
+disp('Part (c) -- noise signals are generated using normrnd');
 %--------------------------------------------------------------------------
 sigma1 = sqrt(0.1);
 sigma2 = sqrt(0.001);
@@ -47,52 +38,84 @@ eta = normrnd(0, sigma1, 1, N);
 mu = normrnd(0, sigma2, 1, N);
 ns = n + eta;
 xs = x + mu;
+%--------------------------------------------------------------------------
+disp('Part (d) -- alpha and gamma are estimated utilizing the properies of nosie');
+%--------------------------------------------------------------------------
+en = mean(ns);
+ex = mean(xs);
 
-%--------------------------------------------------------------------------
-disp('Part (d)');
-%--------------------------------------------------------------------------
-r1 = 15;
-r2 = 15;
-nf = gauss_filter_1d(ns, sigma1, r1);
-xf = gauss_filter_1d(xs, sigma2, r2);
+nsp = zeros(1, N);
+xsp = zeros(1, N);
+for i =2:N-1
+    nsp(i) = 0.5*(ns(i+1)-ns(i-1))/dt;
+    xsp(i) = 0.5*(xs(i+1)-xs(i-1))/dt;
+end
+ensp = mean(nsp(2:N-1));
+exsp = mean(xsp(2:N-1));
 
+en2xs = 0;
+exo1xs = 0;
+for i = 1:N
+    en2xs = en2xs + ns(i)^2 * xs(i);
+    exo1xs = exo1xs + xs(i)/(1+xs(i));
+end
+en2xs = en2xs/N;
+exo1xs = exo1xs/N;
+en2x = en2xs - ex*sigma1^2;
+
+alpha_est2 = (exsp+exo1xs)/en2x;
+gamma_est2 = ensp + alpha_est2*en2x;
+fprintf('  estimated alpha: %f\n', alpha_est2);
+fprintf('  estimated gamma: %f\n', gamma_est2);
 %--------------------------------------------------------------------------
-disp('Part (e)');
+disp('Part (e) -- alpha and gamma are estimated without utilizing the properies of nosie');
 %--------------------------------------------------------------------------
+alpha_sol2 = zeros(1, N);
+gamma_sol2 = zeros(1, N);
+for i = 2:N-1
+    [alpha_sol2(i), gamma_sol2(i)] = central_diff_param_solve(ns, xs, i, dt);
+end
+alpha_star_est = mean(alpha_sol2(2:N-1));
+gamma_star_est = mean(gamma_sol2(2:N-1));
+fprintf('  estimated alpha: %f\n', alpha_star_est);
+fprintf('  estimated gamma: %f\n', gamma_star_est);
 
 %--------------------------------------------------------------------------
 disp('Plotting...');
 %--------------------------------------------------------------------------
 figure(1)
-subplot(3,1,1)
+subplot(2,1,1)
 plot(t, n)
 xlabel('t');
 ylabel('n(t)');
 title('original n(t)')
-subplot(3,1,2)
+subplot(2,1,2)
 plot(t, ns)
 xlabel('t');
 ylabel('n^*(t)');
 title('n(t) with noise');
-subplot(3,1,3)
-plot(t, nf)
-xlabel('t');
-ylabel('n^*(t)');
-title('filtered n^*(t)');
 
 figure(2)
-subplot(3,1,1)
+subplot(2,1,1)
 plot(t, x)
 xlabel('t');
 ylabel('x(t)');
 title('original x(t)')
-subplot(3,1,2)
+subplot(2,1,2)
 plot(t, xs)
 xlabel('t');
 ylabel('x^*(t)');
 title('x(t) with noise');
-subplot(3,1,3)
-plot(t, xf)
-xlabel('t');
-ylabel('x^*(t)');
-title('filtered x^*(t)');
+
+
+function [ak, gk] = central_diff_param_solve(n, x, i, dt)
+    n0 = n(i-1); x0 = x(i-1);
+    n1 = n(i); x1 = x(i);
+    n2 = n(i+1); x2 = x(i+1);
+    
+    np = 0.5*(n2 - n0)/dt;
+    xp = 0.5*(x2 - x0)/dt;
+    
+    ak = (xp+x1/(1+x1))/(n1^2*x1);
+    gk = np+ak*n1^2*x1;
+end
