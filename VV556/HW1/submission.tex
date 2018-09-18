@@ -55,25 +55,39 @@
 
 \maketitle % Print the title
 
-%----------------------------------------------------------------------------------------
-%	PROBLEM 1
-%----------------------------------------------------------------------------------------
+\section{Exercise1.1}
+\begin{enumerate}
+	\item 
+		\begin{equation}
+			\dim{U} = 2
+		\end{equation}
+		As there are 4 components within $x$, and 2 constraints.
+	\item 
+		\begin{equation}
+			\dim{U} = 3
+		\end{equation}
+		As there are 4 components within $x$, and 1 constraint.
+	\item 
+		\begin{equation}
+			\begin{aligned}
+				\dim{U+V} & = \dim{U} + \dim{V} - \dim{U \cap V} \\
+				          & = 2 + 3 - 2 \\
+				          & = 3
+			\end{aligned}
+		\end{equation}
+		The dimension of $U \cap V$ can be observed from
+		\begin{equation}
+			\begin{aligned}
+				U \cap V & = \{x\in \mathbb{R}^4| x_1 + x_2 + x_3 = 0, x_1 + 3 x_2 = x_4, x_1 = x_4\}\\
+				         & = \{x\in \mathbb{R}^4| x_2 = 0, x_1 + x_3 = 0\}
+			\end{aligned}
+		\end{equation}
+\end{enumerate}
 
-\section{Metric Space}
+\section{Exercise1.2}
 
 
-%----------------------------------------------------------------------------------------
-%	PROBLEM 2
-%----------------------------------------------------------------------------------------
-
-\section{Continuity}
-
-
-%----------------------------------------------------------------------------------------
-%	PROBLEM 3
-%----------------------------------------------------------------------------------------
-
-\section{Cardinalty}
+\section{Exercise1.3}
 
 
 \end{document}
