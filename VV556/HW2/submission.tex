@@ -116,10 +116,87 @@
 			\end{proof}	
 		\item 
 			\begin{proof}
-				
+				As any norm induced by inner product should satisfy the parallelogram law, it's easy to show that the norm $||.||_\infty : f\mapsto \sup_{x\in [a, b]} |f(x)|$ on $C[a, b]$ can not be induced by any inner product since it does not satisfy the parallelogram law. For example, let
+				\begin{equation}
+					f(x) = \frac{x-a}{b-a}
+				\end{equation}
+				and
+				\begin{equation}
+					g(x) = (\frac{x-a}{b-a})^2
+				\end{equation}
+				then
+				\begin{equation}
+					||f+g|| = \max_{x\in[a, b]} |(f+g)(x)| = |(f+g)(b)| = 2
+				\end{equation}
+				\begin{equation}
+					||f-g|| = \max_{x\in[a, b]} |(f-g)(x)| = |(f-g)(\frac{a+b}{2})| = \frac{1}{4}
+				\end{equation}
+				\begin{equation}
+					||f|| = \max_{x\in[a, b]} |f(x)| = |f(b)| = 1
+				\end{equation}
+				\begin{equation}
+					||g|| = \max_{x\in[a, b]} |g(x)| = |g(b)| = 1
+				\end{equation}
+				It's obvious that
+				\begin{equation}
+					||f+g||^2 + ||f-g||^2 = \frac{65}{4} \neq 2(||f||^2 + ||g||^2) = 4
+				\end{equation}
 			\end{proof}
 		
 		\item 
+			Assume the norm satisfies the parallelogram law, that is
+			\begin{equation}
+				||x+y||^2 + ||x-y||^2 = 2(||x||^2 + ||y||^2)
+			\end{equation}
+			Let
+			\begin{equation}
+				<x, y> \triangleq \frac{1}{4}(||x+y||^2 - ||x-y||^2)
+			\end{equation}
+			it's left to prove that $<x, y>$ is an inner product.\\
+			Firstly, $<x, y+z>$ can be expanded according to the definition as follows
+			\begin{equation}
+				\begin{aligned}
+					<x, y+z> & = \frac{1}{4}(||x+y+z||^2 - ||x-(y+z)||^2)\\
+					         & = \frac{1}{4}(||y+z+x||^2 - ||y+z-x||^2)
+				\end{aligned}
+			\end{equation}
+			Since
+			\begin{equation}
+				||y+z+x||^2 + ||y-z+x||^2 = 2(||y+x||^2 + ||z||^2)
+			\end{equation}
+			Then
+			\begin{equation}
+				||y+z+x||^2 = 2(||y+x||^2 + ||z||^2) - ||y-z+x||^2
+			\end{equation}
+			Swap $y$ and $z$ yields
+			\begin{equation}
+				||x+y+z||^2 = 2(||z+x||^2 + ||y||^2) - ||z-y+x||^2
+			\end{equation}
+			Adding the two equations above and divided by 2 yields
+			\begin{equation}
+				||y+z+x||^2 = ||y||^2 + ||z||^2 + ||x+y||^2 + ||x+z||^2 -\frac{1}{2}(||y-z+x||^2 + ||z-y+x||^2)
+			\end{equation}
+			Replace $x$ with $-x$
+			\begin{equation}
+				||y+z-x||^2 = ||y||^2 + ||z||^2 + ||x-y||^2 + ||x-z||^2 -\frac{1}{2}(||y-z-x||^2 + ||z-y-x||^2)
+			\end{equation}
+			Hence
+			\begin{equation}
+				||y+z+x||^2 + ||y+z-x||^2 = (||x+y||^2 - ||x-y||^2) + (||x+z||^2 - ||x-z||^2)
+			\end{equation}
+			As
+			\begin{equation}
+				<x, y> = \frac{1}{4} (||x+y||^2 - ||x-y||^2)
+			\end{equation}
+			and
+			\begin{equation}
+				<x, z> = \frac{1}{4} (||x+z||^2 - ||x-z||^2)
+			\end{equation}
+			It's therefore can be concluded that
+			\begin{equation}
+				<x, y+z> = <x, y> + <x, z>
+			\end{equation}
+			Secondly, 
 		
 	\end{enumerate}
 
