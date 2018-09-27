@@ -201,8 +201,20 @@
 	\end{enumerate}
 
 \section{Exercise2.2}
+	Denote $c_0 = \{(a_n)_{n\in\mathbb{N}}: \lim\limits_{n \rightarrow \infty} a_n = 0\}$ and $l^1 = \{(b_n)_{n\in\mathbb{N}}: \sum_{n=0}^{\infty} |b_n| \le \infty\}$
 	\begin{enumerate}
 		\item
+		YES
+		\begin{proof}
+			For any $(a_n) \in c_0$ and $\epsilon > 0$, $\exists N_1$ s.t. when $n > N_1$, $|a_n| \le \frac{\epsilon}{2}$.\\
+			Also, a sequence $(b_n) \in l^1$ can be found s.t. $|b_n| \le \frac{\epsilon}{2}$ when $n > N_2$, and $b_n = a_n$ for $n \leq N_3 \triangleq \max(N_1, N_2)$. This does not violate requirement for $(b_n)$ as the sum of $|b_n|$ here is finite.\\
+			Thus, $||(a_n) - (b_n)||_\infty = \sup_{n \in \mathbb{N}} |a_n - b_n| \leq |a_n| + |b_n| \leq \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon$ when $n > N_3$. And it implies that $l^1$ is dense in $c_0$ under the $||.||_\infty$ norm.
+		\end{proof}
+		\item 
+		NO
+		\begin{proof}
+			For example, pick a sequence $(a_n) \in c_0$ s.t. $a_n = \frac{1}{n+1}$, for any sequence $(b_n) \in l^1$. The norm $||(a_n) - (b_n)|| = \sum_{n=0}^{\infty} |a_n - b_n| \geq \sum_{n=0}^{\infty} (|a_n| - |b_n|) = (\sum_{n=0}^{\infty}|a_n|) - (\sum_{n=0}^{\infty}|b_n|)$ diverges as $\sum_{n=0}^{\infty}|a_n|$ goes infinite and $\sum_{n=0}^{\infty}|b_n|$ is finite.
+		\end{proof}
 	
 	\end{enumerate}
 
