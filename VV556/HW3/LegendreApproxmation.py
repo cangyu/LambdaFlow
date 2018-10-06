@@ -9,8 +9,12 @@ def f(x):
 def f_taylor(t):
     return 1+t+math.pow(t, 2)
 
+a0 = 1.1752
+a1 = 1.1036
+a2 = 0.3578
+
 def f_legendre(x):
-    return 1.1752 + 1.1036 * x + 0.3578 * (3*math.pow(x, 2) -1)/2
+    return a0 + a1 * x + a2 * (3*math.pow(x, 2) -1)/2
 
 
 N = 501
@@ -25,3 +29,5 @@ plt.plot(x, taylor, label=r'Taylor series of $f(x)$ at $x=0$')
 plt.plot(x, legendre, label=r'$p(x)$')
 plt.legend()
 plt.show()
+
+print('Approximation Error: {}'.format(math.sqrt(0.5*(math.exp(2) - math.exp(-2)) - 2 * a0**2 - 2/3 * a1**2 - 2/5 * a2**2)))
