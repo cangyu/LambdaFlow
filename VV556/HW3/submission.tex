@@ -56,6 +56,31 @@
 \maketitle % Print the title
 
 \section{Exercise3.1}
+	\begin{proof}
+		Let $\phi(x) = (x^2 - 1)^n$, then
+		\begin{equation}
+			\phi(\pm 1) = \phi^{(1)}(\pm 1) = \cdots = \phi^{(n-1)}(\pm 1) = 0
+		\end{equation}
+		The $L^2$ norm of $P_n(x)$ is
+		\begin{equation}
+			\begin{aligned}
+				||P_n||_2  & = \sqrt{\int_{-1}^{1} P_n^2(x) dx}\\
+						   & = \sqrt{(\frac{1}{2^n n!})^2 \int_{-1}^{1} [\phi^{(n)}(x)]^2 dx}\\
+						   & = \sqrt{(\frac{1}{2^n n!})^2 (-1)^n \int_{-1}^{1} \phi^{(2n)}(x) \phi(x) dx} \quad \text{(Integrate by parts)}\\
+						   & = \sqrt{(\frac{1}{2^n n!})^2 (-1)^n (2n)! \int_{-1}^{1} (x^2 - 1)^n dx}\\
+						   & = \sqrt{(\frac{1}{2^n n!})^2 (-1)^n (2n)! \cdot 2 \int_{0}^{\frac{\pi}{2}} (sin^2(x) - 1)^n cos(x) dx}\\
+						   & = \sqrt{(\frac{1}{2^n n!})^2 (2n)! \cdot 2 \int_{0}^{\frac{\pi}{2}} cos^{2n+1}(x) dx}\\
+			\end{aligned}
+		\end{equation}
+		Since
+		\begin{equation}
+			\int_{0}^{\frac{\pi}{2}} cos^{2n+1}(x) dx = \frac{2 \times 4 \times \cdots \times (2n)}{1\times3\times \cdots \times (2n+1)} 
+		\end{equation}
+		substitute it into the norm equation of $P_n$ yields
+		\begin{equation}
+			||P_n||_2 = \sqrt{(\frac{1}{2^n n!})^2 (2n)! \cdot 2 \cdot \frac{2 \times 4 \times \cdots \times (2n)}{1\times3\times \cdots \times(2n+1)}} = \sqrt{\frac{2}{2n+1}}
+		\end{equation}
+	\end{proof}
 
 \section{Exercise3.2}
 
