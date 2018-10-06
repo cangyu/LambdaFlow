@@ -9,6 +9,8 @@
 \renewcommand{\algorithmicrequire}{\textbf{Input:}} %Use Input in the format of Algorithm  
 \renewcommand{\algorithmicensure}{\textbf{Output:}} %UseOutput in the format of Algorithm  
 
+\usepackage{graphicx}
+
 \usepackage{listings}
 \lstset{language=Matlab}
 
@@ -83,7 +85,53 @@
 	\end{proof}
 
 \section{Exercise3.2}
+	\begin{enumerate}
+		\item 
+			Consider the projection of $f(x)$ onto $P_0(x)$, $P_1(x)$ and $P_2(x)$ correspondingly
+			\begin{equation}
+				(f, P_0) = \int_{-1}^{1} e^x dx = e - \frac{1}{e}
+			\end{equation} 
+			
+			\begin{equation}
+				(f, P_1) = \int_{-1}^{1} x e^x dx = \frac{2}{e}
+			\end{equation}
+			
+			\begin{equation}
+				(f, P_2) = \int_{-1}^{1} \frac{3x^2 -1}{2} e^x dx = e - \frac{7}{e}
+			\end{equation}
+			As $(P_i, P_j)=0$ when $i \neq j$, $p(x)$ can be written as linear combination of $P_i$
+			\begin{equation}
+				p(x) = a_0 P_0(x) + a_1 P_1(x) + a_2 P_2(x)
+			\end{equation}
+			with coefficient $a_i$ given as
+			\begin{equation}
+				a_i = \frac{(f, P_i)}{(P_i, P_i)} = \frac{2i+1}{2} (f, P_i)
+			\end{equation}
+			Finally
+			\begin{equation}
+				p(x) = 1.1752 P_0(x) + 1.1036 P_1(x) + 0.3578 P_2(x)
+			\end{equation}
+			
+		\item 
+		The plot(Fig \ref{fig:comp}) is provided for comparsion.
+	
+		\begin{figure}[!htbp]
+			\centering
+			\includegraphics[]{ApproximationCompare.png}
+			\caption{Comparsion of different approximation for $e^x$}
+			\label{fig:comp}
+		\end{figure}
+	
+		The distinction is quite obvious and Legendre polynomials does better than taylor series expansion at zero point.
+	
+	\end{enumerate}
 
 \section{Exercise3.3}
+	\begin{enumerate}
+		\item 
+		
+		\item 
+		
+	\end{enumerate}
 
 \end{document}
