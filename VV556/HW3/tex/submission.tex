@@ -115,9 +115,9 @@
 		\item 
 		The plot(Fig \ref{fig:comp}) is provided for comparsion.
 	
-		\begin{figure}[!htbp]
+		\begin{figure}[ht]
 			\centering
-			\includegraphics[]{ApproximationCompare.png}
+			\includegraphics[]{../pic/ApproximationCompare.png}
 			\caption{Comparsion of different approximation for $e^x$}
 			\label{fig:comp}
 		\end{figure}
@@ -133,8 +133,65 @@
 \section{Exercise3.3}
 	\begin{enumerate}
 		\item 
-		
+			\begin{proof}
+				Firstly
+				\begin{equation}
+					\int_{-1}^{1} \frac{1}{\sqrt{2}} cos(n \pi x) dx = \frac{1}{\sqrt{2} n \pi} \int_{-n\pi}^{n \pi} cos(x) dx = 0
+				\end{equation}
+				\begin{equation}
+					\int_{-1}^{1} \frac{1}{\sqrt{2}} sin(n \pi x) dx = \frac{1}{\sqrt{2} n \pi} \int_{-n\pi}^{n \pi} sin(x) dx = 0
+				\end{equation}
+				\begin{equation}
+					\int_{-1}^{1} \frac{1}{\sqrt{2}} \frac{1}{\sqrt{2}} dx = \frac{1}{2} \int_{-1}^{1} dx = 1
+				\end{equation}
+				Secondly, when $n \neq m$
+				\begin{equation}
+					\begin{aligned}
+						& \int_{-1}^{1} cos(n \pi x) cos(m \pi x) dx\\
+					  = & \frac{1}{2} \int_{-1}^{1} cos[(n+m) \pi x] + cos[(n-m) \pi x] dx\\
+					  = & \frac{1}{2} [\frac{1}{(n+m)\pi} \int_{-(n+m)\pi}^{(n+m)\pi} cos(x) dx + \frac{1}{(n-m)\pi} \int_{-(n-m)\pi}^{(n-m)\pi} cos(x) dx] = 0
+					\end{aligned}
+				\end{equation}
+				and
+				\begin{equation}
+					\begin{aligned}
+						& \int_{-1}^{1} sin(n \pi x) sin(m \pi x) dx\\
+					  = & - \frac{1}{2} \int_{-1}^{1} cos[(n+m) \pi x] - cos[(n-m) \pi x] dx\\
+					  = & - \frac{1}{2} [\frac{1}{(n+m)\pi} \int_{-(n+m)\pi}^{(n+m)\pi} cos(x) dx - \frac{1}{(n-m)\pi} \int_{-(n-m)\pi}^{(n-m)\pi} cos(x) dx] = 0
+					\end{aligned}
+				\end{equation}
+				Then, when $n = m$ it's obvious that
+				\begin{equation}
+					\int_{-1}^{1} cos(n \pi x) cos(m \pi x) dx = \int_{-1}^{1} cos^2(n \pi x) dx > 0 
+				\end{equation}
+				and
+				\begin{equation}
+					\int_{-1}^{1} sin(n \pi x) sin(m \pi x) dx = \int_{-1}^{1} sin^2(n \pi x) dx > 0 
+				\end{equation}
+				Finally, no matter $n$ equals $m$ or not
+				\begin{equation}
+					\begin{aligned}
+						& \int_{-1}^{1} sin(n \pi x) cos(m \pi x) dx \\
+					  = & \frac{1}{2} [\int_{-1}^{1} sin[(n+m) \pi x] dx + \int_{-1}^{1} sin[(n-m) \pi x] dx]\\
+					  = & \frac{1}{2} [\int_{-(n+m)\pi}^{(n+m)\pi} sin(x) dx + \int_{-(n-m)\pi}^{(n-m)\pi} sin(x) dx]\\
+					  = & 0
+					\end{aligned}
+				\end{equation}
+			\end{proof}
 		\item 
+			\begin{proof}
+				Let
+				\begin{equation}
+					t = \frac{x - (b+a)/2}{(b-a)/2}
+				\end{equation}
+				Then $ dt = \frac{2}{b-a} dx $. With $\{ e_n\}$ being an orthonormal system
+				\begin{equation}
+					\begin{aligned}
+						\int_{a}^{b} \tilde{e}_i(x) \tilde{e}_j(x) dx & = \frac{2}{b-a} \int_{a}^{b} e_i(\frac{x - (b+a)/2}{(b-a)/2}) e_j(\frac{x - (b+a)/2}{(b-a)/2}) dx\\
+						& = \int_{-1}^{1} e_i(t) e_j(t) dt = \delta_{ij}
+					\end{aligned}
+				\end{equation}
+			\end{proof}
 		
 	\end{enumerate}
 
