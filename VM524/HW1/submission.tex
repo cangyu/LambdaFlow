@@ -5,6 +5,9 @@
 \usepackage[english]{babel} % English language/hyphenation
 \usepackage{amsmath,amsfonts,amsthm,amssymb} % Math packages
 
+\usepackage{caption}
+\usepackage{graphicx, subfig}
+
 \usepackage{algorithm, algorithmic}
 \renewcommand{\algorithmicrequire}{\textbf{Input:}} %Use Input in the format of Algorithm  
 \renewcommand{\algorithmicensure}{\textbf{Output:}} %UseOutput in the format of Algorithm  
@@ -96,7 +99,14 @@
   \begin{equation}
   	cov(X, Y) = E[(X-E[X])(Y-E[Y])] = E[XY] - E[X]E[Y]
   \end{equation}
-  With $E[XY], E[X], E[Y], E[X^2], E[Y^2]$ provided, the correlation coefficient can be therefore calculated.
+  With $E[XY], E[X], E[Y], E[X^2], E[Y^2]$ provided, the correlation coefficient can be therefore calculated. And
+  numerical experiment has been done with 500 times trial.
+   \begin{figure}[H]
+	  	\centering
+	  	\includegraphics[height=10cm]{CovPlot.png}
+	  	\caption{Covariance of random numbers}
+	  	\label{img:cov}
+  	\end{figure}
 \section{Exercise3}
 
 \section{Exercise4}
