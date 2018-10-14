@@ -108,7 +108,26 @@
 	  	\label{img:cov}
   	\end{figure}
 \section{Exercise3}
+	Assume the angular speed of the motion is $\omega = 4\pi rad/s$, with radius $r = \frac{d}{2} = \frac{l}{2} = 5cm$, the  mean velocity can be calculated as 
+	\begin{equation}
+		u = \frac{1}{2} \omega  r = 0.1\pi m/s
+	\end{equation}
+	Thus, the energy input rate is estimated as
+	\begin{equation}
+		\epsilon \sim \frac{u^3}{l} \approxeq 9.8696\times10^{-1} (m^2 \cdot s^{-3})
+	\end{equation}
+	With the kinematic viscosity of water taken as $\nu = 1.006\times10^{-6}  (m^2 \cdot s^{-1})$, the Kolmogorov scale is estimated as
+	\begin{equation}
+		\eta \sim (\frac{\nu^3}{\epsilon})^{\frac{1}{4}} \approxeq 3.187\times10^{-2}mm
+	\end{equation}
 
 \section{Exercise4}
-
+	Load the give txt datafile, denote the input 1D data as $u$, then perform FFT on $u$ yields $u^*$. The energy spectrum is calculated as
+	$E(k) = \frac{1}{2} u^*(k)^2$ for each $u^*$. The log plot of the energy spectrum is provided.
+	\begin{figure}[]
+		\centering
+		\includegraphics[angle=90, width=12cm]{EnergySpectrum.png}
+		\caption{Energy Spectrum}
+		\label{img:es}
+	\end{figure}
 \end{document}
