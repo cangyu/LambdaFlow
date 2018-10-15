@@ -3,13 +3,17 @@ import cantera as ct
 from matplotlib import pyplot as plt
 from scipy import optimize
 
-# Mechane and Air
 # CH4 + 2(O2 + 3.76 N2) -> CO2 + 2 H2O + 2*3.76 N2
 m = 1
 n = 4
-species = [ct.Methane(), ct.Oxygen(), ct.CarbonDioxide(), ct.Water(), ct.Nitrogen()]
+comp = ['CH4:1', 'O2:1', 'CO2:1', 'H2O:1', 'N2:1']
 w = np.array([16, 32, 44, 18, 28])
-T_ref = 298
+spec = [ct.Solution('gri30.xml') for _ in range(len(comp))]
+for i in range(len(spec)):
+    spec[i].X = comp[i]
+
+# Reference State
+T_ref = 300
 P_ref = 101325
 
 # Mass ratio of oxidizer and fuel at stoichiometry
@@ -67,9 +71,9 @@ def Y_b(Z):
 
 
 def species_enthalpy(T):
-    for i in range(len(species)):
-        species[i].TP = T, P_ref
-    return np.array([c.enthalpy_mole for c in species])
+    for k in range(len(spec)):
+        spec[k].TP = T, P_ref
+    return np.array([c.enthalpy_mole for c in spec])
 
 
 def calc_temp(Z):
@@ -84,13 +88,15 @@ def calc_temp(Z):
     def f(T):
         return h_b(T) - h_u
 
-    return optimize.newton(f, 1500)
+    ret = optimize.newton(f, 1500)
+    return ret
 
 
 if __name__ == '__main__':
-    # Z = np.linspace(0.1,0.9,21)
-    # T_ad = np.array([calc_temp(z) for z in Z])
-    # plt.plot(Z, T_ad)
-    # plt.show()
-
-    print(species_enthalpy(1600))
+    Z = np.linspace(0.001, 1.0, 1000)
+    T_ad = np.array([calc_temp(z) for z in Z])
+    plt.plot(Z, T_ad)
+    plt.xlabel('Mixture Fraction(Z)')
+    plt.ylabel('Adiabatic Temperature/K')
+    plt.title('Methane-Air Case')
+    plt.show()
