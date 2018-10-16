@@ -97,7 +97,7 @@
 					\int_{0}^{\pi} (\frac{1}{\sqrt{\pi}})^2 dx = \frac{1}{\pi} \int_{0}^{\pi} dx = 1
 				\end{equation}
 				\begin{equation}
-					\int_{0}^{\pi} (\sqrt{\frac{2}{\pi}}cos(nx))^2 dx = \frac{2}{\pi} \int_{0}^{\pi} cos^2(nx)dx = 1
+					\int_{0}^{\pi} (\sqrt{\frac{2}{\pi}}cos(nx))^2 dx = \frac{2}{\pi} \int_{0}^{\pi} cos^2(nx)dx = \frac{1}{\pi} \int_{0}^{\pi} (cos(2nx) + 1) dx = 1
 				\end{equation}
 				\begin{equation}
 					\int_{0}^{\pi} \frac{1}{\sqrt{\pi}} \sqrt{\frac{2}{\pi}}cos(nx) dx = 0
@@ -108,10 +108,41 @@
 			\end{proof}
 		\item 
 			\begin{proof}
-				
+				It's trival to show both $K=0$ and $K=1$ are valid, and $K=2$ is also justified as
+				\begin{equation}
+					cos^2(x) = \frac{1+cos(2x)}{2}
+				\end{equation}
+				Assume the proposition is also valid for $K=n$, that means
+				\begin{equation}
+					span\{1, cos(x), cos(2x), ... cos(nx)\} = span\{1, cos(x), cos^2(x), ... cos^n(x)\}
+				\end{equation}
+				which indicates that $\exists a_k$ and $b_k (k=0, 1, ..., n)$ s.t. 
+				\begin{equation}
+					cos^n(x) = \sum_{k=0}^{n} a^{(n)}_k \cdot cos(kx)
+				\end{equation}
+				\begin{equation}
+					cos(nx) = \sum_{k=0}^{n} b^{(n)}_k \cdot cos^k(x)
+				\end{equation}
+				When $K = n+1$, the proposition is still valid as
+				\begin{equation}
+					\begin{aligned}
+						cos^{n+1}(x) & = cos(x) \sum_{k=0}^{n} a_k cos(kx)\\
+									 & = a_0 cos(x) + cos(x) \sum_{k=1}^{n-1} a_k cos(kx) + a_n cos(x) cos(nx)\\
+									 & = a_0 cos(x) + \sum_{k=1}^{n-1} \frac{a_k}{2} [cos(k-1)x + cos(k+1)x] + \frac{a_n}{2} [cos(n-1)x + cos(n+1)x]\\
+									 & = \frac{a_1}{2} + (a_0 + \frac{a_2}{2}) cos(x) + \sum_{k=2}^{n-1}\frac{a_{k-1} + a_{k+1}}{2} cos(kx) + \frac{a_n}{2} cos(n+1)x
+					\end{aligned}
+				\end{equation}
+				and
+				\begin{equation}
+					\begin{aligned}
+						cos(n+1)x & = 2 cos(nx)cos(x) - cos(n-1)x\\
+								  & = 2 cos(x)\sum_{k=0}^{n} b^{(n)}_k cos^k(x) - \sum_{k=0}^{n-1} b^{(n-1)}_k cos^k(x)\\
+								  & = -b^{(n-1)}_0 + \sum_{k=0}^{n-1} (2b^{(n)}_k - b^{(n-1)}_k) cos^{k+1}(x) + 2b^{(n)}_k cos^{n+1}(x)
+					\end{aligned}
+				\end{equation}
 			\end{proof}
-		
 		\item 
+			
 		
 		\item 
 		
