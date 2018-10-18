@@ -116,20 +116,24 @@
 				\begin{equation}
 					span\{1, cos(x), cos(2x), ... cos(nx)\} = span\{1, cos(x), cos^2(x), ... cos^n(x)\}
 				\end{equation}
-				which indicates that $\exists a_k$ and $b_k (k=0, 1, ..., n)$ s.t. 
+				which indicates that $\exists a^{(n)}_k$ and $b^{(n)}_k (k=0, 1, ..., n)$ s.t. 
 				\begin{equation}
 					cos^n(x) = \sum_{k=0}^{n} a^{(n)}_k \cdot cos(kx)
 				\end{equation}
+				and
 				\begin{equation}
 					cos(nx) = \sum_{k=0}^{n} b^{(n)}_k \cdot cos^k(x)
 				\end{equation}
 				When $K = n+1$, the proposition is still valid as
+				
 				\begin{equation}
 					\begin{aligned}
-						cos^{n+1}(x) & = cos(x) \sum_{k=0}^{n} a_k cos(kx)\\
-									 & = a_0 cos(x) + cos(x) \sum_{k=1}^{n-1} a_k cos(kx) + a_n cos(x) cos(nx)\\
-									 & = a_0 cos(x) + \sum_{k=1}^{n-1} \frac{a_k}{2} [cos(k-1)x + cos(k+1)x] + \frac{a_n}{2} [cos(n-1)x + cos(n+1)x]\\
-									 & = \frac{a_1}{2} + (a_0 + \frac{a_2}{2}) cos(x) + \sum_{k=2}^{n-1}\frac{a_{k-1} + a_{k+1}}{2} cos(kx) + \frac{a_n}{2} cos(n+1)x
+						 cos^{n+1}(x) & = cos(x) cos^n(x)\\
+						 			  & = cos(x) \sum_{k=0}^{n} a^{(n)}_k cos(kx)\\
+									  & = a^{(n)}_0 cos(x) + cos(x) \sum_{k=1}^{n-1} a^{(n)}_k cos(kx) + a^{(n)}_n cos(x) cos(nx)\\
+									  & = a^{(n)}_0 cos(x) + \sum_{k=1}^{n-1} \frac{a^{(n)}_k}{2} [cos(k-1)x + cos(k+1)x] + \frac{a^{(n)}_n}{2} [cos(n-1)x + cos(n+1)x]\\
+									  & = \frac{a^{(n)}_1}{2} + (a^{(n)}_0 + \frac{a^{(n)}_2}{2}) cos(x) + \sum_{k=2}^{n-1}\frac{a^{(n)}_{k-1} + a^{(n)}_{k+1}}{2} cos(kx) + \frac{a^{(n)}_{n-1}}{2}cos(nx) + \frac{a^{(n)}_n}{2} cos(n+1)x\\
+									  & \triangleq \sum_{k=0}^{n+1} a^{(n+1)}_k cos(kx)
 					\end{aligned}
 				\end{equation}
 				and
@@ -137,19 +141,59 @@
 					\begin{aligned}
 						cos(n+1)x & = 2 cos(nx)cos(x) - cos(n-1)x\\
 								  & = 2 cos(x)\sum_{k=0}^{n} b^{(n)}_k cos^k(x) - \sum_{k=0}^{n-1} b^{(n-1)}_k cos^k(x)\\
-								  & = -b^{(n-1)}_0 + \sum_{k=0}^{n-1} (2b^{(n)}_k - b^{(n-1)}_k) cos^{k+1}(x) + 2b^{(n)}_k cos^{n+1}(x)
+								  & = 2 \sum_{k=0}^{n} b^{(n)}_k cos^{k+1}(x) - \sum_{k=0}^{n-1} b^{(n-1)}_k cos^k(x)\\
+								  & = 2 \sum_{k=1}^{n+1} b^{(n)}_{k-1} cos^{k}(x) - [b^{(n-1)}_0 +\sum_{k=1}^{n-1} b^{(n-1)}_k cos^k(x)]\\
+								  & = -b^{(n-1)}_0 + \sum_{k=1}^{n-1} (2b^{(n)}_{k-1} - b^{(n-1)}_k) cos^{k}(x) + 2b^{(n)}_{n-1} cos^{n}(x) + 2b^{(n)}_{n} cos^{n+1}(x)\\
+								  & \triangleq \sum_{k=0}^{n+1}b^{(n+1)}_k cos^k(x)
 					\end{aligned}
 				\end{equation}
+				Thus
+				\begin{equation}
+					span\{1, cos(x), cos(2x), ... , cos(n+1)x\} = span\{1, cos(x), cos^2(x), ... , cos^{n+1}(x)\}
+				\end{equation}
+				Hence, by induction hypothesis, the proposition is valid for all $k\in N$.
 			\end{proof}
 		\item 
-			
-		
+			\begin{proof}
+				Given any continous function $f$ over $[-1, 1]$, by Weierstras Approximation Theorem, $\exists p(x)$ over $[-1, 1]$ s.t.
+				\begin{equation}
+					||f-p||_\infty < \epsilon
+				\end{equation}
+				for any $\epsilon > 0$.\\
+				Assume $p$ can be writte as
+				\begin{equation}
+					p(x) = \sum_{i=0}^{N} a_i x^i
+				\end{equation}
+				Then with the change of variables $y = cos(x)$
+				\begin{equation}
+					f(x) = \tilde{f}(y) \approxeq p(y) = \sum_{i=0}^{N} a_i y^i = \sum_{i=0}^{N} a_i cos^i(x)
+				\end{equation}
+				As $cos^i(x)$ can be expressed as the sum of $1, cos(x), cos(2x), ... , cos(ix)$ with proper coefficients, $f(x)$ is therefore can be approximated uniformly by finite linear combinations of $1, cos(x), cos(2x), ... $.
+			\end{proof}
 		\item 
-		
+			\begin{proof}
+				As have been proved above, for any continous function $f$ over $[0,\pi]$, it can be approximated by linear combinations of $1, cos(x), cos(2x), ... $, which means that $\exists g \in span\{B\}$ s.t. 
+				\begin{equation}
+					||f-g||_\infty < \epsilon
+				\end{equation}
+				for any $\epsilon > 0$.\\
+				Thus, span\{B\} is dense in $C([0, \pi])$ in the $||\cdot||_\infty$ norm.
+			\end{proof}
 		\item 
-		
+			\begin{proof}
+				As have been proved aboved, $\forall f \in C[a, b]$, $\exists p \in \mathbb{P}[a, b]$ s.t.
+				\begin{equation}
+					||f-p||_\infty = \sup_{x\in[a, b]}|f(x)-p(x)| < \frac{\epsilon}{\sqrt{b-a}}
+				\end{equation}
+				for any $\epsilon > 0$.\\
+				Then for the $L^2$ norm
+				\begin{equation}
+					||f-p||_2 = \sqrt{\int_{a}^{b} (f(x) - p(x))^2 dx} \leq \sqrt{(b-a) \cdot \max_{x\in[a, b]}(f(x)-p(x))^2} < \epsilon
+				\end{equation}
+				Thus, span\{B\} is dense in $C([0, \pi])$ in the $||\cdot||_2$ norm.
+			\end{proof}
 		\item 
-		
+			Not figured out...
 	\end{enumerate}
 
 \end{document}
