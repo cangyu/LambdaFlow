@@ -73,7 +73,7 @@ def Y_b(Z):
 def species_enthalpy(T):
     for k in range(len(spec)):
         spec[k].TP = T, P_ref
-    return np.array([c.enthalpy_mole for c in spec])
+    return np.array([c.enthalpy_mass for c in spec])
 
 
 def calc_temp(Z):
