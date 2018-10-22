@@ -134,7 +134,15 @@
 \section{Exercise1.3}
 	\begin{enumerate}
 		\item 
-			Not figured out...
+			\begin{proof}
+				Given a sequence $(a_n) \in l^p$, then $\lim\limits_{n\rightarrow \infty} |a_n|^p =0$.\\
+				Thus, $\lim\limits_{n\rightarrow \infty} |a_n|^{q-p} = 0$, which indicates that $|a_n|^{q-p}$ is bounded.\\
+				Hence $\exists C > 0$ s.t. $|a_n|^{q-p} < C$, which results in
+				\begin{equation}
+					\sum_{n=0}^{\infty} |a_n|^q = \sum_{n=0}^{\infty} |a_n|^p \cdot |a_n|^{q-p} < C \sum_{n=0}^{\infty} |a_n|^p < \infty 
+				\end{equation}
+				Therefore $(a_n) \in l^q$.
+			\end{proof}
 		\item 
 			For example
 			\begin{equation}
