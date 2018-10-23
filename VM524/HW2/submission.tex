@@ -55,17 +55,50 @@
 \maketitle
 
 \section{Exercise1}
-	An identity is used
+	Consider the N-S equation
+	\begin{equation}
+		\frac{\partial u_j}{\partial t} + u_k \frac{\partial u_j}{\partial x_k} = -\frac{1}{\rho}\frac{\partial p}{\partial x_j} + \nu \frac{\partial^2 u_j}{\partial x_k \partial x_k} + f_j = 0
+	\end{equation}
+	
+	With the ensemble average, each quantity can be decomposed into mean and fluctuation. Namely
+	\begin{equation}
+		\begin{aligned}
+			u_j & = U_j + u_j'\\
+			p & = P + p'\\
+			f_j &= F_j + f_j'
+		\end{aligned}
+	\end{equation}
+	Thus, the N-S equation can be expanded as
+	\begin{equation}
+		\Bigg(\frac{\partial U_j}{\partial t} + \frac{\partial u_j'}{\partial t}\Bigg) + \Bigg(U_k\frac{\partial U_j}{\partial x_k} + u_k'\frac{\partial U_j}{\partial x_k} + U_k \frac{\partial u_j'}{\partial x_k} + u_k'\frac{\partial u_j'}{\partial x_k}\Bigg) = -\frac{1}{\rho}\Bigg(\frac{\partial P}{\partial x_j} + \frac{\partial p'}{\partial x_j}\Bigg) + \nu \Bigg(\frac{\partial^2 U_j}{\partial x_k \partial x_k} + \frac{\partial^2 u_j'}{\partial x_k \partial x_k}\Bigg) + (F_j + f_j')
+	\end{equation}
+	
+	Taking ensemble average on the equation above yiels the so called Reynolds equation
+	\begin{equation}
+		\frac{\partial U_j}{\partial t} + U_k \frac{\partial U_j}{\partial x_k} + \overline{u_k'\frac{\partial u_j'}{\partial x_k}} = -\frac{1}{\rho}\frac{\partial P}{\partial x_j} + \nu \frac{\partial^2 U_j}{\partial x_k \partial x_k} + F_j
+	\end{equation}
+	
+	Substract the Reynolds equation by N-S equation that has been expaneded yields
+	\begin{equation}
+		\frac{\partial u_j'}{\partial t} + u_k'\frac{\partial U_j}{\partial x_k} + U_k \frac{\partial u_j'}{\partial x_k} + u_k'\frac{\partial u_j'}{\partial x_k} - \overline{u_k'\frac{\partial u_i'}{\partial x_k}} = -\frac{1}{\rho}\frac{\partial p'}{\partial x_j} + \nu \frac{\partial^2 u_j'}{\partial x_k \partial x_k} + f_j'
+	\end{equation}
+	
+	With the continuity equation for incompressible flow
+	\begin{equation}
+		\frac{\partial u_k'}{\partial x_k} = 0 
+	\end{equation}
+	the substracted equation can be re-written as
+	\begin{equation}
+		N_j\{\vec{x}, t\} \triangleq \frac{\partial u_j'}{\partial t} + u_k' \frac{\partial \overline{u_j}}{x_k} + \overline{u_k}\frac{\partial u_j'}{\partial x_k} + \frac{\partial [u_j' u_k']}{\partial x_k} - \frac{\partial \overline{u_j' u_k'}}{\partial x_k} + \frac{1}{\rho} \frac{\partial p'}{\partial x_j}-\nu \frac{\partial^2 u_j'}{\partial x_k \partial x_k} - f_j' = 0
+		\label{eq:sns}
+	\end{equation}
+
+	Also, an identity is frequently used within the exercise
 	\begin{equation}
 		\frac{d u(t+s)}{dt} = \frac{d u(t+s)}{d(t+s)} = \frac{d u(t+s)}{ds} 
 	\end{equation}
 	
-	Since the structure function and two-point correlation function are defined as
-	\begin{equation}
-		N_i\{\vec{x}, t\} = \frac{\partial u_i'}{\partial t} + \overline{u_k}\frac{\partial u_i'}{\partial x_k} + u_k' \frac{\partial \overline{u_i}}{x_k} + \frac{\partial (u_i' u_k')}{\partial x_k} - \frac{\partial \overline{u_i' u_k'}}{\partial x_k} + \frac{1}{\rho} \frac{\partial p'}{\partial x_i}-\nu \frac{\partial^2 u_i'}{\partial x_k \partial x_k} - f_i' = 0
-	\end{equation}
-	
-	and
+	Since the two-point correlation function is defined as
 	\begin{equation}
 		R_{ij} = \overline{u_i'(\vec{x}, t) u_j'(\vec{x}+\vec{r}, t + \tau)}
 	\end{equation}
@@ -177,7 +210,8 @@
 	 
 	 \begin{equation}
 	 	\begin{aligned}
-	 		\overline{u_i'(\vec{x}, t) \frac{\partial^2 u_j'(\vec{x} + \vec{r}, t + \tau)}{\partial (x_k+r_k) \partial (x_k+r_k)}} &= \overline{u_i'(\vec{x}, t) \frac{\partial^2 u_j'(\vec{x} + \vec{r}, t + \tau)}{\partial r_k \partial r_k}} \\
+	 		\overline{u_i'(\vec{x}, t) \frac{\partial^2 u_j'(\vec{x} + \vec{r}, t + \tau)}{\partial (x_k+r_k) \partial (x_k+r_k)}}
+	 		&= \overline{u_i'(\vec{x}, t) \frac{\partial^2 u_j'(\vec{x} + \vec{r}, t + \tau)}{\partial r_k \partial r_k}} \\
 	 		& = \overline{ \frac{\partial^2 u_i'(\vec{x}, t) u_j'(\vec{x} + \vec{r}, t + \tau)}{\partial r_k \partial r_k}} = \frac{\partial R_{ij}}{\partial r_k \partial r_k}
 	 	\end{aligned}
 	 \end{equation}
@@ -206,6 +240,65 @@
 	 \end{equation}
 	 
 \section{Exercise 2}
+	Refer to (\ref{eq:sns}), kinetic energy equation of each velocity component is given as
+	\begin{equation}
+		\begin{aligned}
+			u_1'N_1 & = 0\\
+			u_2'N_2 & = 0\\
+			u_3'N_3 & = 0\\
+		\end{aligned}
+		\label{eq:kc}
+	\end{equation}
+	In the pure shear flow case, assumptions can be made as
+	\begin{equation}
+		\begin{aligned}
+			\frac{\partial}{\partial x_1} & = \frac{\partial}{\partial x_3} = 0\\
+			U_2 & = U_3 = 0\\
+			U_1 & = f(x_2)
+		\end{aligned}
+	\end{equation}
+	Hence, (\ref{eq:kc}) can be simplified as
+	\begin{equation}
+		\begin{aligned}
+			\frac{\overline{D}}{\overline{D} t}\Big(\frac{u_1'^2}{2}\Big) & = -u_2' u_1'\frac{\partial U_1}{\partial x_2} - u_1'\frac{\partial [u_1'u_2']}{\partial x_2} + u_1'\frac{\partial \overline{u_1' u_2'}}{\partial x_2} + u_1'\nu \frac{\partial^2 u_1'}{\partial x_2 \partial x_2}\\
+			\frac{\overline{D}}{\overline{D} t}\Big(\frac{u_2'^2}{2}\Big) & = -u_2'\frac{\partial [u_2'u_2']}{\partial x_2} + u_2'\frac{\partial \overline{u_2' u_2'}}{\partial x_2} - \frac{u_2'}{\rho}\frac{\partial p'}{\partial x_2}+ u_2'\nu \frac{\partial^2 u_2'}{\partial x_2 \partial x_2}\\
+			\frac{\overline{D}}{\overline{D} t}\Big(\frac{u_3'^2}{2}\Big) & = -u_3'\frac{\partial [u_3'u_2']}{\partial x_2} + u_3'\frac{\partial \overline{u_3' u_2'}}{\partial x_2} + u_3'\nu \frac{\partial^2 u_3'}{\partial x_2 \partial x_2}\\
+		\end{aligned}
+		\label{eq:kt}
+	\end{equation}
+	where
+	\begin{equation}
+		\frac{\overline{D}}{\overline{D} t} = \frac{\partial}{\partial t} + U_k \frac{\partial}{\partial x_k}
+	\end{equation}
+	and it should be noted that the $U_k \frac{\partial}{\partial x_k}$ term vanishes in (\ref{eq:kt}).\\
+	Estimations on each term can be made respectively.\\
+	For the first equation in (\ref{eq:kt})
+	\begin{equation}
+		\begin{aligned}
+			u_2' u_1'\frac{\partial U_1}{\partial x_2} & \sim \frac{u'^2 U}{L}\\
+			u_1'\frac{\partial [u_1'u_2']}{\partial x_2} & \sim \frac{u'^3}{L}\\
+			u_1'\frac{\partial \overline{u_1' u_2'}}{\partial x_2} & \sim u'\nu \frac{\partial U_1}{\partial x_2} \sim \nu \frac{u' U}{L}\\
+			u_1'\nu \frac{\partial^2 u_1'}{\partial x_2 \partial x_2} & \sim \nu \frac{u'^2}{L^2}
+		\end{aligned}
+	\end{equation}
 	
+	For the second equation in (\ref{eq:kt})
+	\begin{equation}
+		\begin{aligned}
+			u_2'\frac{\partial [u_2'u_2']}{\partial x_2} & \sim \frac{u'^3}{L}\\
+			u_2'\frac{\partial \overline{u_2' u_2'}}{\partial x_2} & \sim \frac{u'^3}{L}\\
+			\frac{u_2'}{\rho}\frac{\partial p'}{\partial x_2} & \sim \frac{u'}{\rho} \rho \\
+			u_2'\nu \frac{\partial^2 u_2'}{\partial x_2 \partial x_2} & \sim \nu \frac{u'^2}{L^2}
+		\end{aligned}
+	\end{equation}
+	
+	For the third equation in (\ref{eq:kt})
+	\begin{equation}
+		\begin{aligned}
+			u_3'\frac{\partial [u_3'u_2']}{\partial x_2} & \sim \frac{u'^3}{L}\\
+			u_3'\frac{\partial \overline{u_3' u_2'}}{\partial x_2} & \sim \frac{u'^3}{L}\\
+			u_3'\nu \frac{\partial^2 u_3'}{\partial x_2 \partial x_2} & \sim \nu \frac{u'^2}{L^2}
+		\end{aligned}
+	\end{equation}
 	
 \end{document}
