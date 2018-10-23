@@ -55,21 +55,27 @@
 \maketitle
 
 \section{Exercise1}
+	An identity is used
+	\begin{equation}
+		\frac{d u(t+s)}{dt} = \frac{d u(t+s)}{d(t+s)} = \frac{d u(t+s)}{ds} 
+	\end{equation}
+	
 	Since the structure function and two-point correlation function are defined as
 	\begin{equation}
 		N_i\{\vec{x}, t\} = \frac{\partial u_i'}{\partial t} + \overline{u_k}\frac{\partial u_i'}{\partial x_k} + u_k' \frac{\partial \overline{u_i}}{x_k} + \frac{\partial (u_i' u_k')}{\partial x_k} - \frac{\partial \overline{u_i' u_k'}}{\partial x_k} + \frac{1}{\rho} \frac{\partial p'}{\partial x_i}-\nu \frac{\partial^2 u_i'}{\partial x_k \partial x_k} - f_i' = 0
 	\end{equation}
+	
 	and
 	\begin{equation}
 		R_{ij} = \overline{u_i'(\vec{x}, t) u_j'(\vec{x}+\vec{r}, t + \tau)}
 	\end{equation}
+
 	Thus, for $D^{(i)}\{R_{ij}\} = \overline{u_j'(\vec{x} + \vec{r}, t+\tau) N_i\{\vec{x}, t\}}$, components in the expansion are calculated as
 	\begin{equation}
 		\begin{aligned}
 			\overline{u_j'(\vec{x} + \vec{r}, t+\tau) \frac{\partial u_i'(\vec{x}, t)}{\partial t}}  
 			& = \overline{\frac{\partial (u_i'(\vec{x}, t)u_j'(\vec{x} + \vec{r}, t+\tau))}{\partial t} - u_i'(\vec{x}, t) \frac{\partial u_j'(\vec{x} + \vec{r}, t+\tau)}{\partial t}}\\
-			& = \frac{\partial \overline{u_i'(\vec{x}, t)u_j'(\vec{x} + \vec{r}, t+\tau)}}{\partial t} - \overline{u_i'(\vec{x}, t) \frac{\partial u_j'(\vec{x} + \vec{r}, t+\tau)}{\partial (t+\tau)}}\\
-			& = \frac{\partial R_{ij}}{\partial t} - \overline{u_i'(\vec{x}, t) \frac{\partial u_j'(\vec{x} + \vec{r}, t+\tau)}{\partial \tau}}\\
+			& = \frac{\partial \overline{u_i'(\vec{x}, t)u_j'(\vec{x} + \vec{r}, t+\tau)}}{\partial t} - \overline{u_i'(\vec{x}, t) \frac{\partial u_j'(\vec{x} + \vec{r}, t+\tau)}{\partial \tau}}\\
 			& = \frac{\partial R_{ij}}{\partial t} - \frac{\partial \overline{u_i'(\vec{x}, t) u_j'(\vec{x} + \vec{r}, t+\tau)}}{\partial \tau}\\
 			& = \frac{\partial R_{ij}}{\partial t} - \frac{\partial R_{ij}}{\partial \tau}
 		\end{aligned}
@@ -92,6 +98,20 @@
 	
 	\begin{equation}
 		\begin{aligned}
+			\overline{u_j'(\vec{x} + \vec{r}, t+\tau) \frac{\partial [u_i'(\vec{x}, t)u_k'(\vec{x}, t)]}{\partial x_k}} 
+			& = \overline{\frac{\partial [u_i'(\vec{x}, t)u_k'(\vec{x}, t) u_j'(\vec{x} + \vec{r}, t+\tau)]}{\partial x_k}} - \overline{u_i'(\vec{x}, t)u_k'(\vec{x}, t) \frac{\partial u_j'(\vec{x} + \vec{r}, t+\tau)}{\partial x_k}}\\
+			& = \frac{\partial R_{(ik)j}}{\partial x_k} - \overline{u_i'(\vec{x}, t)u_k'(\vec{x}, t) \frac{\partial u_j'(\vec{x} + \vec{r}, t+\tau)}{\partial r_k}}\\
+			& = \frac{\partial R_{(ik)j}}{\partial x_k} - \overline{\frac{\partial [u_i'(\vec{x}, t)u_k'(\vec{x}, t)u_j'(\vec{x} + \vec{r}, t+\tau)]}{\partial r_k}}\\
+			& = \frac{\partial R_{(ik)j}}{\partial x_k} - \frac{\partial R_{(ik)j}}{\partial r_k}
+		\end{aligned}
+	\end{equation}
+	
+	\begin{equation}
+		\overline{u_j'(\vec{x} + \vec{r}, t+\tau) \frac{\partial \overline{u_i'(\vec{x}, t)u_k'(\vec{x}, t)}}{\partial x_k}} = \overline{u_j'(\vec{x} + \vec{r}, t+\tau)} \frac{\partial \overline{u_i'(\vec{x}, t)u_k'(\vec{x}, t)}}{\partial x_k} = 0
+	\end{equation}
+	
+	\begin{equation}
+		\begin{aligned}
 			\overline{u_j'(\vec{x} + \vec{r}, t+\tau) \frac{\partial p'(\vec{x}, t)}{\partial x_i}} 
 			& = \overline{\frac{\partial p'(\vec{x}, t) u_j'(\vec{x} + \vec{r}, t+\tau)}{\partial x_i}} - \overline{p'(\vec{x}, t) \frac{\partial u_j'(\vec{x} + \vec{r}, t+\tau)}{\partial x_i}}\\
 			& = \frac{\partial \overline{p'(\vec{x}, t) u_j'(\vec{x} + \vec{r}, t+\tau)}}{\partial x_i} - \overline{p'(\vec{x}, t) \frac{\partial u_j'(\vec{x} + \vec{r}, t+\tau)}{\partial (x_i + r_i)}}\\
@@ -103,11 +123,88 @@
 	
 	\begin{equation}
 		\begin{aligned}
-			\overline{u_j'(\vec{x} + \vec{r}, t + \tau) \frac{\partial^2 u_i'(\vec{x}, t)}{\partial x_k \partial x_k}} = 
+			& \overline{u_j'(\vec{x} + \vec{r}, t + \tau) \frac{\partial^2 u_i'(\vec{x}, t)}{\partial x_k \partial x_k}} 
+			= \overline{u_j'(\vec{x} + \vec{r}, t + \tau) \frac{\partial}{\partial x_k}\Bigg(\frac{\partial u_i'(\vec{x}, t)}{\partial x_k}\Bigg)}\\
+			 = & \overline{\frac{\partial}{\partial x_k} \Bigg(u_j'(\vec{x} + \vec{r}, t + \tau) \frac{\partial u_i'(\vec{x}, t)}{\partial x_k}\Bigg)} - \overline{\frac{\partial u_j'(\vec{x} + \vec{r}, t + \tau)}{\partial x_k} \frac{\partial u_i'(\vec{x}, t)}{\partial x_k}}\\
+		= 	& \overline{\frac{\partial}{\partial x_k} \Bigg(\frac{\partial [u_j'(\vec{x} + \vec{r}, t + \tau) u_i'(\vec{x}, t)]}{\partial x_k} - u_i'(\vec{x}, t) \frac{\partial u_j'(\vec{x} + \vec{r}, t + \tau)}{\partial x_k}\Bigg)} - \overline{\frac{\partial u_j'(\vec{x} + \vec{r}, t + \tau)}{\partial x_k} \frac{\partial u_i'(\vec{x}, t)}{\partial x_k}}\\
+			 = &\frac{\partial^2 R_{ij}}{\partial x_k \partial x_k} - \overline{\frac{\partial}{\partial x_k} \Bigg(u_i'(\vec{x}, t) \frac{\partial u_j'(\vec{x} + \vec{r}, t + \tau)}{\partial r_k}\Bigg)} - \overline{\frac{\partial u_j'(\vec{x} + \vec{r}, t + \tau)}{\partial x_k} \frac{\partial u_i'(\vec{x}, t)}{\partial x_k}}\\
+			 =& \frac{\partial^2 R_{ij}}{\partial x_k \partial x_k} - \overline{\frac{\partial}{\partial x_k} \frac{\partial [u_i'(\vec{x}, t) u_j'(\vec{x} + \vec{r}, t + \tau)]}{\partial r_k}} - \overline{\frac{\partial u_j'(\vec{x} + \vec{r}, t + \tau)}{\partial r_k} \frac{\partial u_i'(\vec{x}, t)}{\partial x_k}}\\
+		 =	& \frac{\partial^2 R_{ij}}{\partial x_k \partial x_k} - \frac{\partial^2 R_{ij}}{\partial x_k \partial r_k} - \overline{\Bigg(\frac{\partial}{\partial x_k}\Bigg(u_i'(\vec{x}, t) \frac{\partial u_j'(\vec{x} + \vec{r}, t + \tau)}{\partial r_k} \Bigg) - u_i'(\vec{x}, t) \frac{\partial^2 u_j'(\vec{x} + \vec{r}, t + \tau)}{\partial x_k \partial r_k}\Bigg)}\\
+		 = 	&\frac{\partial^2 R_{ij}}{\partial x_k \partial x_k} - \frac{\partial^2 R_{ij}}{\partial x_k \partial r_k} - \overline{\Bigg(\frac{\partial}{\partial x_k}\Bigg(\frac{\partial [u_i'(\vec{x}, t) u_j'(\vec{x} + \vec{r}, t + \tau)]}{\partial r_k} \Bigg) - u_i'(\vec{x}, t) \frac{\partial^2 u_j'(\vec{x} + \vec{r}, t + \tau)}{\partial r_k \partial r_k}\Bigg)}\\
+			 = &\frac{\partial^2 R_{ij}}{\partial x_k \partial x_k} - 2\frac{\partial^2 R_{ij}}{\partial x_k \partial r_k} + \overline{\frac{\partial^2 [u_i'(\vec{x}, t)u_j'(\vec{x} + \vec{r}, t + \tau)]}{\partial r_k \partial r_k}}\\
+			 =& \frac{\partial^2 R_{ij}}{\partial x_k \partial x_k} - 2\frac{\partial^2 R_{ij}}{\partial x_k \partial r_k} + \frac{\partial^2 R_{ij}}{\partial r_k \partial r_k}\\
 		\end{aligned}
 	\end{equation}
 	
+	then, detailed expression for  $D^{(i)}\{R_{ij}\}$ is given as
+	\begin{equation}
+		\begin{aligned}
+			D^{(i)}\{R_{ij}\} = \frac{\partial R_{ij}}{\partial t} - \frac{\partial R_{ij}}{\partial \tau} + \overline{u_k(\vec{x}, t)} \Bigg[\frac{\partial R_{ij}}{\partial x_k}- \frac{\partial R_{ij}}{\partial r_k}\Bigg] + R_{kj}\frac{\partial \overline{u_i(\vec{x}, t)}}{\partial x_k} \\ + \frac{\partial R_{(ik)j}}{\partial x_k} - \frac{\partial R_{(ik)j}}{\partial r_k} + \frac{1}{\rho} \Bigg(\frac{\partial \overline{p'(\vec{x}, t) u_j'(\vec{x} + \vec{r}, t+\tau)}}{\partial x_i} - \frac{\partial \overline{p'(\vec{x}, t) u_j'(\vec{x} + \vec{r}, t+\tau)}}{\partial r_i}\Bigg) \\ - \nu \Bigg(\frac{\partial^2 R_{ij}}{\partial x_k \partial x_k} - 2\frac{\partial^2 R_{ij}}{\partial x_k \partial r_k} + \frac{\partial^2 R_{ij}}{\partial r_k \partial r_k}\Bigg) - \overline{u_j'(\vec{x} + \vec{r}, t+\tau) f_i'(\vec{x}, t)} = 0
+		\end{aligned}
+	\end{equation}
 	
+	 For $D^{(j)}\{R_{ij}\} = \overline{u_i'(\vec{x}, t) N_j\{\vec{x} + \vec{r}, t + \tau\}}$, components in the expansion are calculated as
+	 \begin{equation}
+	 	\overline{u_i'(\vec{x}, t) \frac{\partial u_j'(\vec{x} + \vec{r}, t + \tau)}{\partial (t + \tau)}} = \overline{u_i'(\vec{x}, t) \frac{\partial u_j'(\vec{x} + \vec{r}, t + \tau)}{\partial \tau}} = \overline{ \frac{\partial u_i'(\vec{x}, t) u_j'(\vec{x} + \vec{r}, t + \tau)}{\partial \tau}} = \frac{\partial R_{ij}}{\partial \tau}
+	 \end{equation}
+	 
+	 \begin{equation}
+	 	\begin{aligned}
+	 		\overline{u_i'(\vec{x}, t) \overline{u_k(\vec{x} + \vec{r}, t + \tau)}\frac{\partial u_j'(\vec{x} + \vec{r}, t + \tau)}{\partial (x_k + r_k)}} 
+	 		 = \overline{u_k(\vec{x} + \vec{r}, t + \tau)} \overline{u_i'(\vec{x}, t) \frac{\partial u_j'(\vec{x} + \vec{r}, t + \tau)}{\partial r_k}}\\
+	 		 = \overline{u_k(\vec{x} + \vec{r}, t + \tau)} \overline{\frac{\partial [u_i'(\vec{x}, t)u_j'(\vec{x} + \vec{r}, t + \tau)]}{\partial r_k}} = \overline{u_k(\vec{x} + \vec{r}, t + \tau)} \frac{\partial R_{ij}}{\partial r_k}
+	 	\end{aligned}
+	 \end{equation}
+	 
+	 \begin{equation}
+	 	\overline{u_i'(\vec{x}, t)u_k'(\vec{x} + \vec{r}, t + \tau)\frac{\partial \overline{u_j(\vec{x} + \vec{r}, t + \tau)}}{\partial (x_k+r_k)}} = R_{ik} \frac{\partial \overline{u_j(\vec{x} + \vec{r}, t + \tau)}}{\partial r_k}
+	 \end{equation}
+	 
+	 \begin{equation}
+	 	\begin{aligned}
+	 		\overline{u_i'(\vec{x}, t) \frac{\partial [u_j'(\vec{x} + \vec{r}, t + \tau)u_k'(\vec{x} + \vec{r}, t + \tau)]}{\partial  (x_k+r_k)}} = \overline{u_i'(\vec{x}, t) \frac{\partial [u_j'(\vec{x} + \vec{r}, t + \tau)u_k'(\vec{x} + \vec{r}, t + \tau)]}{\partial r_k}}\\
+	 		= \overline{\frac{\partial [u_i'(\vec{x}, t) u_j'(\vec{x} + \vec{r}, t + \tau)u_k'(\vec{x} + \vec{r}, t + \tau)]}{\partial r_k}} = \frac{\partial R_{i(jk)}}{\partial r_k}
+	 	\end{aligned}
+	 \end{equation}
+	 
+	 \begin{equation}
+	 	\overline{u_i'(\vec{x}, t) \frac{\partial \overline{u_j'(\vec{x} + \vec{r}, t + \tau)u_k'(\vec{x} + \vec{r}, t + \tau)}}{\partial (x_k+r_k)}} = \overline{u_i'(\vec{x}, t)} \frac{\partial \overline{u_j'(\vec{x} + \vec{r}, t + \tau)u_k'(\vec{x} + \vec{r}, t + \tau)}}{\partial r_k} = 0
+	 \end{equation}
+	 
+	 \begin{equation}
+	 	\overline{u_i'(\vec{x}, t) \frac{\partial p'(\vec{x} + \vec{r}, t + \tau)}{\partial (x_j + r_j)}} = \overline{u_i'(\vec{x}, t) \frac{\partial p'(\vec{x} + \vec{r}, t + \tau)}{\partial r_j}} = \overline{\frac{\partial p'(\vec{x} + \vec{r}, t + \tau)u_i'(\vec{x}, t)}{\partial r_j}}
+	 \end{equation}
+	 
+	 \begin{equation}
+	 	\begin{aligned}
+	 		\overline{u_i'(\vec{x}, t) \frac{\partial^2 u_j'(\vec{x} + \vec{r}, t + \tau)}{\partial (x_k+r_k) \partial (x_k+r_k)}} &= \overline{u_i'(\vec{x}, t) \frac{\partial^2 u_j'(\vec{x} + \vec{r}, t + \tau)}{\partial r_k \partial r_k}} \\
+	 		& = \overline{ \frac{\partial^2 u_i'(\vec{x}, t) u_j'(\vec{x} + \vec{r}, t + \tau)}{\partial r_k \partial r_k}} = \frac{\partial R_{ij}}{\partial r_k \partial r_k}
+	 	\end{aligned}
+	 \end{equation}
+	 
+	 then, detailed expression for  $D^{(j)}\{R_{ij}\}$ is given as
+	 \begin{equation}
+		 \begin{aligned}
+		 	D^{(j)}\{R_{ij}\} = \frac{\partial R_{ij}}{\partial \tau} + \overline{u_k(\vec{x} + \vec{r}, t + \tau)} \frac{\partial R_{ij}}{\partial r_k} + R_{ik} \frac{\partial \overline{u_j(\vec{x} + \vec{r}, t + \tau)}}{\partial r_k} + \frac{\partial R_{i(jk)}}{\partial r_k} \\
+		 	+ \frac{1}{\rho}\frac{\partial \overline{p'(\vec{x} + \vec{r}, t + \tau)u_i'(\vec{x}, t)}}{\partial r_j} - \nu \frac{\partial R_{ij}}{\partial r_k \partial r_k} - \overline{u_i'(\vec{x}, t) f_j'(\vec{x} + \vec{r}, t + \tau)} = 0
+		 \end{aligned}
+	 \end{equation}
+	 
+	 Therefore, the two-point correlation equation is calculated as
+	 \begin{equation}
+	 	\begin{aligned}
+	 		D^{(i)}\{R_{ij}\} + D^{(j)}\{R_{ij}\}
+	 		= \frac{\partial R_{ij}}{\partial t}
+	 		+ \overline{u_k(\vec{x}, t)} \frac{\partial R_{ij}}{\partial x_k}
+	 		+ \Big[\overline{u_k(\vec{x} + \vec{r}, t + \tau)} - \overline{u_k(\vec{x}, t)}\Big]\frac{\partial R_{ij}}{\partial r_k}\\
+	 		+ R_{kj}\frac{\partial \overline{u_i(\vec{x}, t)}}{\partial x_k} + R_{ik} \frac{\partial \overline{u_j(\vec{x} + \vec{r}, t + \tau)}}{\partial r_k} 
+	 		 + \frac{\partial R_{(ik)j}}{\partial x_k} - \frac{\partial [R_{(ik)j}-R_{i(jk)}]}{\partial r_k}\\
+	 		 + \frac{1}{\rho} \Bigg(\frac{\partial \overline{p'(\vec{x}, t) u_j'(\vec{x} + \vec{r}, t+\tau)}}{\partial x_i} - \frac{\partial \overline{p'(\vec{x}, t) u_j'(\vec{x} + \vec{r}, t+\tau)}}{\partial r_i} + \frac{\partial \overline{p'(\vec{x} + \vec{r}, t + \tau)u_i'(\vec{x}, t)}}{\partial r_j}\Bigg) \\ 
+	 		 - \nu \Bigg(\frac{\partial^2 R_{ij}}{\partial x_k \partial x_k} - 2\frac{\partial^2 R_{ij}}{\partial x_k \partial r_k} + 2\frac{\partial^2 R_{ij}}{\partial r_k \partial r_k}\Bigg) - \overline{u_j'(\vec{x} + \vec{r}, t+\tau) f_i'(\vec{x}, t)}
+	 		 - \overline{u_i'(\vec{x}, t) f_j'(\vec{x} + \vec{r}, t + \tau)} = 0
+	 	\end{aligned}
+	 \end{equation}
+	 
 \section{Exercise 2}
 	
 	
