@@ -84,5 +84,30 @@
 	\end{proof}
 
 \section{Exercise5.3}
+	\begin{enumerate}
+		\item 
+			\begin{proof}
+				Firstly, it's obvious that $||u|| \geq 0$. Meanwhile, $||u|| \geq \sup_{x\in[a, b]} |u(x)| > 0$ when $u(x) \neq 0$. Hence $||u|| = 0$ iff. $u(x) = 0$.\\
+				Secondly, the linearity is valid as
+					\begin{equation}
+						||\alpha \cdot u|| = \sup_{x\in[a, b]} |\alpha u(x)| + \sup_{x\in[a, b]} |\alpha u'(x)| = |\alpha| (\sup_{x\in[a, b]} |u(x)| + \sup_{x\in[a, b]} |u'(x)|) = |\alpha| ||u||
+					\end{equation}
+				Finally, the triangle inequality is justified as
+					\begin{equation}
+						\begin{aligned}
+							||u+v|| & = \sup_{x\in[a, b]}|u(x)+v(x)| + \sup_{x\in[a, b]}|u'(x) + v'(x)|\\
+							& \leq \sup_{x\in[a, b]} |u(x)| + \sup_{x\in[a, b]} |u'(x)| + \sup_{x\in[a, b]} |v(x)| + \sup_{x\in[a, b]} |v'(x)|\\
+							& = ||u|| + ||v||
+						\end{aligned}
+					\end{equation}
+				Thus, $||u||$ defines a norm.
+			\end{proof}
+		\item 
+			 For example, let $u(x) = x^n$, then
+			\begin{equation}
+				||T|| = \sup_{u\in\mathbb{C^1}[0, 1]} \frac{||Tu||}{||u||} = \sup_{u\in\mathbb{C^1}[0, 1]} \frac{\sup_{x\in[0, 1]}|u'(x)|}{\sup_{x\in[0, 1]}|u(x)|} = n
+			\end{equation}
+			which indicates that $T$ is not bounded, hence $T$ is not continuous.
+	\end{enumerate}
 
 \end{document}
