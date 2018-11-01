@@ -1,0 +1,120 @@
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm,amssymb} % Math packages
+
+\usepackage{algorithm, algorithmic}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}} %Use Input in the format of Algorithm  
+\renewcommand{\algorithmicensure}{\textbf{Output:}} %UseOutput in the format of Algorithm  
+
+\usepackage{graphicx}
+
+\usepackage{listings}
+\lstset{language=Matlab}
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Shanghai Jiao Tong University, UM-SJTU JOINT INSTITUTE} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Methods of Applied Mathematics I\\ HW6 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Yu Cang \quad 018370210001\\ Zhiming Cui \quad 017370910006} % Your name
+
+\date{\normalsize \today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+\section{Exercise6.1}
+	\begin{enumerate}
+		\item
+			\begin{proof}
+				With the Cauchy-Schwartz inequality
+				\begin{equation}
+					\sum_{n=1}^{\infty} |y_n|^2 = \sum_{n=1}^{\infty} (\sum_{m=1}^{\infty} a_{nm}x_m)^2 \leq \sum_{n=1}^{\infty} \Big[\sum_{m=1}^{\infty}x_m^2 \sum_{m=1}^{\infty} a_{nm}^2\Big] = \Big(\sum_{m=1}^{\infty}x_m^2\Big) \Big(\sum_{n=1}^{\infty} \sum_{m=1}^{\infty} a_{nm}^2\Big) < \infty
+				\end{equation}
+				The last setp is valid as $x$ is a square-summable sequence and $\sum_{m,n=1}^{\infty} a_{nm}^2 = M^2 < \infty$.\\
+				Hence $y\in l^2$.
+			\end{proof}
+		\item 
+			According to the definition of $L$
+			\begin{equation}
+				L e_j = (a_{1j}, a_{2j}, ... , a_{nj})
+			\end{equation}
+			Thus
+			\begin{equation}
+				L_{ij} = <e_i, L e_j> = a_{ij}
+			\end{equation}
+		\item 
+			\begin{proof}
+				Follow from the first part
+				\begin{equation}
+					||y||_2 \leq ||x||_2 \cdot M
+				\end{equation}
+				Thus
+				\begin{equation}
+					||L|| = \sup_{x \in l^2} \frac{||Lx||_2}{||x||_2} \leq \frac{||x||_2 M}{||x||_2} = M
+				\end{equation}
+			\end{proof}
+		\item 
+			\begin{proof}
+				Denote $(e_j)$ being the standard basis, then
+				\begin{equation}
+					L e_j = (0, 0, ..., \frac{1}{j}, 0, ... , 0)
+				\end{equation}
+				Thus
+				\begin{equation}
+					a_{ij} \triangleq L_{ij} = \delta_{ij}\frac{1}{j}
+				\end{equation}
+				Hence
+				\begin{equation}
+					\sum_{n, m = 1}^{\infty} |a_{nm}|^2 = \sum_{n=1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6}
+				\end{equation}
+				which indicates that $L$ is a Hilbert-Schmidt operator.\\
+				Let $x_0 = (1, 0, 0, ... , 0)$, then
+				\begin{equation}
+					||L|| = \sup_{x \in l^2} \frac{||Lx||_2}{||x||_2} \geq \frac{||Lx_0||_2}{||x_0||_2} = \frac{||(1, 0, ...)||_2}{||(1, 0, ...)||_2} = 1
+				\end{equation}
+				Also, with the Cauchy-Schwartz inequality
+				\begin{equation}
+					||L|| = \sup_{x \in l^2} \frac{||Lx||_2}{||x||_2} = \sup_{x \in l^2} \frac{\sqrt{\sum_{n=1}^{\infty} (\frac{x_n}{n})^2}}{||x||_2} \leq \sup_{x \in l^2} \frac{\sqrt{\sum_{n=1}^{\infty} x_n^2}}{||x||_2} = \sup_{x \in l^2} \frac{||x||_2}{||x||_2} = 1
+				\end{equation}
+				Therefore $||L|| = 1$.\\
+				It can be seen that $M$ is the upper bound of $||L||$.
+			\end{proof}
+		
+	\end{enumerate}
+
+\end{document}
