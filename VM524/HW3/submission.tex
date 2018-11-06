@@ -101,6 +101,10 @@
  	\begin{equation}\label{eq:bl}
  		LHS = \frac{\bar{D}k_T}{\bar{D}t} + \overline{u_j' u_k'}\frac{\partial U_j}{\partial x_k} + \frac{1}{2}\frac{\partial}{\partial x_k}\overline{u_k' u_j' u_j'}
  	\end{equation}
+	where
+ 	\begin{equation}
+ 	\frac{\bar{D}}{\bar{D}t} = \frac{\partial}{\partial t} + U_k \frac{\partial}{\partial x_k}
+ 	\end{equation}
  	Since
  	\begin{equation}
  		\overline{u_j'\frac{\partial^2 u_j'}{\partial x_k \partial x_k}} = \overline{\frac{\partial}{\partial x_k} \big(u_j'\frac{\partial u_j'}{\partial x_k}\big)} - \overline{\frac{\partial u_j'}{\partial x_k} \frac{\partial u_j'}{\partial x_k}} = \frac{\partial^2 k_T}{\partial x_k \partial x_k} - \overline{\frac{\partial u_j'}{\partial x_k} \frac{\partial u_j'}{\partial x_k}}
@@ -113,8 +117,51 @@
  	\begin{equation}
  		\frac{\bar{D}k_T}{\bar{D}t} = -\overline{u_j' u_k'}\frac{\partial U_j}{\partial x_k} - \frac{1}{2}\frac{\partial}{\partial x_k}\overline{u_k' u_j' u_j'} -\frac{1}{\rho_0} \frac{\partial \overline{u_j' p'}}{\partial x_j} + \nu \Big(\frac{\partial^2 k_T}{\partial x_k \partial x_k} - \overline{\frac{\partial u_j'}{\partial x_k} \frac{\partial u_j'}{\partial x_k}}\Big) + \frac{g_j}{\bar{T}}\overline{u_j' \tilde{T}}
  	\end{equation}
- 	
+ 	\newpage
+ 
 \section{Exercise 2}
-
-	
+	The governing equation for the passive scalar $\phi$ is
+	\begin{equation}\label{eq:passive}
+		\frac{D \phi}{D t} = \Gamma \triangledown^2 \phi
+	\end{equation}
+	The gradient of (\ref{eq:passive}) is
+	\begin{equation}
+		\frac{\partial \triangledown \phi}{\partial t} + \triangledown(\vec{U}\cdot\triangledown\phi) = \Gamma \triangledown^2(\triangledown\phi)
+	\end{equation}
+	An vector operation identity is used
+	\begin{equation}
+		\triangledown(\vec{f}\cdot\vec{g}) = (\vec{g}\cdot\triangledown)\vec{f} + \vec{g} \times (\triangledown \times \vec{f}) + (\vec{f} \cdot \triangledown)\vec{g} + \vec{f} \times (\triangledown \times \vec{g})
+	\end{equation}
+	Thus
+	\begin{equation}
+		\begin{aligned}
+			\triangledown(\vec{U} \cdot \triangledown\phi) 
+			& = (\triangledown\phi \cdot \vec{U})\vec{U} + \triangledown\phi \times (\triangledown \times \vec{U}) + (\vec{U} \cdot \triangledown) \triangledown \phi + \vec{U} \times (\triangledown \times \triangledown\phi)\\
+			& = (\triangledown\phi \cdot \vec{U})\vec{U} + \triangledown\phi \times (\triangledown \times \vec{U}) + (\vec{U} \cdot \triangledown) \triangledown \phi
+		\end{aligned}
+	\end{equation}
+	Hence, the governing equation for $\triangledown\phi$ is
+	\begin{equation}\label{eq:gp}
+		\frac{D}{Dt}\triangledown\phi = -(\vec{U} \cdot \triangledown\phi)\vec{U} - \triangledown\phi \times (\triangledown \times \vec{U}) + \Gamma \triangledown^2(\triangledown\phi)  
+	\end{equation}
+	Denote $\vec{W} = \triangledown \phi$, then (\ref{eq:gp}) can be re-written as
+	\begin{equation}
+		\frac{D}{Dt} \vec{W} = -(\vec{U} \cdot \vec{W})\vec{U} - \vec{W} \times (\triangledown \times \vec{U}) + \Gamma \triangledown^2 \vec{W} \triangleq RHS
+	\end{equation}
+	Inner product with $\vec{W}$, the 2nd term in $RHS$ vanishes, remaining parts yields
+	\begin{equation}
+		\frac{D}{Dt} \big(\frac{1}{2}|\vec{W}|^2\big) = -(\vec{U} \cdot \vec{W})^2  + \Gamma \vec{W} \triangledown^2 \vec{W}
+	\end{equation}
+	since
+	\begin{equation}
+			\vec{W} \triangledown^2 \vec{W} = \triangledown^2 \big(\frac{1}{2}|\vec{W}|^2\big) - \triangledown \vec{W} : \triangledown \vec{W}
+	\end{equation}
+	then, the governing equation for the scalar gradient energy $\triangledown\phi \cdot \triangledown\phi$ is
+	\begin{equation}
+		\frac{D}{Dt} \big(\frac{1}{2}|\vec{W}|^2\big) = -(\vec{U} \cdot \vec{W})^2  + \Gamma \Bigg(\triangledown^2 \big(\frac{1}{2}|\vec{W}|^2\big) - \triangledown \vec{W} : \triangledown \vec{W}\Bigg)
+	\end{equation}
+	Characteristic scales of dissipation term is estimated as
+	\begin{equation}
+		\Gamma \triangledown^2(\frac{1}{2} |\vec{W}|^2) \sim \Gamma \frac{\phi^2}{L^4}
+	\end{equation}
 \end{document}
