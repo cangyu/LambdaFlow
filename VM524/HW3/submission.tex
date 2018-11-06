@@ -1,0 +1,120 @@
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm,amssymb} % Math packages
+\usepackage{extarrows}
+
+\usepackage{caption}
+\usepackage{graphicx, subfig}
+
+\usepackage{algorithm, algorithmic}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}} %Use Input in the format of Algorithm  
+\renewcommand{\algorithmicensure}{\textbf{Output:}} %UseOutput in the format of Algorithm  
+
+\usepackage{listings}
+\lstset{language=Matlab}
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Shanghai Jiao Tong University, UM-SJTU JOINT INSTITUTE} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Turbulence \\ HW3 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Yu Cang \\ 018370210001}
+
+\date{\normalsize \today}
+
+\begin{document}
+
+\maketitle
+
+\section{Exercise1}
+	When the gravity is considered, the N-S equation is written as
+	\begin{equation}
+		\rho \frac{\partial u_j}{\partial t} + \rho u_k \frac{\partial u_j}{\partial x_k} = -\frac{\partial p}{\partial x_j} + \mu \frac{\partial^2 u_j}{\partial x_k \partial x_k} + \rho g_j
+	\end{equation}
+	Decompose the density into mean and fluctuation as $\rho = \rho_0 + \tilde{\rho}$, and substitute into the equation above yields
+	\begin{equation}\label{eq:raw}
+		\rho_0 \frac{\partial u_j}{\partial t} + \tilde{\rho} \frac{\partial u_j}{\partial t} + \rho_0 u_k \frac{\partial u_j}{\partial x_k} + \tilde{\rho} \frac{\partial u_j}{\partial x_k} = -\frac{\partial p}{\partial x_j} + \mu \frac{\partial^2 u_j}{\partial x_k \partial x_k} + \rho_0 g_j + \tilde{\rho} g_j
+	\end{equation}
+ 	The 2nd and 4th term in the LHS of (\ref{eq:raw}) can be neglected as $\tilde{\rho} << \rho_0$. Assuming $\frac{\mu}{\rho_0} \approxeq \frac{\mu}{\rho} = \nu$ yields
+ 	\begin{equation}\label{eq:rs}
+ 		\frac{\partial u_j}{\partial t} + u_k \frac{\partial u_j}{\partial x_k} = - \frac{1}{\rho_0} \frac{\partial p}{\partial x_j} + \nu \frac{\partial^2 u_j}{\partial x_k \partial x_k} + g_j + g_j \frac{\tilde{\rho}}{\rho_0} 
+ 	\end{equation}
+ 	When the EOS for ideal gas($p = \rho R T$) is adopted, $\rho T$ can be assumed to be constant when the change of $p$ is negligible and velocity is small. Hence
+ 	\begin{equation}
+ 		(\rho_0 + \tilde{\rho})(\bar{T} + \tilde{T}) = \rho_0 \bar{T}
+ 	\end{equation}
+ 	Thus
+ 	\begin{equation}
+ 		\frac{\tilde{\rho}}{\rho_0} + \frac{\tilde{T}}{\bar{T}} = 0
+ 	\end{equation}
+ 	This is achieved by neglecting the 2nd-order small quantities.
+ 	\newpage
+ 	Substitute into (\ref{eq:rs}) yields
+ 	\begin{equation}\label{eq:boussineq}
+ 		\frac{\partial u_j}{\partial t} + u_k \frac{\partial u_j}{\partial x_k} = - \frac{1}{\rho_0} \frac{\partial p}{\partial x_j} + \nu \frac{\partial^2 u_j}{\partial x_k \partial x_k} + g_j - g_j \frac{\tilde{T}}{\bar{T}}
+ 	\end{equation}
+ 	Decompose the velocity and pressure into mean and fluctuation as
+ 	\begin{equation}
+ 		\begin{aligned}
+ 			u_j & = U_j + u_j'\\
+ 			p & = P + p'
+ 		\end{aligned}
+ 	\end{equation}
+ 	Substitute into (\ref{eq:boussineq})
+ 	\begin{equation}
+ 		\frac{\partial (U_j + u_j')}{\partial t} + (U_k + u_k') \frac{\partial (U_j + u_j')}{\partial x_k} = - \frac{1}{\rho_0} \frac{\partial (P + p')}{\partial x_j} + \nu \frac{\partial^2 (U_j + u_j')}{\partial x_k \partial x_k} + g_j - g_j \frac{\tilde{T}}{\bar{T}}
+ 	\end{equation}
+ 	Multiply $u_j'$ and take ensemble average yields
+ 	\begin{equation}\label{eq:ea}
+ 		LHS \triangleq \overline{u_j' \frac{\partial u_j'}{\partial t}} + U_k \overline{u_j' \frac{\partial u_j'}{\partial x_k}} + \overline{u_j' u_k'}\frac{\partial U_j}{\partial x_k} + \overline{u_j' u_k' \frac{\partial u_j'}{\partial x_k}} = -\frac{1}{\rho_0} \overline{u_j' \frac{\partial p'}{\partial x_j}} + \nu \overline{u_j'\frac{\partial^2 u_j'}{\partial x_k \partial x_k}} + \frac{g_j}{\bar{T}}\overline{u_j' \tilde{T}} \triangleq RHS
+ 	\end{equation}
+ 	Denote $k_T = \frac{1}{2} \overline{u_j' u_j'}$ and follow from the continuity equation
+ 	\begin{equation}\label{eq:bl}
+ 		LHS = \frac{\bar{D}k_T}{\bar{D}t} + \overline{u_j' u_k'}\frac{\partial U_j}{\partial x_k} + \frac{1}{2}\frac{\partial}{\partial x_k}\overline{u_k' u_j' u_j'}
+ 	\end{equation}
+ 	Since
+ 	\begin{equation}
+ 		\overline{u_j'\frac{\partial^2 u_j'}{\partial x_k \partial x_k}} = \overline{\frac{\partial}{\partial x_k} \big(u_j'\frac{\partial u_j'}{\partial x_k}\big)} - \overline{\frac{\partial u_j'}{\partial x_k} \frac{\partial u_j'}{\partial x_k}} = \frac{\partial^2 k_T}{\partial x_k \partial x_k} - \overline{\frac{\partial u_j'}{\partial x_k} \frac{\partial u_j'}{\partial x_k}}
+ 	\end{equation}
+ 	then, also follows from the continuity equation
+ 	\begin{equation}\label{eq:br}
+ 		RHS = -\frac{1}{\rho_0} \frac{\partial \overline{u_j' p'}}{\partial x_j} + \nu \Big(\frac{\partial^2 k_T}{\partial x_k \partial x_k} - \overline{\frac{\partial u_j'}{\partial x_k} \frac{\partial u_j'}{\partial x_k}}\Big) + \frac{g_j}{\bar{T}}\overline{u_j' \tilde{T}}
+ 	\end{equation}
+ 	Combining (\ref{eq:bl}) and (\ref{eq:br}) yields the turbulent kinetic energy equation for the buoyancy case
+ 	\begin{equation}
+ 		\frac{\bar{D}k_T}{\bar{D}t} = -\overline{u_j' u_k'}\frac{\partial U_j}{\partial x_k} - \frac{1}{2}\frac{\partial}{\partial x_k}\overline{u_k' u_j' u_j'} -\frac{1}{\rho_0} \frac{\partial \overline{u_j' p'}}{\partial x_j} + \nu \Big(\frac{\partial^2 k_T}{\partial x_k \partial x_k} - \overline{\frac{\partial u_j'}{\partial x_k} \frac{\partial u_j'}{\partial x_k}}\Big) + \frac{g_j}{\bar{T}}\overline{u_j' \tilde{T}}
+ 	\end{equation}
+ 	
+\section{Exercise 2}
+
+	
+\end{document}
