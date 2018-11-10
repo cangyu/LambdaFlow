@@ -69,24 +69,74 @@
 		\item 
 			
 		\item 
-		
-		\item 
-		
+			Not figured out...
+		\item
+			\begin{equation}
+				Ru = \lambda u
+			\end{equation} 
+			Denote $u = (a_0, a_1, ..., a_n, ...)$, then
+			\begin{equation}
+				\begin{aligned}
+					0 &= \lambda a_0\\
+					a_0 &= \lambda a_1\\
+					...\\
+				\end{aligned}
+			\end{equation}
 	\end{enumerate}
 
 
 \section{Exercise7.2}
 	\begin{enumerate}
 		\item 
-		
+			\begin{proof}
+				Take a subset of the domain of $L^{-1}$, which is denoted as $M$ and is defined as
+				\begin{equation}
+					M = \Big\{u \in L^2\big([0, 1]\big) \Big| \exists \xi >0 \  \forall x \in [0, \xi] \ u(x) = 0\Big\}
+				\end{equation}
+				Given any $u(x) \in L^2$, then
+				\begin{equation}
+					\int_{0}^{1} u^2(x) dx < \infty
+				\end{equation}
+				Hence $u(x)$ is bounded over $[0, 1]$. \\
+				Let 
+				\begin{equation}
+					T \triangleq \sup \limits_{x\in [0, 1]} |u(x)|
+				\end{equation}
+				then, $\forall \epsilon > 0$, $\exists v \in M $ s.t.
+				\begin{equation}
+					v(x) = \Bigg\{\begin{aligned}
+					0, &\quad x \in [0, \delta]\\
+					u(x), &\quad x \in (\delta, 1]
+					\end{aligned}
+				\end{equation}
+				where $\delta = \frac{\epsilon}{T^2}$. Therefore
+				\begin{equation}
+					d(u, v) \triangleq ||u-v||_2 = \int_{0}^{1} [u(x) - v(x)]^2 dx = \int_{0}^{\delta} u^2(x) dx \leq T^2 \delta = \epsilon
+				\end{equation}
+				which indicates that $M$ is dense in $L^2$, so do the domain of $L^{-1}$.
+			\end{proof}
 		\item 
-		
+			\begin{proof}
+				\begin{equation}
+					||L|| = \sup_{u\in L^2}\frac{||Lu||_2}{||u||_2} = \sup_{u\in L^2}\frac{||xu(x)||_2}{||u(x)||_2} = \sup_{u\in L^2}\frac{|x| ||u||_2}{||u||_2} = \sup_{x\in [0, 1]} |x| = 1
+				\end{equation}
+				and
+				\begin{equation}
+					||L^{-1}|| = \sup_{u\in L^2}\frac{||L^{-1}u||_2}{||u||_2} = \sup_{x\in [0, 1]} \frac{1}{|x|} = \infty
+				\end{equation}
+				hence $L^{-1}$ is unbounded.
+			\end{proof}
 		\item 
-		
+			The state of $L$ is $(I, 1_n)$.\\
+			The state of $L^{-1}$ is $(I, 2_c)$.
 		\item 
-		
+			Yes
 		\item 
-		
+			Since
+			\begin{equation}
+				[(L - \lambda I)u] (x) = (Lu)(x) - \lambda u(x) = (x-\lambda) u(x)
+			\end{equation}
+			The inverse of $(L - \lambda I)$ always exists, therefore $\sigma(L) = \emptyset$.
 	\end{enumerate}
 
 
