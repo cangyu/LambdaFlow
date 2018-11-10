@@ -67,7 +67,7 @@
 				\end{equation}
 			\end{proof}
 		\item 
-		
+			
 		\item 
 		
 		\item 
@@ -76,9 +76,68 @@
 
 
 \section{Exercise7.2}
+	\begin{enumerate}
+		\item 
+		
+		\item 
+		
+		\item 
+		
+		\item 
+		
+		\item 
+		
+	\end{enumerate}
+
 
 \section{Exercise7.3}
+	\begin{enumerate}
+		\item 
+			\begin{proof}
+				It's clear that $L^{-1}$ is the differentiate operator, and $L^{-1}$ is unbounded. So $L$ has unbounded inverse.\\
+				Since the domain of $L$ is composed of square-integrable functions over $[0,1]$, say
+				\begin{equation}
+					\int_{0}^{1} f^2(x) dx < \infty
+				\end{equation}
+				An element within the range of $L$ is
+				\begin{equation}
+					g(x) = \int_{0}^{x} f(t) dt
+				\end{equation}
+				Then, if $f(x)$ is a polynomial in $L^2$ , it must be bounded over $[0, 1]$ as it is continous. Denote the supreme of $f(x)$ as $M$, then $g(x) \leq Mx$. Hence $g(x)$ is square-integrable over $[0,1]$, say
+				\begin{equation}
+					\int_{0}^{1} g^2(x) dx \leq M^2 \int_{0}^{1} x^2 dx < \infty
+				\end{equation}
+				Clearly, the domain of $L$ doesn't contain all the polynomials and therefore the range of $L$ is open and incomplete. The boundary of the range of $L$ are the limits of squences like $f_n(x) = nx$ when $n\rightarrow \infty$.\\
+				Hence, the state of $L$ is $(III, 1_n)$.
+			\end{proof}
+		\item 
+			\begin{equation}
+				L^* = L
+			\end{equation}
+		
+	\end{enumerate}
 
 \section{Exercise7.4}
+	\begin{proof}
+		For $p = 1$
+		\begin{equation}
+			\begin{aligned}
+				RHS & \triangleq ||(a_n)||_1 \cdot ||(b_n)||_1 = \sum_{i=0}^{\infty} |a_i| \cdot \sum_{j=0}^{\infty} |b_j| = \sum_{n=0}^{\infty} \sum_{i+j=n} |a_i||b_j|\\
+				 & \geq \sum_{n=0}^{\infty} |\sum_{i+j=n} a_i b_j| = \sum_{n=0}^{\infty} |c_n| = ||(c_n)||_1 \triangleq LHS
+			\end{aligned}
+		\end{equation} 
+		For $p>1$, take $q > 0$ s.t. $\frac{1}{p} + \frac{1}{q} = 1$\\
+		Then, using the Holder's inequality
+		\begin{equation}
+			\begin{aligned}
+				LHS & \triangleq ||(c_n)||_p = \Big(\sum_{n=0}^{\infty} |c_n|^p\Big)^{\frac{1}{p}} = \Big(\sum_{n=0}^{\infty} \Big|\sum_{i+j=n}a_i b_j\Big|^p\Big)^{\frac{1}{p}}\\
+				& = \Big(\sum_{n=0}^{\infty} \Big|\sum_{i+j=n}a_i b_j^\frac{1}{p} b_j^{\frac{1}{q}}\Big|^p\Big)^{\frac{1}{p}} \leq  \Big(\sum_{n=0}^{\infty} \Big|\sum_{i+j=n}\Big(|a_i| |b_j|^\frac{1}{p}\Big) |b_j|^{\frac{1}{q}}\Big|^p\Big)^{\frac{1}{p}}\\
+				& \leq \Big(\sum_{n=0}^{\infty} \Big[\Big(\sum_{i+j=n}|a_i|^p |b_j|\Big)^\frac{1}{p} \Big(\sum_{j=0}^{n}|b_j|\Big)^\frac{1}{q}\Big]^p\Big)^{\frac{1}{p}} \\ 
+				& = \Bigg[\sum_{n=0}^{\infty} \Big(\sum_{i+j=n}|a_i|^p |b_j|\Big) \Big(\sum_{j=0}^{n}|b_j|\Big)^\frac{p}{q}\Bigg]^\frac{1}{p} \\
+				& \leq \Big(\sum_{i=0}^{\infty}|a_i|^p\Big)^\frac{1}{p}\cdot\Big(\sum_{j=0}^{\infty}|b_j|\Big)^\frac{1}{p}\cdot\Big(\sum_{j=0}^{\infty}|b_j|\Big)^\frac{1}{q}\\
+				& = ||(a_n)||_p \cdot ||(b_n)||_1 \triangleq RHS
+			\end{aligned}
+		\end{equation}
+	\end{proof}
 
 \end{document}
