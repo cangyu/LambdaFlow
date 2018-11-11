@@ -67,7 +67,21 @@
 				\end{equation}
 			\end{proof}
 		\item 
-			
+			\begin{proof}
+				Since
+				\begin{equation}
+					\begin{aligned}
+						(L - \lambda I) e_\lambda^{(N)} 
+						& = L e_\lambda^{(N)} - \lambda e_\lambda^{(N)}\\
+						& = \frac{1}{\sqrt{N+1}}\big[(\lambda, \lambda^2, ... , \lambda^N, 0, 0, ...) - (\lambda, \lambda^2, ... , \lambda^N, \lambda^{N+1}, 0, ...)\big]\\
+						& = \frac{-1}{\sqrt{N+1}}(0, 0, ..., 0, \lambda^{N+1}, 0, ...)
+					\end{aligned}
+				\end{equation}
+				Together with  $|\lambda|=1$, then
+				\begin{equation}
+				\lim\limits_{N\rightarrow\infty} ||(L - \lambda I) e_\lambda^{(N)}||_2 = \lim\limits_{N\rightarrow\infty} \frac{|\lambda|^{N+1}}{\sqrt{N+1}} = \lim\limits_{N\rightarrow\infty} \frac{1}{\sqrt{N+1}} = 0
+				\end{equation}
+			\end{proof}
 		\item 
 			Not figured out...
 		\item
