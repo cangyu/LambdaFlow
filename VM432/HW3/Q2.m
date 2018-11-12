@@ -1,0 +1,38 @@
+clear all; close all; clc;
+
+T0 = 300;
+Ti = 2000;
+Tf = 2300;
+P = oneatm;
+
+gas = GRI30('Mix');
+gascomp = 'CH4:0.5, O2:1, N2:3.6';
+
+set(gas,'T', T0, 'P', P, 'X', gascomp);
+rho_u = density(gas);
+lambda = thermalConductivity(gas);
+cp = cp_mass(gas);
+SL = sqrt(2*lambda*summation(gas, Ti, Tf, 10000))/(rho_u * cp * (Ti - T0));
+
+fprintf('\tDensity: %f Kg/m^3\n', rho_u);
+fprintf('\tThermal Conductivity: %f W/(m K)\n', lambda);
+fprintf('\tSpecific Heat: %f J/(Kg K)\n', cp);
+fprintf('\tFlame Speed: %f m/s\n', SL);
+
+function ret = s(tp, temp)
+    set(tp,'T', temp);
+    w = netProdRates(tp);
+    h = enthalpies_RT(tp);
+    ret = dot(w, h) * temp * gasconstant;
+end
+
+function ret = summation(tp, Ta, Tb, N)
+    step = (Tb-Ta)/N;
+    cT = Ta - step/2;
+    ret = 0;
+    for i = 1:N
+        cT = cT + step;
+        ret = ret + s(tp, cT);
+    end
+    ret = ret * step;    
+end
