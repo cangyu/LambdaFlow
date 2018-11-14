@@ -1,0 +1,1 @@
+Q1: For the carbon particle combustion problem, reproduce the consumption rate for the detached limit case (include all the necessary inter-steps with details) and analyze the process physics.
