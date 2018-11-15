@@ -1,42 +1,38 @@
 clear all; close all; clc;
 
-Tu = 300;
-T = 1500;
+T0 = 300;
+Ti = 2000;
+Tf = 2300;
 P = oneatm;
-fprintf('Flame Thickness Estimation at T=%d K, P=%d Pa\n', T, P);
 
-fprintf('===============Mehtane-Oxygen================\n');
 gas = GRI30('Mix');
-gascomp = 'CH4:1, O2:2';
-set(gas,'T', Tu, 'P', P, 'X', gascomp);
-rho = density(gas);
-fprintf('\tDensity: %f Kg/m^3\n', rho);
-set(gas,'T', T, 'P', P, 'X', gascomp);
-lambda = thermalConductivity(gas);
-fprintf('\tThermalConductivity: %f W/(mK)\n', lambda);
-cp = cp_mass(gas);
-fprintf('\tSpecific Heat: %f J/(Kg K)\n', cp);
-alpha = lambda / (rho * cp);
-S = 0.3;
-fprintf('\tAssume flame speed to be: %f m/s\n', S);
-delta = alpha / S;
-fprintf('\tEstimated flame thickness: %f mm\n', delta*1000);
+gascomp = 'CH4:0.5, O2:1, N2:3.6';
 
-fprintf('===============Hydrogen-Oxygen===============\n');
-gas = GRI30('Mix');
-gascomp = 'H2:2, O2:1';
-set(gas,'T', Tu, 'P', P, 'X', gascomp);
-rho = density(gas);
-fprintf('\tDensity: %f Kg/m^3\n', rho);
-set(gas,'T', T, 'P', P, 'X', gascomp);
+set(gas,'T', T0, 'P', P, 'X', gascomp);
+rho_u = density(gas);
 lambda = thermalConductivity(gas);
-fprintf('\tThermalConductivity: %f W/(mK)\n', lambda);
 cp = cp_mass(gas);
-fprintf('\tSpecific Heat: %f J/(Kg K)\n', cp);
-alpha = lambda / (rho * cp);
-S = 3;
-fprintf('\tAssume flame speed to be: %f m/s\n', S);
-delta = alpha / S;
-fprintf('\tEstimated flame thickness: %f mm\n', delta*1000);
+SL = sqrt(2*lambda*summation(gas, Ti, Tf, 10000))/(rho_u * cp * (Ti - T0));
 
-fprintf('=============================================\n');
+fprintf('\tDensity: %f Kg/m^3\n', rho_u);
+fprintf('\tThermal Conductivity: %f W/(m K)\n', lambda);
+fprintf('\tSpecific Heat: %f J/(Kg K)\n', cp);
+fprintf('\tFlame Speed: %f m/s\n', SL);
+
+function ret = s(tp, temp)
+    set(tp,'T', temp);
+    w = netProdRates(tp);
+    h = enthalpies_RT(tp);
+    ret = dot(w, h) * temp * gasconstant;
+end
+
+function ret = summation(tp, Ta, Tb, N)
+    step = (Tb-Ta)/N;
+    cT = Ta - step/2;
+    ret = 0;
+    for i = 1:N
+        cT = cT + step;
+        ret = ret + s(tp, cT);
+    end
+    ret = ret * step;    
+end
