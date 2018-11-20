@@ -1,0 +1,202 @@
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm,amssymb} % Math packages
+
+\usepackage{algorithm, algorithmic}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}} %Use Input in the format of Algorithm  
+\renewcommand{\algorithmicensure}{\textbf{Output:}} %UseOutput in the format of Algorithm  
+
+\usepackage{graphicx}
+
+\usepackage{listings}
+\lstset{language=Matlab}
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Shanghai Jiao Tong University, UM-SJTU JOINT INSTITUTE} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Methods of Applied Mathematics I\\ HW8 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Yu Cang \quad 018370210001\\ Zhiming Cui \quad 017370910006} % Your name
+
+\date{\normalsize \today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+\section{Exercise8.1}
+	\begin{enumerate}
+		\item 
+			\begin{proof}
+				Since
+				\begin{equation}
+					\sum_{i=1}^{\infty}\sum_{j=1}^{\infty}|a_{ij}|^2 = \sum_{k=1}^{\infty} \frac{1}{k} \rightarrow \infty
+				\end{equation}
+				Thus, $L$ is not a Hilbert-Schmidt operator.
+			\end{proof}
+		\item 
+			\begin{proof}
+				$\forall x, y \in l^2$, the inner product can be expressed as
+				\begin{equation}
+					\begin{aligned}
+						<x, Ly> & =  <(x_1, x_2, ... , x_n, ...), (y_1, \frac{y_2}{\sqrt{2}}, ... , \frac{y_n}{\sqrt{n}}, ...)>\\
+								& = \sum_{i=1}^{\infty} \frac{x_i y_i}{\sqrt{i}}\\
+								& = <(x_1, \frac{x_2}{\sqrt{2}}, ... , \frac{x_n}{\sqrt{n}}, ...), (y_1, y_2, ... , y_n, ...)>\\
+								& = <Lx, y>
+					\end{aligned}
+				\end{equation}
+				Thus, $L$ is self adjoint.
+			\end{proof}
+		\item 
+			\begin{proof}
+				Denote $L_n : l^2 \rightarrow l^2$ by
+				\begin{equation}
+					L_n(x_n) = (x_1, \frac{x_2}{\sqrt{2}}, \frac{x_3}{\sqrt{3}}, ... , \frac{x_n}{\sqrt{n}}, 0, 0, ...)
+				\end{equation}
+				$L_n$ is a Hilbert-Schmidt operator as 
+				\begin{equation}
+					\sum_{i=1}^{\infty}\sum_{j=1}^{\infty}|a_{ij}|^2 = \sum_{k=1}^{n} \frac{1}{k} < \infty
+				\end{equation}
+				Thus, $L_n$ is compact. Then, $L$ is compact if $(L_n)$ converges to $L$ in norm, i.e.
+				\begin{equation}
+					\lim\limits_{n \rightarrow \infty} ||L_n - L|| = 0
+				\end{equation}
+				To show this, expand the operator norm as
+				\begin{equation}
+					\begin{aligned}
+						||L_n - L||& = \sup\limits_{x\in l^2}\frac{||(L_n - L)x||}{||x||}\\
+						& = \sup\limits_{x\in l^2}\frac{||(0, ... , 0, \frac{x_{n+1}}{\sqrt{n+1}}, \frac{x_{n+2}}{\sqrt{n+2}},...)||}{||x||}\\
+						& \leq \frac{1}{\sqrt{n+1}} \frac{||(0, ... , 0, x_{n+1}, x_{n+2}, ...)||}{||x||}\\
+						& \leq  \frac{1}{\sqrt{n+1}}
+					\end{aligned}
+				\end{equation}
+				So, $\lim\limits_{n \rightarrow \infty} ||L_n - L|| \leq  \lim\limits_{n \rightarrow \infty} \frac{1}{\sqrt{n+1}} = 0$.\\
+				According to the positivity of norm,  $\lim\limits_{n \rightarrow \infty} ||L_n - L||\geq 0$.\\
+				Hence  $\lim\limits_{n \rightarrow \infty} ||L_n - L|| = 0$.
+			\end{proof}
+		\item
+			Since
+			\begin{equation}
+				||L|| = \sup\limits_{x\in l^2} \frac{||Lx||}{||x||} \geq \frac{||Le_1||}{||e_1||} = 1
+			\end{equation}
+			and
+			\begin{equation}
+				||L|| = \sup\limits_{x\in l^2} \frac{||Lx||}{||x||} \leq \frac{||x||}{||x||} = 1
+			\end{equation}
+			Thus $||L|| = 1$.\\
+			As the norm of operator is a bound for all its eigenvalues, then $|\lambda| \leq 1$. Thus the upper bound for the spcetrum is found.\\
+			For the lower bound, Rayleigh Quotient is used. For $x\neq 0$, 
+			\begin{equation}
+				\lambda \geq L_T \triangleq \inf\limits_{x\in dom(L)} R(x) = \inf\limits_{x\in dom(L)} \frac{<x, Lx>}{||x||^2} = \lim\limits_{n \rightarrow \infty} \frac{<e_n, Le_n>}{||e_n||^2} = \lim\limits_{n \rightarrow \infty} \frac{1}{\sqrt{n}} = 0
+			\end{equation}
+			Thus the lower bound for the spcetrum is found.
+		\item 
+			Clearly, $\{1, \frac{1}{\sqrt{2}}, \frac{1}{\sqrt{3}}, ...\}$ is the point specturm as they are eigenvalues of $L$.
+
+	\end{enumerate}
+
+
+\section{Exercise8.2}
+	\begin{enumerate}
+		\item 
+			\begin{proof}
+				$\forall u \in M$, with the B.C. of $u$, the transform by operator $KL$ yields
+				\begin{equation}
+					\begin{aligned}
+						(KL)u(x) & = \int_{0}^{1} g(x, \xi) (Lu)(\xi) d\xi\\
+					 			 & = \int_{0}^{x} g(x, \xi) (Lu)(\xi) d\xi + \int_{x}^{1} g(x, \xi) (Lu)(\xi) d\xi\\
+					 			 & = \int_{0}^{x} \xi(x-1) u^{\prime\prime}(\xi) d\xi + \int_{x}^{1} x(\xi - 1) u^{\prime\prime}(\xi) d\xi\\
+					 			 & = \int_{0}^{x} \xi(x-1) du^{\prime}(\xi) + \int_{x}^{1} x(\xi - 1) du^{\prime}(\xi)\\
+					 			 & = (\xi(x-1)u')\Big|_0^x - \int_{0}^{x} u' (x-1) d\xi + (x(\xi-1)u')\Big|_x^1 - \int_{x}^{1} u' x d\xi\\
+					 			 & = x(x-1)u'(x) - (x-1) (u(x) - u(0)) - x(x-1)u'(x) - x (u(1)-u(x))\\
+					 			 & = u(x)
+					\end{aligned}
+				\end{equation}
+				Thus, $KL = I$ on $M$.
+			\end{proof}
+		\item 
+			\begin{proof}
+				For example, take $u(x) = \sqrt{x}$, then
+				\begin{equation}
+					||L|| \geq \frac{||Lu||}{||u||} = \frac{||x^{-\frac{3}{2}}||}{4||x^\frac{1}{2}||} \rightarrow \infty
+				\end{equation}
+				Thus, $L$ is unbounded.
+			\end{proof}
+		\item 
+
+		\item 
+			\begin{proof}
+				Swap $\xi$ and $x$, then
+				\begin{equation}
+					g(\xi, x) = 
+					\left\{
+						\begin{aligned}
+							\xi(1-x) & \quad \xi<x\\
+							x(1-\xi) & \quad \xi\geq x
+						\end{aligned}
+					\right.
+					=
+					\left\{
+						\begin{aligned}
+							x(1-\xi) & \quad x < \xi\\
+							\xi(1-x) & \quad x \geq \xi
+						\end{aligned}
+					\right.
+					=g(x,\xi)
+				\end{equation}
+				Thus, $\forall u, v\in M$,
+				\begin{equation}
+					\begin{aligned}
+						<u, Kv> & = \int_{0}^{1} u(x) \Bigg(\int_{0}^{1} g(x, \xi) v(\xi) d\xi\Bigg) dx\\
+								& = \int_{0}^{1} \int_{0}^{1} u(x) g(\xi, x) v(\xi) d\xi dx\\
+								& = \int_{0}^{1} \Bigg(\int_{0}^{1} g(\xi, x) u(x) dx\Bigg) v(\xi) d\xi\\
+								& = <Ku, v>
+					\end{aligned}
+				\end{equation}
+				Hence, $K$ is self-adjoint.
+			\end{proof}
+		\item 
+			\begin{equation}
+				L_T = \inf\limits_{u\in M} \frac{<u, Ku>}{<u, u>} = \inf\limits_{u\in M} \frac{<Ku, u>}{<u, u>}
+			\end{equation}
+			and
+			\begin{equation}
+				U_T = \sup\limits_{u\in M} \frac{<u, Ku>}{<u, u>} = \sup\limits_{u\in M} \frac{<Ku, u>}{<u, u>}
+			\end{equation}
+			
+	\end{enumerate}
+
+\end{document}
