@@ -1,0 +1,171 @@
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm,amssymb} % Math packages
+
+\usepackage{algorithm, algorithmic}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}} %Use Input in the format of Algorithm  
+\renewcommand{\algorithmicensure}{\textbf{Output:}} %UseOutput in the format of Algorithm  
+
+\usepackage{graphicx}
+
+\usepackage{listings}
+\lstset{language=Matlab}
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Shanghai Jiao Tong University, UM-SJTU JOINT INSTITUTE} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Methods of Applied Mathematics I\\ HW9 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Yu Cang \quad 018370210001\\ Zhiming Cui \quad 017370910006} % Your name
+
+\date{\normalsize \today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+\section{Exercise9.1}
+	\begin{enumerate}
+		\item
+			\begin{proof}
+				Since
+				\begin{equation}
+					\begin{aligned}
+						(LKu)(x) & = -\frac{d^2}{d x^2} \int_{0}^{1} g(x, \xi) u(\xi) d\xi\\
+								 & = -\frac{d^2}{d x^2} \Bigg(\int_{0}^{x} g(x, \xi) u(\xi) d\xi + \int_{x}^{1} g(x, \xi) u(\xi) d\xi \Bigg)\\
+								 & = -\frac{d^2}{d x^2} \Bigg(\int_{0}^{x} \xi(1-x) u(\xi) d\xi + \int_{x}^{1} x(1-\xi) u(\xi) d\xi \Bigg)\\
+								 & = -\frac{d^2}{d x^2} \Bigg((1-x)\int_{0}^{x} \xi u(\xi) d\xi + x\int_{x}^{1} (1-\xi) u(\xi) d\xi \Bigg)\\
+								 & = -\frac{d}{d x} \Bigg(-\int_{0}^{x} \xi u(\xi) d\xi + \int_{x}^{1} (1-\xi) u(\xi) d\xi \Bigg)\\
+								 & = xu(x) + (1-x) u(x) = u(x)
+ 					\end{aligned}
+				\end{equation}
+				Thus, $LK=I$, which means $L = K^{-1}$.
+			\end{proof}
+		\item 
+			\begin{proof}
+				($\Rightarrow$) Suppose $\frac{1}{\lambda}$ is an eigenvalue for $K$, then
+				\begin{equation}
+					ku = \frac{1}{\lambda}u
+				\end{equation} 
+				Thus
+				\begin{equation}
+					u = \lambda K u
+				\end{equation}
+				Take the operator $L$ on it
+				\begin{equation}
+					Lu = \lambda LKu = \lambda Iu = \lambda u
+				\end{equation}
+				which indicates that $\lambda$ is an eigenvalue of $L$.\\
+				($\Leftarrow$) Suppose $\lambda \neq 0$ is an eigenvalue of $L$, then
+				\begin{equation}
+					Lu = \lambda u
+				\end{equation}
+				Thus
+				\begin{equation}
+					u = \frac{1}{\lambda} Lu
+				\end{equation}
+				As $K = L^{-1}$ is known, take the operator $K$ onto it yields
+				\begin{equation}
+					Ku = \frac{1}{\lambda}KLu = \frac{1}{\lambda} Iu = \frac{1}{\lambda} u
+				\end{equation}
+				which indicates that $\frac{1}{\lambda}$ is an eigenvalue of $K$.\\
+				It's clear that for the given $\lambda$, $K$ and $L$ share the same eigenfunction $u(x)$.
+			\end{proof}
+		\item 
+			\begin{proof}
+				It's obvious that $L$ is bounded over $M$.\\
+				Since
+				\begin{equation}
+					\begin{aligned}
+						<u, Lv> &= -\int_{0}^{1} u(x)v''(x) dx = -\Bigg(u(x)v'(x)\Big|_0^1 - \int_{0}^{1}u'(x)v'(x)dx\Bigg)\\
+								&= \int_{0}^{1}u'(x)v'(x)dx = \int_{0}^{1}u'(x)dv(x) = u'(x)v(x)\Big|_0^1 - \int_{0}^{1} v(x)u''(x)dx\\
+								& = -\int_{0}^{1} u''(x)v(x)dx = <Lu, v>
+					\end{aligned}
+				\end{equation}
+				which indicates that $L$ is self-adjoint. Thus the eigenvalues of $L$ are real numbers.\\
+		 		The eigenfunction $\psi_n(x)$ of $L$ together with $\lambda_n$ satisfy 
+		 		\begin{equation}
+		 			\psi_n''(x) + \lambda_n \psi_n(x) = 0
+		 		\end{equation}
+		 		and
+		 		\begin{equation}
+		 			\psi_n(0) = \psi_n(1) = 0
+		 		\end{equation}
+		 		Solution of this ODE depends on the sign of $\lambda_n$.\\
+		 		\begin{enumerate}
+		 			\item 
+		 				If $\lambda_n > 0$, then
+		 				\begin{equation}
+		 					\psi_n(x) = C_1 sin(\sqrt{\lambda_n}x) + C_2 cos(\sqrt{\lambda_n}x)
+		 				\end{equation}
+		 				apply the boundary condition yields
+		 				\begin{equation}
+		 					C_2 = 0
+		 				\end{equation}
+		 				and
+		 				\begin{equation}
+		 					C_1 sin(\sqrt{\lambda_n}) = 0
+		 				\end{equation}
+		 				Thus
+		 				\begin{equation}
+		 					\lambda_n = (n\pi)^2
+		 				\end{equation}
+		 				and
+		 				\begin{equation}
+		 					\psi_n(x) = C_2 sin(n\pi x) \quad (C_2 \neq 0)
+		 				\end{equation}
+		 			\item 
+		 				If $\lambda_n = 0$, then
+		 				\begin{equation}
+		 					\psi_n(x) = C_0 + C_1 x
+		 				\end{equation}
+		 				Apply the B.C. yields $C_0 = C_1 = 0$, which indicates 0 is not an eigenvalue for $L$.
+		 			\item 
+		 				If $\lambda_n < 0$, then
+		 				\begin{equation}
+		 					\psi_n(x) = C_1 e^{\sqrt{-\lambda_n}x} + C_2 e^{-\sqrt{-\lambda_n}x}
+		 				\end{equation}
+		 				Apply the B.C. yields $C_0 = C_1 = 0$, which indicates  $\lambda_n < 0$ are not eigenvalues for $L$.
+		 		\end{enumerate}
+			\end{proof}
+		\item 
+			
+		\item 
+		
+		
+	\end{enumerate}
+
+\end{document}
