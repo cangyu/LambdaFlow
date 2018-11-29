@@ -162,10 +162,34 @@
 		 		\end{enumerate}
 			\end{proof}
 		\item 
-			
+			It's obvious that, from previous proof, the eigenvalues of $K$ are
+			\begin{equation}
+				\sigma_{point}(K) = \{\frac{1}{(n\pi)^2}, n=1,2,3, ....\}
+			\end{equation} 
+			As $K$ is compact and self-adjoint, it's obvious bounded and
+			\begin{equation}
+				\sigma_{compression}(K) = \sigma_{point}(K)
+			\end{equation} 
+			If $0$ is an eigenvalue of $K$, then
+			\begin{equation}
+				Ku = 0
+			\end{equation}
+			thus
+			\begin{equation}
+				LKu = 0 \quad \Rightarrow \quad u = 0
+			\end{equation}
+			which indicates that 0 is not an eigenvalue for $K$.\\
+			Hence, 
+			\begin{equation}
+				\sigma_{continous}(K) = {0}
+			\end{equation}
+			as $K^{-1} = L$ is unbounded.
 		\item 
-		
-		
+			It's obvious that, from previous proof, the eigenfunctions of $K$ are
+			\begin{equation}
+				u_n(x) = sin(n\pi x) \quad n = 1, 2, ...
+			\end{equation}
+			which form the Fouier basis.
 	\end{enumerate}
 
 \end{document}
