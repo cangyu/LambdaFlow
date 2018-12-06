@@ -1,0 +1,184 @@
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm,amssymb} % Math packages
+
+\usepackage{algorithm, algorithmic}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}} %Use Input in the format of Algorithm  
+\renewcommand{\algorithmicensure}{\textbf{Output:}} %UseOutput in the format of Algorithm  
+
+\usepackage{graphicx}
+
+\usepackage{listings}
+\lstset{language=Matlab}
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Shanghai Jiao Tong University, UM-SJTU JOINT INSTITUTE} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Methods of Applied Mathematics I\\ HW10 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Yu Cang \quad 018370210001\\ Zhiming Cui \quad 017370910006} % Your name
+
+\date{\normalsize \today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+\section{Exercise10.1}
+	\begin{enumerate}
+		\item
+			\begin{proof}
+				Since
+				\begin{equation}
+					\begin{aligned}
+						<u, Lu> & = \int_{0}^{1} u(x) u''(x) dx\\
+								& = -\Big[uu'\big|_0^1 - \int_{0}^{1}(u'(x))^2 dx\Big]\\
+								& =  \int_{0}^{1}(u'(x))^2 dx \geq 0
+					\end{aligned}
+				\end{equation}
+				Thus, the operator $L$ is positive definite.
+			\end{proof}
+		\item 
+			\begin{proof}
+				Denote $\lambda$ as the eigenvalue, and $u$ being the corresponding eigenfunction, then
+				\begin{equation}
+					Lu = \lambda u
+				\end{equation}
+				As has been proved before, the positive definite property of $L$ implies that
+				\begin{equation}
+					<u, Lu> = <u, \lambda u> = \lambda <u, u> = \lambda ||u||^2 \geq 0
+				\end{equation}
+				Thus 
+				\begin{equation}
+					\lambda > 0
+				\end{equation}
+				as the case $\lambda = 0$ is trival.\\
+				Then, the solution of this ODE is 
+				\begin{equation}
+					u(x) = a sin(\sqrt{\lambda} x) + b cos(\sqrt{\lambda} x)
+				\end{equation}
+				With the B.C. at endpoints, it follows that
+				\begin{equation}
+					b = 0
+				\end{equation}
+				and
+				\begin{equation}
+					a(sin(\sqrt{\lambda}) + \sqrt{\lambda}cos(\sqrt{\lambda})) = 0
+				\end{equation}
+				Thus 
+				\begin{equation}
+					sin(\sqrt{\lambda}) + \sqrt{\lambda}cos(\sqrt{\lambda}) = 0
+				\end{equation}
+				which indicates that the eigenvalue $\lambda$ satisfies 
+				\begin{equation}
+					\sqrt{\lambda} = - tan(\sqrt{\lambda})
+				\end{equation}
+			\end{proof}
+		\item 
+			From the plot of $y_1(x) = -x$ and $y_2(x) = tan(x)$, the first 2 intersections in $x>0$ region lie in the gap $(\frac{1}{2}\pi, \pi)$ and $(\frac{3}{2}\pi, 2\pi)$.\\
+			With the aid of MATLAB, the 2 lowest eigenvalues $\lambda_1$ and $\lambda_2$ are found as
+			\begin{equation}
+				\lambda_1 = (2.0288)^2 = 4.1160
+			\end{equation}
+			and
+			\begin{equation}
+				\lambda_2 = (4.9132)^2 = 24.1395
+			\end{equation}
+		\item 
+			Denote $p(x) = a_0 + a_1 x + a_2 x^2$, the B.V. at endpoints implies that  
+			\begin{equation}
+				V_1 = \Big\{ p(x) | p(x) =  a_2 (x^2 - \frac{3}{2}x)\Big\}
+			\end{equation}
+			Thus, for any $v \in V_1$
+			\begin{equation}
+				\begin{aligned}
+					R(v) & = \frac{<v, Lv>}{<v, v>}\\
+					     & = \frac{\int_{0}^{1} a_2 (x^2 - \frac{3}{2}x) (-2a_2) dx }{\int_{0}^{1} a_2^2 (x^2 - \frac{3}{2}x)^2 dx}\\
+					     & = -2\frac{\int_{0}^{1} (x^2 - \frac{3}{2}x) dx }{\int_{0}^{1} (x^2 - \frac{3}{2}x)^2 dx}\\
+					     & = 4.167
+				\end{aligned}
+			\end{equation}
+		\item 
+			Denote $p(x) = a_0 + a_1 x + a_2 x^2 + a_3 x^3$, the B.V. at endpoints implies that  
+			\begin{equation}
+				V_2 = \Big\{ p(x) | p(x) =  a_2 (x^2 - \frac{3}{2}x) + a_3 (x^3 - 2x)\Big\}
+			\end{equation}
+			Thus, for any $v \in V_2$
+			\begin{equation}
+				\begin{aligned}
+					R(v) & = \frac{<v, Lv>}{<v, v>}\\
+						& = \frac{\int_{0}^{1} [a_2 (x^2 - \frac{3}{2}x) + a_3(x^2 - 2 x)][2a_2 + 6a_3 x] dx }{\int_{0}^{1} [a_2 (x^2 - \frac{3}{2}x) + a_3(x^2 - 2 x)]^2 dx}\\
+						& = \frac{175a_2^2 + 630a_2a_3 + 588a_3^2}{42a_2^2 + 154a_2a_3 + 142a_3^2}
+				\end{aligned}
+			\end{equation}
+			As the leading coefficient $a_3\neq 0$, then, denote $t \triangleq \frac{a_2}{a_3}$
+			\begin{equation}
+				R(v) = \frac{175t^2 + 630 t + 588}{42t^2 + 154t + 142}
+			\end{equation}
+			It's obvious that $R(v)$ goes to its minimal when $t \rightarrow \infty$, thus $\min R(v) = \frac{175}{42}=4.1667$.
+		\item 
+			Firstly, determine the general form of each element $v \in V_3$.\\
+			Denote $v(x) = a_2 (x^2 - \frac{3}{2}x) + a_3 (x^3 - 2x)$ as $v \in V_2$, then, as $v$ also lies in $V_1^\perp$, it means
+			\begin{equation}
+				\int_{0}^{1} (x^2 - \frac{3}{2}x) v(x) dx = 0
+			\end{equation}
+			namely
+			\begin{equation}
+				a_2 \int_{0}^{1} (x^2 - \frac{3}{2}x)^2 dx + a_3 \int_{0}^{1} (x^2 - \frac{3}{2}x)(x^3 - 2x) dx = 0
+			\end{equation}
+			Thus
+			\begin{equation}
+				a_2 = - \frac{16}{3} a_3
+			\end{equation}
+			Hence
+			\begin{equation}
+				v(x) = a_3(x^3 - \frac{16}{3}x^2 + 6x)
+			\end{equation}
+			and
+			\begin{equation}
+				v''(x) = a_3(6x - \frac{32}{3})
+			\end{equation}
+			Thus, for any $v \in V_3$, the second eigenvalue is estimated as
+			\begin{equation}
+				\begin{aligned}
+					R(v) & = \frac{<v, Lv>}{<v, v>}\\
+						& = -\frac{\int_{0}^{1} (x^3 - \frac{16}{3}x^2 + 6x)(6x - \frac{32}{3}) dx }{\int_{0}^{1} (x^3 - \frac{16}{3}x^2 + 6x)^2 dx}\\
+						& = 4.2803
+				\end{aligned}
+			\end{equation}
+	\end{enumerate}
+
+\end{document}
