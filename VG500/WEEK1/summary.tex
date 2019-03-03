@@ -1,0 +1,19 @@
+\documentclass[paper=a4, fontsize=11pt]{scrartcl}
+
+\usepackage{lipsum}
+\usepackage{amsmath, amsfonts, amssymb}
+
+\title{Summary of "PREMIX: A Program for Modeling Steady, Laminar, One-Dimensional Premixed Flames"}
+\author{Yu Cang \ \ 018370210001}
+\date{2019-03-01}
+
+\begin{document}
+
+\maketitle
+
+Detailed numerical procedures on solving the 1-D steady laminar premixed flames are described in this report. Generally, this program combines the damped Newton method where second order convergence can be achived but may be unstable, and the explict time-stepping iteration which is very reliable but converge slowly.\\
+At the beginning, this program tries to solve the steady equation set with the damped Newton method, once the newton iteration fails, it turns to solve the time-dependent equation set. In this way,  a new starting estimation can be provided for the next trial of the damped Newton method. \\
+Controling parameters can be set inside each stage, which should be choose properly according to the properties of target physical problem.
+
+	
+\end{document}
