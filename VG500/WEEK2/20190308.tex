@@ -1,0 +1,21 @@
+\documentclass[paper=a4, fontsize=11pt]{scrartcl}
+\usepackage{amsmath, amsfonts, amssymb}
+
+\title{Paraphrase of  a paragraph in "PREMIX: A Program for Modeling Steady, Laminar, One-Dimensional Premixed Flames"}
+\author{Yu Cang \ \ 018370210001}
+\date{2019-03-08}
+
+\begin{document}
+
+\maketitle
+
+\section{Original paragraph}
+	The numerical solution procedure begins by making finite difference approximations to reducethe boundary value problem to a system of algebraic equations. The initial approximations are usually ona very coarse mesh that may have as few as five or six points. After obtaining a solution on the coarsemesh, new mesh points are added in regions where the solution or its gradients change rapidly.  Weobtain an initial guess for the solution on the finer mesh by interpolating the coarse mesh solution. Thisprocedure continues until no new mesh points are needed to resolve the solution to the degree specifiedby the user.  This continuation from coarse to fine meshes has several important benefits that areexplained later in this section.  We attempt to solve the system of algebraic equations by the dampedmodified Newton algorithm. However, if the Newton algorithm fails to converge, the solution estimate isconditioned by a time integration. This provides a new starting point for the Newton algorithm that iscloser to the solution, and thus more likely to be in the domain of convergence for Newton’s method. As the mesh becomes finer we normally find that the estimate interpolated from the previous mesh is withinthe domain of convergence of Newton’s method. This point is key to the solution strategy.
+
+
+\section{My paraphrase}
+	To solve the Boundary Value Problem(BVP), the governing equations are approximated by Finite Difference Method(FDM) and the a system of algebraic equations are to be solved.\newline
+	The numerical procedure starts from a coarse mesh so that the converged solution is more likely to be achieved. Then it seeks better solution on a finer mesh and the corresponding initial values are calculated from interpolation of previous results.\newline
+	A hybrid scheme is adopted to solve these algebraic equations. First, the solver tries the damped Newton method, which has faster convergence speed, but unstable. Once the damped Newton method fails, it switches to the time-stepping method which is stable but  slow to converge. As the mesh becomes finer and finer, it's normally expected that the converged solution will be achived.
+	
+\end{document}
