@@ -1,0 +1,171 @@
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm,amssymb} % Math packages
+
+\usepackage{algorithm, algorithmic}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}} %Use Input in the format of Algorithm  
+\renewcommand{\algorithmicensure}{\textbf{Output:}} %UseOutput in the format of Algorithm  
+
+\usepackage{graphicx}
+\usepackage{blindtext}
+
+\usepackage{listings}
+\lstset{language=Matlab}
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+\newcommand*{\dif}{\mathop{}\!\mathrm{d}}
+
+\title{	
+\normalfont \normalsize 
+\textsc{Shanghai Jiao Tong University, UM-SJTU JOINT INSTITUTE} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Technical Communication\\ HW2 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Yu Cang \quad 018370210001} % Your name
+
+\date{\normalsize \today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+\section{Writing Mathematics}
+	As a final example, consider the triple compositions
+	\begin{eqnarray}
+		f(x)=\int_a^{\big(\int_a^{x^3} {\frac{1}{1+\sin^2{t}}} dt \big)} \frac{1}{1+\sin^2{t}} dt,
+		\quad
+		 g(x)=\int_a^{\left[\begin{matrix}(\int_a^x \frac{1}{1+\sin^2{t}} dt)\\\int_a \frac{1}{1+\sin^2{t}} dt\end{matrix}\right]} \frac{1}{1+\sin^2{t}} dt,\notag
+	\end{eqnarray}
+	which can be written
+	\[
+		f=F\circ F\circ C \quad \mbox{and}\quad g=F\circ F\circ F.
+	\]
+	Suppose $F(x)=\int_a^x \dfrac{1}{1+\sin^2{t}} dt$ and $C(x)=x^3$, we have
+	\begin{align}
+		f'(x) & = F'(F(C(x)))\cdot F'(C(x))\cdot C'(x) \notag\\
+		       & = \dfrac{1}{1+\sin^2{\left( \int_a^{x^3} \dfrac{1}{1+\sin^2{t}} dt \right)}} \cdot \dfrac{1}{1+\sin^2{x^3}} \cdot 3x^2.\notag
+	\end{align}
+	Likewise, we have
+	\begin{align}
+		g'(x) & = F'(F(F(x)))\cdot F'(F(x))\cdot F'(x) \notag\\
+			   & = \dfrac{1}{1+\sin^2{\left[ \int_a^{ \left( \int_a^x \dfrac{1}{1+\sin^2{t}} dt \right) } \dfrac{1}{1+\sin^2{t}} dt \right]}} \cdot \dfrac{1}{1+\sin^2{\left( \int_a^{x} \dfrac{1}{1+\sin^2{t}} dt \right)}} \cdot \dfrac{1}{1+\sin^2{x}}.\notag
+	\end{align}
+
+\section{\LaTeX}
+	\subsection{Exercise on Slide 242}
+		\begin{eqnarray}\notag
+			x^{y+z}_{4t},\ \frac{y+\frac{3z}{2}}{b},\ \sqrt[n]{\Omega},\ \sum\limits_{n=0}^{\infty}n,\  \int_{0}^{1}\frac{1}{x} dx,\ \forall n \in \mathbb{N} \exists m\ \mbox{such that}\ n-m=0
+		\end{eqnarray}
+	\subsection{Exercise on Slide 246}
+		\begin{enumerate}
+			\item[1] \textbf{Using package blindtext} \newline
+				\blindmathpaper
+			
+			\item[2] \textbf{Reproduce equations} \newline
+				\begin{equation}\notag
+					\bar{x}=\dfrac{1}{n}\sum_{i=1}^{i=n} x_i=\dfrac{x_1+x_2+\ldots+x_n}{n} 
+				\end{equation}
+				
+				\begin{equation}\notag
+					\int_0^\infty e^{-\alpha x^2} \dif{x}=\dfrac{1}{2} \sqrt{\int_{-\infty}^\infty e^{-\alpha x^2}}\dif{x} \int_{-\infty}^\infty e^{-\alpha y^2}\dif{y} =\dfrac{1}{2} \sqrt{\dfrac{\pi}{\alpha}}
+				\end{equation}
+				
+				\begin{equation}\notag
+					\sum_{k=0}^\infty a_0q^k=\lim_{n\rightarrow \infty}\sum_{k=0}^n a_0q^k=\lim_{n\rightarrow \infty}a_0 \dfrac{1-q^{n+1}}{1-q}=\dfrac{a_0}{1-q}
+				\end{equation}
+				
+				\begin{equation}\notag
+					x_{1,2}=\dfrac{-b\pm \sqrt{b^2-4ac}}{2a}=\dfrac{-p\pm \sqrt{p^2-4q}}{2}
+				\end{equation}
+				
+				\begin{equation}\notag
+					\dfrac{\partial^2 \Phi}{\partial x^2}+\dfrac{\partial^2 \Phi}{\partial y^2}+\dfrac{\partial^2 \Phi}{\partial z^2}=\dfrac{1}{c^2}\dfrac{\partial^2 \Phi}{\partial t^2}
+				\end{equation}
+	
+			\item[3] \textbf{Vandermonde matrix}
+				\begin{equation}\notag
+					\left[\begin{matrix}
+						1 & \alpha_1 & \alpha^2_1 &\ldots &\alpha^{n-1}_1 \\
+						1 & \alpha_2 & \alpha^2_2 &\ldots &\alpha^{n-1}_2 \\
+						1 & \alpha_3 & \alpha^2_3 &\ldots &\alpha^{n-1}_3 \\
+						\vdots & \vdots & \vdots & \ddots & \vdots \\
+						1 & \alpha_m & \alpha^2_m &\ldots &\alpha^{n-1}_m
+					\end{matrix}\right]
+				\end{equation}
+		\end{enumerate}
+	\subsection{Exercise on Slide 250}
+		\begin{equation}\notag
+			\begin{aligned}
+				\tilde{E}(\omega)=& \int_{-\infty}^{\infty}E_0\sin(\omega_0t)e^{-2i\pi\omega t}dt \\
+				\sin(x)= & \frac{e^{ix}-e^{-ix}}{2i} \\
+				e^ae^b= & e^{a+b} \\
+				\int_{-\infty}^{\infty}e^{it(x-x')}dt=&2\pi \delta(x-x')\\
+				\tilde{E}(\omega)=& \frac{E_0}{2i}\int_{-\infty}^{\infty}e^{-2i\pi t(\omega-\frac{\omega_0}{2\pi})}-e^{-2i\pi t(\omega+\frac{\omega_0}{2\pi})}dt \\
+				\tilde{E}(\omega)=&\frac{-2\pi^2}{i}E_0[\delta(\omega-\frac{\omega_0}{2\pi})-\delta(\omega+\frac{\omega_0}{2\pi})]
+			\end{aligned}
+		\end{equation}
+		
+\section{Group Exercise}
+	I'm in Group 2, responsible for paragraph 4, 14 and 19.
+	\subsection{Summary}
+		In paragraph 4, the key idea author want to convey is, when writting something, we'd better have some target readers in mind. In this way, emphasis on will be paid at different levels and different aspects so that readers may have better understanding.\newline
+		I paragraph 14, details about using correct words are explained. First of all, using words correctly does not mean to redundency. Instead, it means to express both clearly and precisely so that ambiguity does not exist, and readers will not be confused or mislead. Also, instead of using symbolic notations, which is quite cumbersome, it's better to use sentences expressing arguments or theorems.\newline
+		In paragraph 19, the author tells us not to be disturbed by editorial related issues. Some of editorial work like spelling check are helpful, but they may apply some editorial rules mechanically, which change the original meaning of contents. If some intrinsic words have been used, we should pay attention to keep them unchanged.
+
+\section{Grammar}
+	\subsection{Plurals of given words}
+		\begin{enumerate}
+			\item[(a)] means: means
+			\item[(b)] paralysis: paralyses
+			\item[(c)] curriculum: curricula/curriculums
+			\item[(d)] oasis: oases
+			\item[(e)] offspring: offspring/offsprings
+			\item[(f)] criterion: criteria/criterions
+			\item[(g)] Chinese: Chinese
+			\item[(h)] antenna: antennae/antennas
+			\item[(i)] stimulus: stimuluses/stimuli
+			\item[(j)] fungus: fung/funguses
+			\item[(k)] alumnus: alumni
+			\item[(l)] series: series
+			\item[(m)] diagnosis: diagnoses
+			\item[(n)] vita: vitae
+			\item[(o)] American: American
+			\item[(p)] synopsis: synopses
+		\end{enumerate}
+	
+	\subsection{Filling the blanks}
+		(a) \underline{\makebox[1cm]{The}} Decline and Fall of \underline{\makebox[1cm]{the}} Roman Empire\\
+		(b) \underline{\makebox[1cm]{The}} complexity of \underline{\makebox[1cm]{the}} problem of \underline{\makebox[1cm]{the}} decline and fall of the Roman Empire is made evident by \underline{\makebox[1cm]{a}} wide variety of causes that are emphasized in varying degrees by \makebox[1cm]{\hrulefill}different authors.\\
+		(c) Fortunately, \underline{\makebox[1cm]{a}} concise formulation of Edward Gibbon serves as \underline{\makebox[1cm]{a}} widely accepted basis for \makebox[1cm]{\hrulefill} modern discussion of \underline{\makebox[1cm]{the}} problem.\\
+		(d) According to Gibbon,\underline{\makebox[1cm]{the}} empire reached its peak during \underline{\makebox[1cm]{the}} administration of \makebox[1cm]{\hrulefill} two Antonines.\\
+		(e) After that, however, \underline{\makebox[1cm]{the}}extent of \makebox[1cm]{\hrulefill} Roman conquest became too great to be managed by \makebox[1cm]{\hrulefill} Roman government,\underline{\makebox[1cm]{the}} decline began.\\
+		(f) \underline{\makebox[1cm]{The}} military government was weakened and finally dissolved as \makebox[1cm]{\hrulefill} barbarians were allowed to constitute \underline{\makebox[1cm]{an}} ever-growing percentage of \underline{\makebox[1cm]{the}} Roman legions.\\
+		(g) \underline{\makebox[1cm]{The}} victorious legions began to dominate and corrupt \underline{\makebox[1cm]{the}} government, weakening it at \underline{\makebox[1cm]{the}} time when it most needed \underline{\makebox[1cm]{a}} strength to overcome \makebox[1cm]{\hrulefill} other problems.
+
+\end{document}
