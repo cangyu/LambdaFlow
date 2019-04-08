@@ -1,0 +1,169 @@
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm,amssymb} % Math packages
+
+\usepackage{algorithm, algorithmic}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}} %Use Input in the format of Algorithm  
+\renewcommand{\algorithmicensure}{\textbf{Output:}} %UseOutput in the format of Algorithm  
+
+\usepackage{graphicx}
+\usepackage{blindtext}
+\usepackage{enumerate}
+\usepackage{ulem} 
+\usepackage{pdfpages}
+\usepackage{multirow}
+
+\usepackage{listings}
+\lstset{language=Matlab}
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+\newcommand*{\dif}{\mathop{}\!\mathrm{d}}
+
+\title{	
+\normalfont \normalsize 
+\textsc{Shanghai Jiao Tong University, UM-SJTU JOINT INSTITUTE} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Technical Communication\\ HW4 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Yu Cang \quad 018370210001} % Your name
+
+\date{\normalsize \today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+\section{Writting skills}
+	\begin{enumerate}
+		\item 
+			As shown in Fig. 1, due to stencil aperture dimension variations and stencil cleanliness, variations across the die arise. Also, smaller variations would also show up, due to random defects, such as inclusions in the paste and contamination from the wafer or environment.
+		\item 
+			\begin{enumerate}[(a)]
+				\item 
+					While these systems are very sensitive, they are very reliable. As a result, many banks, shops, hotels and other businesses use them, because their components are of the highest quality.
+				\item 
+					 We are holding the above cheque, but there are insufficient funds in your account to clear it. Originally, our normal practice would be to charge you 150 RMB. However, we will waive the charge this time as this is your first time.
+				\item 
+					 For inspiring innovation and excellence in our customers and users within a secure and sustainable integrated community, we will create and manage distinctive spaces, and comprise mixed-use developments anchored by business space.
+			\end{enumerate}
+		\item 
+			\begin{enumerate}[(a)]
+				\item 
+					We can deal with more problems of this kind in such a way, and bring about satisfactory solutions.
+				\item 
+					Some companies self-generating their own websites is a tendency in the industry, and Internet makes training for the skill of website development more accessible to everyone, so this activity can more and more be handled in-house.
+				\item 
+					 Harold recommended us to fire Mr. Harrison.
+				\item 
+					We will ask him to think about changing his work routine.
+				\item 
+					Their correspondence expired when he learned that they no longer supported his proposal.
+				\item 
+					This document is used to identify the recovered objects.
+			\end{enumerate}
+	\end{enumerate}
+
+\section{Group Exercise}
+	This section mainly talks about the general guidelines on graphics to be used in scientific writings. \newline
+	Firstly, one should spare enough time to generate figures. Roughly, spend as much as that of writing text.\newline 
+	Secondly, it is better to prepare an outline and decide what are the most important elements to conveyed before drawing pictures.\newline 
+	Thirdly, either placed in stand-alone form or in inlined form, figures should be linked and referenced properly. Usually, one should provide a detailed caption, which illustrates the key point of the figure, and a complete reference that faciliates readers a lot. It's better not to use abbreviations like "Fig.", which may slow readers down. \newline
+	Then, consistency between graphics and text should be maintained through out the whole article. For example, it is suggest to use figures of same sacles, take same line width, keep fonts in figures as same as that in text, and choose color coding according to that used in text etc. In practice, instead of using different graphics software, the best way to keep consistency is to use a single graphics program. \newline
+	Also, labels play an important role in plots. Text in labels should be of the same font as that in the main text, and fonts between labels should also be consistent with each other. Notions should not be different, for example, $\frac{1}{2}$ vs $0.5$, $e^{-i\pi}$ vs $-1$. In addition, labels should be both clear and well placed, which provide a straight forward explanation.\newline
+	Most importantly, issues concerning plots and charts should be carefully handled. 3D pie charts may introduce distortions and should be avoided whenever possible. Instead, table can be used to explain in detail numbers and percentages. It is recommended to use colors that can group things or direct readers' focus. As background patterns may distract and is likely to blur important messages, they should not be used as well. \newline
+	Finally, "avoid distractions" and "steer attention" are useful concepts when designing figures. Distraction like strong contrast produced by sparse vs dense, white vs black should be avoided. As human eyes are much better at grouping things according to colors instead of line patterns, distraction originates from dashed or dot lines should also be avoided. Backgourd image is usually unnecessary as it convey little message.  
+	
+	
+\section{\LaTeX}
+	\begin{table}[H]
+		\begin{center}
+			\begin{tabular}{c |c |c}
+				\hline
+				Component & Transition & Probability ($\lambda$)\\
+				\hline
+				\multirow{5}{*}{MDC$_{-}$A} & Limited Bandwidth &0.2\\
+				& Memory Leak & 0.3\\
+				&Bandwidth Upgrade & 0.5 \\
+				& MDC$_{-}$A Reboot &0.4\\
+				&MDC Exception & Fixed Rate = 0.8 \\
+				\hline
+				\multirow{5}{*}{MDC$_{-}$B}& Communication Delay & 0.6\\
+				& No WIFI & 0.3\\
+				&Protocol Adjustment & 0.2 \\
+				& Router Reboot & 0.8  \\
+				&MDC Exception & Fixed Rate = 0.8 \\
+				\hline
+				\multirow{5}{*}{MDC$_{-}$C} & Retrieval Exception &0.3\\
+				& System No Response & 0.4 \\
+				&Omit Retrieval & 0.8  \\
+				& MDC$_{-}$C Reboot & 0.9\\
+				&MDC Exception & Fixed Rate = 0.8 \\
+				\hline
+				\multirow{5}{*}{MSC} & Overload & 0.1\\
+				& System Crashed & 0.2 \\
+				& Load Adjustment& 0.7 \\
+				& MSC  Reboot & 0.9\\
+				&MSC Exception& Fixed Rate = 0.9 \\
+				\hline
+			\end{tabular}
+		\end{center}
+		\caption{ Transition and probability of MCAS}
+	\end{table}
+	
+	\begin{table}
+		\begin{center}
+			\begin{tabular}{ c c}
+				\hline
+				Trapdoor Size Before Compression (bit) & 65536 \\
+				Trapdoor Size After Compression (bit) &3260.32 \\
+				Compression Rate (\%) & 4.97 \\
+				\hline
+			\end{tabular}
+		\end{center}
+		\caption{Compression Rate}
+	\end{table}
+	
+	\begin{table}
+		\begin{center}
+			\begin{tabular}{c |c |c c |c c}
+				\hline\multirow{3}{*}{} & \multirow{2}{*}{Native} & \multicolumn{2}{c}{SLA-aware} & \multicolumn{2}{c}{Proportional-share} \\
+				& & \multicolumn{2}{c}{Scheduling} & \multicolumn{2}{c}{Scheduling}\\
+				\cline{2-6}
+				& FPS & FPS & Overhead(\%) & FPS &Overhead(\%)\\
+				\hline
+				GT1 & 43.023 & 42.044 & 2.28 & 42.221 & 1.86 \\
+				GT2 & 48.686 & 45.996 & 5.53 & 48.284 & 0.83\\
+				HDRT1 & 59.062 & 57.923 & 1.93 & 57.700 & 2.31 \\
+				HDRT2 & 65.808 & 62.854 & 4.90 & 65.984 & -0.27 \\
+				\hline
+			\end{tabular}
+		\end{center}
+		\caption{Macrobenchmark Results.}
+	\end{table}
+\end{document}
