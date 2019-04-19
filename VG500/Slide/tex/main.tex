@@ -1,5 +1,4 @@
 \input{preamble.tex}
-\input{pdfinfo.tex}
 \input{title.tex}
 
 \begin{document}
@@ -7,37 +6,51 @@
 \maketitle
 
 
-\section{Themes}
+\section{Introduction}
+	
+	\subsection{part1.1}
+	
+		\begin{xframe}{Backgound}
+			Turbulent combustion is encountered in most practical combustion system such as \textit{rocket}, \textit{ICE}, \textit{aircraft engien}, and \textit{industrial burner}.
+			\begin{figure}[htbp]\centering
+				\begin{minipage}{3.5cm}
+					\centering
+					\includegraphics[height=4.5cm, width=3cm]{../pic/rocket.jpg}
+				\end{minipage}%
+				\begin{minipage}{7.5cm}
+					\centering
+					\includegraphics[height=4.5cm, width=7cm]{../pic/engien.jpg}
+				\end{minipage}%
+			\end{figure}
+		\end{xframe}
+	
+		\begin{xframe}{Research aspects}
+			Meaningful to practical systems:
+			\begin{enumerate}[(a)]
+				\item 
+					Improve efficiency, meet demanding standards.
+				\item
+					Reduce pollution, environment friendly.
+			\end{enumerate}
 
-\subsection{Background images}
-
-\begin{xframe}{Themes for the Elegance}
-
-    You need a \hl{style/images} directory
-    with these files inside:
-
-    \begin{itemize}
-        \item style/background-section.pdf
-        \item style/background-slide.pdf
-        \item style/background-title.pdf
-        \item style/logo.png
-    \end{itemize}
-
-\end{xframe}
-
-
-{
-\usebackgroundtemplate{\includegraphics[width=\paperwidth]{../pic/theme-1.png}}
-\begin{frame}[plain]
-    .
-\end{frame}
-}
+			Why is numerical simulation adopted?
+			\begin{enumerate}[(a)]
+				\item 
+				Analytical techniques are difficult to handle.
+				\item
+				Experiments are too expensive to be widely used.
+			\end{enumerate}
+		\end{xframe}
+			
+		\begin{xframe}{Physical Configuration}
+			\includegraphics[width=7cm, height=8cm]{../pic/counterflow_configuration.png}	
+		\end{xframe}
 
 
 {
 \usebackgroundtemplate{\includegraphics[width=\paperwidth]{../pic/theme-2.png}}
 \begin{frame}[plain]
-    .
+
 \end{frame}
 }
 
@@ -45,61 +58,59 @@
 {
 \usebackgroundtemplate{\includegraphics[width=\paperwidth]{../pic/theme-3.png}}
 \begin{frame}[plain]
-    .
+
 \end{frame}
 }
 
+\section{Governing Equations}
+
+	\subsection{Showing code}
+	
+		\begin{xframe}{Code snippets}
+		
+		    Do you have some code to show on the slide?
+		
+		    And the same frame should also contain text?
+		
+		    \begin{cxxcodebox}
+		        class example {
+		            // \codedots shows grayed-out dots
+		            @ \codedots @
+		        };
+		    \end{cxxcodebox}
+		
+		    You can use \verb|cxxcodebox| environment.
+		    It has \verb|cxx| in the name,
+		    but no syntax highlighting is performed.
+		
+		    For short code snippets,
+		    it is better just to highlight the important parts.
+		
+		\end{xframe}
 
 
-
-
-\section{Examples}
-
-\subsection{Showing code}
-
-\begin{xframe}{Code snippets}
-
-    Do you have some code to show on the slide?
-
-    And the same frame should also contain text?
-
-    \begin{cxxcodebox}
-        class example {
-            // \codedots shows grayed-out dots
-            @ \codedots @
-        };
-    \end{cxxcodebox}
-
-    You can use \verb|cxxcodebox| environment.
-    It has \verb|cxx| in the name,
-    but no syntax highlighting is performed.
-
-    For short code snippets,
-    it is better just to highlight the important parts.
-
-\end{xframe}
-
-
-\subsection{Code slides and escapes}
-
-\begin{xframe}{Second slide}
-
-    \begin{cxxcode}
-        class example {
-            // There are a few useful escapes here
-            @ \codedots @ // \codedots shows grayed-out dots
-
-            // Invalid parts can be marked with \hlErr
-            @\hlErr{operator;}@
-
-            // Good parts can be marked with \hlOk
-            @\hlOk{operator() ()}@
-
-            // Other highlighting commands can be seen in
-            // the preamble.tex file
-        };
-    \end{cxxcode}
-
-\end{xframe}
+	\subsection{Code slides and escapes}
+	
+		\begin{xframe}{Second slide}
+		
+		    \begin{cxxcode}
+		        class example {
+		            // There are a few useful escapes here
+		            @ \codedots @ // \codedots shows grayed-out dots
+		
+		            // Invalid parts can be marked with \hlErr
+		            @\hlErr{operator;}@
+		
+		            // Good parts can be marked with \hlOk
+		            @\hlOk{operator() ()}@
+		
+		            // Other highlighting commands can be seen in
+		            // the preamble.tex file
+		        };
+		    \end{cxxcode}
+		
+		\end{xframe}
+	
+\section{Numerical Solution}
 
 \end{document}
