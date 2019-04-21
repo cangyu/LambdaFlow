@@ -5,112 +5,151 @@
 
 \maketitle
 
-
 \section{Introduction}
-	
 	\subsection{part1.1}
-	
 		\begin{xframe}{Backgound}
-			Turbulent combustion is encountered in most practical combustion system such as \textit{rocket}, \textit{ICE}, \textit{aircraft engien}, and \textit{industrial burner}.
-			\begin{figure}[htbp]\centering
+			Turbulent combustion is encountered in most practical combustion system such as rocket, ICE, and aircraft engien.
+			\begin{figure}
 				\begin{minipage}{3.5cm}
 					\centering
-					\includegraphics[height=4.5cm, width=3cm]{../pic/rocket.jpg}
+					\includegraphics[height=3.5cm, width=3cm]{../pic/rocket.jpg}
 				\end{minipage}%
 				\begin{minipage}{7.5cm}
 					\centering
-					\includegraphics[height=4.5cm, width=7cm]{../pic/engien.jpg}
+					\includegraphics[height=3.5cm, width=7cm]{../pic/engien.jpg}
 				\end{minipage}%
 			\end{figure}
-		\end{xframe}
-	
-		\begin{xframe}{Research aspects}
 			Meaningful to practical systems:
 			\begin{enumerate}[(a)]
 				\item 
-					Improve efficiency, meet demanding standards.
+				Improve efficiency, meet demanding standards.
 				\item
-					Reduce pollution, environment friendly.
+				Reduce pollution, environment friendly.
 			\end{enumerate}
-
+		\end{xframe}
+	\subsection{part1.2}
+		\begin{xframe}{Research aspects}
 			Why is numerical simulation adopted?
 			\begin{enumerate}[(a)]
 				\item 
-				Analytical techniques are difficult to handle.
+					Analytical techniques are difficult to handle.
 				\item
-				Experiments are too expensive to be widely used.
+					Experiments are too expensive to be widely used.
 			\end{enumerate}
+			What are the key points in numerical practice?
+			\begin{itemize}
+				\item Interaction between turbulence and combustion.
+				\item Proper flame model.
+			\end{itemize}
 		\end{xframe}
+	\subsection{part1.3}
+		\begin{xframe}{Numerical simulation of flowfield}
+			Based on CFD, there're 3 possible approaches:
+			\begin{enumerate}[(a)]
+				\item{Direct Numerical Simulation(DNS)}\newline
+					--Precise, but costly(Tremendous memory and CPU). \XSolid
+				\item Large Eddy Simulation(LES)\newline
+					--Compromise between accuracy and computational cost. \Checkmark
+				\item Reynolds Averaged Navier-Stokes(RANS)\newline
+					--Inaccurate for combustion phenomenon. \XSolid
+			\end{enumerate}
+			\includegraphics[width=11cm, height=3cm]{../pic/comparision.png}
+		\end{xframe}
+	\subsection{part1.4}
+		\begin{xframe}{Numerical simulation of flame}
+			Although based on LES, traditional flame models are inadequate:
+			\begin{itemize}
+				\item
+					Distribution of flame properties are mannually assumed.
+				\item
+					Parameter tuning may be unphysical.
+			\end{itemize}
+			These drawbacks are overcome by the turbulent flamelet model to be introduced:
+			\begin{itemize}
+				\item
+					Designed especially for LES, with tfewer approximation.
+				\item
+					Relations are provided through scaling law, which is based on DNS database.
+			\end{itemize}		
+		\end{xframe}
+\section{Turbulent Flamelet Model}
+	\subsection{part2.1}
+		\begin{xframe}{Theory}
+			Original G.E. in the context of LES:
+			\begin{equation}
+				\frac{\partial \bar{\rho}\tilde{Z}}{\partial t} + \nabla \cdot (\bar{\rho} \tilde{Z}\tilde{\vec{u}}) = \nabla \cdot [\bar{\rho}(D+D_T)\nabla\tilde{Z}]
+			\end{equation}
+			\begin{equation}
+				\frac{\partial \bar{\rho}\tilde{Y_i}}{\partial t} + \nabla \cdot (\bar{\rho} \tilde{Y_i}\tilde{\vec{u}}) = \nabla \cdot [\bar{\rho}(D+D_T)\nabla\tilde{Y_i}] + \overline{\omega_i}
+			\end{equation}
+			After coordinate transformation$(x_1,x_2,x_3,t)\rightarrow(Z,Z_2,Z_3,\tau)$:
+			\begin{equation}
+				\begin{split}
+					\bar{\rho}\frac{\partial \tilde{Y_i}}{\partial \tau} + \bar{\rho} \Big(\tilde{\vec{u}} \cdot \nabla_\perp \tilde{Y_i} + \frac{\partial \tilde{Y_i}}{\partial Z_2}\frac{\partial Z_2}{\partial t} + \frac{\partial \tilde{Y_i}}{\partial Z_3}\frac{\partial Z_3}{\partial t}\Big) = \frac{\bar{\rho}\chi}{2Le_T}\frac{\partial^2 \tilde{Y_i}}{\partial^2 \tilde{Z}}\\ + \frac{\partial \tilde{Y_i}}{\partial \tilde{Z}}\nabla\cdot\Bigg[\bar{\rho}(\mathcal{D}_{T,i}-\mathcal{D}_T)\vec{n}\cdot\frac{\partial \tilde{Z}}{\partial \vec{n}}\Bigg] + \nabla \cdot (\bar{\rho}\mathcal{D}_{T,i}\nabla_\perp\tilde{Y_i}) + \overline{\omega_i}
+				\end{split}	
+			\end{equation}
+		\end{xframe}
+	\subsection{part2.2}
+		\begin{xframe}{Laminar Flamelet assumption}
+			Locally, the characteristic timescale of chemical reaction is much smaller that that of flow$(t_c \ll t_f)$.\newline
+			Thus, local flame structure can be described by the difffusion flame under counterflow configuration.
+			\includegraphics[width=10cm, height=3cm]{../pic/flamelet.png}
 			
-		\begin{xframe}{Physical Configuration}
-			\includegraphics[width=7cm, height=8cm]{../pic/counterflow_configuration.png}	
+			Each micro flamelet can be described by $Z$ and $\chi$:
+			\begin{itemize}
+				\item $Z$ describes chemical reaction.
+				\item $\chi$ indicates turbulence stretching effect.
+			\end{itemize}
+			Thus, a database can be pre-computed for later looking-up. 
 		\end{xframe}
-
-
-{
-\usebackgroundtemplate{\includegraphics[width=\paperwidth]{../pic/theme-2.png}}
-\begin{frame}[plain]
-
-\end{frame}
-}
-
-
-{
-\usebackgroundtemplate{\includegraphics[width=\paperwidth]{../pic/theme-3.png}}
-\begin{frame}[plain]
-
-\end{frame}
-}
-
-\section{Governing Equations}
-
-	\subsection{Showing code}
-	
-		\begin{xframe}{Code snippets}
-		
-		    Do you have some code to show on the slide?
-		
-		    And the same frame should also contain text?
-		
-		    \begin{cxxcodebox}
-		        class example {
-		            // \codedots shows grayed-out dots
-		            @ \codedots @
-		        };
-		    \end{cxxcodebox}
-		
-		    You can use \verb|cxxcodebox| environment.
-		    It has \verb|cxx| in the name,
-		    but no syntax highlighting is performed.
-		
-		    For short code snippets,
-		    it is better just to highlight the important parts.
-		
+	\subsection{part2.3}
+		\begin{xframe}{Turbulent Flamelet}
+			\begin{multicols}{2}
+				\includegraphics[width=5.5cm, height=7cm]{../pic/counterflow.png}	
+				
+				Unlike the laminar flamelet introduced above,\\
+				G.E. of the counterflow flame is slightly modified by our turbulet flamelet model from
+				\begin{equation}
+					\rho \frac{D Y_i}{D t} = \mathcal{D}_i\frac{\partial^2 Y_i}{\partial^2 x} + \omega_i(T, \vec{Y})
+				\end{equation}
+				to
+				\begin{equation}
+					\bar{\rho} \frac{D \tilde{Y_i}}{D t} = \mathcal{D}_i\frac{\partial^2 \tilde{Y_i}}{\partial^2 x} + \tilde{\omega_i}(\tilde{T}, \tilde{\vec{Y}})
+				\end{equation}
+				The two equations share similar form, but have totally different meanings.
+			\end{multicols}
 		\end{xframe}
-
-
-	\subsection{Code slides and escapes}
-	
-		\begin{xframe}{Second slide}
-		
-		    \begin{cxxcode}
-		        class example {
-		            // There are a few useful escapes here
-		            @ \codedots @ // \codedots shows grayed-out dots
-		
-		            // Invalid parts can be marked with \hlErr
-		            @\hlErr{operator;}@
-		
-		            // Good parts can be marked with \hlOk
-		            @\hlOk{operator() ()}@
-		
-		            // Other highlighting commands can be seen in
-		            // the preamble.tex file
-		        };
-		    \end{cxxcode}
-		
+	\subsection{part2.4}
+		\begin{xframe}{Solution procedure}
+			Based on the filtered turbulent flamelet database generated in the way descirbed above, the full solution procedure that incorporates a CFD solver can be described as follows:
+			\centering
+			\includegraphics[width=9cm, height=6.5cm]{../pic/solver.png}
 		\end{xframe}
-	
-\section{Numerical Solution}
+\section{Numerical Results}
+	\subsection{part3.1}
+		\begin{xframe}{Comparsion of ``S'' curve}
+			The $T_{max}$ plot:
+			\begin{itemize}
+				\item
+					One of the most convincing testing cases.
+				\item
+					Difference and transition position are clearly revealed! 
+			\end{itemize}			
+			\includegraphics[width=11cm, height=6cm]{../pic/Tmax.jpg}	
+		\end{xframe}
+	\subsection{part3.2}
+		\begin{xframe}{Standard case}
+			Comparsion between experimental data, which is widely used as benchmark.
+			\begin{figure}
+				\begin{minipage}{3.5cm}
+					\centering
+					\includegraphics[height=3cm, width=5cm]{../pic/slice.png}
+				\end{minipage}%
+				\begin{minipage}{7.5cm}
+					\centering
+					\includegraphics[height=5.5cm, width=7cm]{../pic/line.png}
+				\end{minipage}%
+			\end{figure}
+		\end{xframe}
 
 \end{document}
