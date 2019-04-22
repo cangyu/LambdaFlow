@@ -1,6 +1,7 @@
 \input{preamble.tex}
 \input{title.tex}
 
+
 \begin{document}
 
 \maketitle
@@ -47,11 +48,11 @@
 			Based on CFD, there're 3 possible approaches:
 			\begin{enumerate}[(a)]
 				\item{Direct Numerical Simulation(DNS)}\newline
-					--Precise, but costly(Tremendous memory and CPU). \XSolid
+					--Precise, but costly(Tremendous memory and CPU). %\XSolid
 				\item Large Eddy Simulation(LES)\newline
-					--Compromise between accuracy and computational cost. \Checkmark
+					--Compromise between accuracy and computational cost. %\Checkmark
 				\item Reynolds Averaged Navier-Stokes(RANS)\newline
-					--Inaccurate for combustion phenomenon. \XSolid
+					--Inaccurate for combustion phenomenon. %\XSolid
 			\end{enumerate}
 			\includegraphics[width=11cm, height=3cm]{../pic/comparision.png}
 		\end{xframe}
@@ -139,7 +140,7 @@
 		\end{xframe}
 	\subsection{part3.2}
 		\begin{xframe}{Standard case}
-			Comparsion between experimental data, which is widely used as benchmark.
+			Comparsion between experimental data, which is widely used as benchmark\cite{RN14}.
 			\begin{figure}
 				\begin{minipage}{3.5cm}
 					\centering
@@ -150,6 +151,11 @@
 					\includegraphics[height=5.5cm, width=7cm]{../pic/line.png}
 				\end{minipage}%
 			\end{figure}
+		\end{xframe}
+
+	\subsection{part3.3}
+		\begin{xframe}{Reference}
+			\printbibliography
 		\end{xframe}
 
 \end{document}
