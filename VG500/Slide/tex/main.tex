@@ -20,6 +20,7 @@
 					\includegraphics[height=3.5cm, width=7cm]{../pic/engien.jpg}
 				\end{minipage}%
 			\end{figure}
+			\pause
 			Meaningful to practical systems:
 			\begin{enumerate}[(a)]
 				\item 
@@ -27,21 +28,6 @@
 				\item
 				Reduce pollution, environment friendly.
 			\end{enumerate}
-		\end{xframe}
-	\subsection{part1.2}
-		\begin{xframe}{Research aspects}
-			Why is numerical simulation adopted?
-			\begin{enumerate}[(a)]
-				\item 
-					Analytical techniques are difficult to handle.
-				\item
-					Experiments are too expensive to be widely used.
-			\end{enumerate}
-			What are the key points in numerical practice?
-			\begin{itemize}
-				\item Interaction between turbulence and combustion.
-				\item Proper flame model.
-			\end{itemize}
 		\end{xframe}
 	\subsection{part1.3}
 		\begin{xframe}{Numerical simulation of flowfield}
@@ -65,10 +51,11 @@
 				\item
 					Parameter tuning may be unphysical.
 			\end{itemize}
-			These drawbacks are overcome by the turbulent flamelet model to be introduced:
+			\pause
+			These drawbacks are overcame by the turbulent flamelet model to be introduced:
 			\begin{itemize}
 				\item
-					Designed especially for LES, with tfewer approximation.
+					Designed especially for LES, with fewer approximation.
 				\item
 					Relations are provided through scaling law, which is based on DNS database\cite{RN2}.
 			\end{itemize}		
@@ -83,6 +70,7 @@
 			\begin{equation}
 				\frac{\partial \bar{\rho}\tilde{Y_i}}{\partial t} + \nabla \cdot (\bar{\rho} \tilde{Y_i}\tilde{\vec{u}}) = \nabla \cdot [\bar{\rho}(D+D_T)\nabla\tilde{Y_i}] + \overline{\omega_i}
 			\end{equation}
+			\pause
 			After coordinate transformation$(x_1,x_2,x_3,t)\rightarrow(Z,Z_2,Z_3,\tau)$:
 			\begin{equation}
 				\begin{split}
@@ -152,8 +140,22 @@
 				\end{minipage}%
 			\end{figure}
 		\end{xframe}
-
-	\begin{xframe}{Reference}
-		\printbibliography
-	\end{xframe}
+\section{Conclusions}
+	\subsection{part4.1}
+		\begin{xframe}{Conclusions}
+			\begin{itemize}
+				\item
+					Turbulent flamelet model has good agreement with experimental data.
+				\pause
+				\item
+					Numerical simulation based on Large Eddy Simulation(LES) shows better resolution of flame structures.
+				\pause
+				\item
+					Flamelet modeling based on the filtered G.E. is physically effective for combustion problem.
+			\end{itemize}	
+		\end{xframe}
+	\subsection{part4.2}
+		\begin{xframe}{Reference}
+			\printbibliography
+		\end{xframe}
 \end{document}
