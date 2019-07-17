@@ -22,16 +22,18 @@ print(x_train.shape, y_train.shape)
 print(x_validation.shape, y_validation.shape)
 print(x_test.shape, y_test.shape)
 
-ListOfClass = set(y_train)
+ListOfClass = list(set(y_train))
 NumOfClass = len(ListOfClass)
 print(NumOfClass)
 
-for label in ListOfClass:
-    cur_label_found = False
-    while cur_label_found is False:
-        idx = randint(0, len(y_train))
-        if y_train[idx] == label:
-            cur_label_found = True
-            plt.imshow(x_train[idx])
-            plt.savefig('{:d}.png'.format(label))
-
+flag = np.zeros(NumOfClass, dtype=int)
+cnt = NumOfClass
+while cnt > 0:
+    idx = randint(1, len(y_train))-1
+    label = y_train[idx]
+    if flag[label] == 0:
+        flag[label] = 1
+        cnt -= 1
+        plt.imshow(x_train[idx])
+        plt.savefig('{:d}.png'.format(label))
+            
