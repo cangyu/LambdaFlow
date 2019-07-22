@@ -83,19 +83,19 @@ Label = [
 
 """Exploration and Visualization"""
 
-if not os.path.exists('sample'):
-    os.mkdir('sample')
-
 flag = np.zeros(NumOfClass, dtype=int)
 cnt = NumOfClass
+plt.figure(figsize=(32, 48))
 while cnt > 0:
     idx = randint(1, len(y_train))-1
     label = y_train[idx]
     if flag[label] == 0:
         flag[label] = 1
         cnt -= 1
+        plt.subplot(8, 6, NumOfClass-cnt)
         plt.imshow(x_train[idx])
-        plt.savefig('sample/{:d}.png'.format(label))
+        plt.xlabel(str(label))
+plt.savefig('explore.png', dpi=300)
 
 """Process the dataset"""
 
