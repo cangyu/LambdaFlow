@@ -81,6 +81,29 @@ Label = [
     'End of no passing by vehicles over 3.5 metric tons',
 ]
 
+training_stat = np.zeros(NumOfClass, dtype=int)
+validation_stat = np.zeros(NumOfClass, dtype=int)
+testing_stat = np.zeros(NumOfClass, dtype=int)
+
+for e in y_train:
+  training_stat[e] += 1
+for e in y_validation:
+  validation_stat[e] += 1
+for e in y_test:
+  testing_stat[e] += 1
+
+plt.figure(figsize=(24, 6))
+plt.subplot(1, 3, 1)
+plt.bar(range(NumOfClass), training_stat)
+plt.title('Class distribution in Training Set')
+plt.subplot(1, 3, 2)
+plt.bar(range(NumOfClass), validation_stat)
+plt.title('Class distribution in Validation Set')
+plt.subplot(1, 3, 3)
+plt.bar(range(NumOfClass), testing_stat)
+plt.title('Class distribution in Testing Set')
+plt.show()
+
 """Exploration and Visualization"""
 
 flag = np.zeros(NumOfClass, dtype=int)
@@ -96,6 +119,7 @@ while cnt > 0:
         plt.imshow(x_train[idx])
         plt.xlabel(str(label))
 plt.savefig('explore.png', dpi=300)
+plt.show()
 
 """Process the dataset"""
 
@@ -107,19 +131,30 @@ def hist_eq_v(img):
   v_max = np.max(v_channel)
   
   if v_max - v_min < 128:
-    # Do histogram equalization if too dark
+    # Do histogram equalization if too dark or too bright
     hsv_img[:, :, 2] = skimage.exposure.equalize_hist(hsv_img[:, :, 2])
     new_img = skimage.color.hsv2rgb(hsv_img)
     return new_img
   else:
     return img
 
+# Image before processing
+plt.imshow(x_train[2002])
+plt.xlabel(Label[y_train[2002]])
+plt.show()
+
+# Processing images
 x_train = np.array([hist_eq_v(img) for img in x_train])
 print(x_train.shape)
 x_validation = np.array([hist_eq_v(img) for img in x_validation])
 print(x_validation.shape)
 x_test = np.array([hist_eq_v(img) for img in x_test])
 print(x_test.shape)
+
+# Image after processing
+plt.imshow(x_train[2002])
+plt.xlabel(Label[y_train[2002]])
+plt.show()
 
 """Building model..."""
 
@@ -151,18 +186,19 @@ model.compile(optimizer=loc_optimizer,loss=loc_loss,metrics=loc_metrics)
 
 """Fitting model..."""
 
-r0 = model.fit(x_train.astype(np.float32), y_train.astype(np.float32), validation_data=(x_validation, y_validation), verbose = 1, batch_size = 128, epochs=12)
+r0 = model.fit(x_train.astype(np.float32), y_train.astype(np.float32), validation_data=(x_validation, y_validation), verbose = 1, batch_size = 128, epochs=8)
 
 """History of training"""
 
+plt.figure(figsize=(12, 6))
+plt.subplot(1, 2, 1)
 plt.plot(r0.history['acc'], '-^')
 plt.plot(r0.history['val_acc'], '-o')
 plt.title('Model Accuracy')
 plt.ylabel('Accuracy')
 plt.xlabel('Epoch')
 plt.legend(['train', 'validation'], loc='lower right')
-plt.show()
-
+plt.subplot(1, 2, 2)
 plt.plot(r0.history['loss'], '-^')
 plt.plot(r0.history['val_loss'], '-o')
 plt.title('Model Loss')
@@ -226,27 +262,22 @@ for i in range(10):
 """Load images downloaded from Internet and adjust size"""
 
 DOWNLOAD_DIR = os.path.join('.', 'download')
-
 x_download = []
 y_download = np.zeros(10, dtype='int')
-
+plt.figure(figsize=(18, 8))
 cnt = 0
 for e in os.listdir(DOWNLOAD_DIR):
   label, ext = e.split('.')
   cur_path = os.path.join(DOWNLOAD_DIR, e)
   cur_img = Image.open(cur_path)
   adj_img = cur_img.resize((32, 32), Image.ANTIALIAS)
-  
-
   x_download.append(np.array(adj_img))
   y_download[cnt] = int(label)
-  
+  plt.subplot(2, 5, cnt+1)
   plt.imshow(x_download[cnt])
   plt.xlabel(Label[y_download[cnt]])
-  plt.show()
-  
   cnt += 1
-
+plt.show()
 x_download = np.array(x_download)
 print(x_download.shape)
 
